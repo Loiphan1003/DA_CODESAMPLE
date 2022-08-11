@@ -9,6 +9,7 @@ namespace CodeSampleAPI.Data
     {
         public BtLuyenTap()
         {
+            CtLamBaiTapCoThoiGians = new HashSet<CtLamBaiTapCoThoiGian>();
             CtLuyenTaps = new HashSet<CtLuyenTap>();
             TestCaseLuyenTaps = new HashSet<TestCaseLuyenTap>();
         }
@@ -28,6 +29,7 @@ namespace CodeSampleAPI.Data
         public int? SoNguoiThanhCong { get; set; }
 
         public virtual GiangVien UIdNguoiTaoNavigation { get; set; }
+        public virtual ICollection<CtLamBaiTapCoThoiGian> CtLamBaiTapCoThoiGians { get; set; }
         public virtual ICollection<CtLuyenTap> CtLuyenTaps { get; set; }
         public virtual ICollection<TestCaseLuyenTap> TestCaseLuyenTaps { get; set; }
     }

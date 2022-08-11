@@ -1,5 +1,7 @@
-﻿using CodeSampleAPI.Model;
+﻿using CodeSampleAPI.Data;
+using CodeSampleAPI.Model;
 using CodeSampleAPI.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,6 +27,7 @@ namespace CodeSampleAPI.Controllers
             return Ok(_btLuyenTapService.getOne(id));
         }
 
+        [Authorize]
         [HttpGet("getAll")]
         public IActionResult getAll()
         {
@@ -54,6 +57,12 @@ namespace CodeSampleAPI.Controllers
         public IActionResult countAll()
         {
             return Ok(_btLuyenTapService.getSoLuongBaiLuyenTap());
+        }
+        
+        [HttpPost("SubmitBTCode")]
+        public IActionResult submitBT(CtLuyenTap ctLuyenTap )
+        {
+            return Ok(_btLuyenTapService.submitBT(ctLuyenTap.UIdNguoiDung, ctLuyenTap.IdBaiTap, (bool)ctLuyenTap.TrangThai, ctLuyenTap.Code));
         }
     }
 }

@@ -17,6 +17,7 @@ namespace CodeSampleAPI.Service
         int getSoLuongBaiLuyenTap();
         bool add(BaiTapLuyenTap_Custom btLuyenTap_Cus);
         bool DeleteBTLT(int id);
+        bool submitBT(string uId, int idBT, bool trangthai, string code);
         bool EditBTLT(int id, int doKho, string tieuDe, string deBai, string rangBuoc, string dinhDangDauVao, string dinhDangDauRa, string mauDauVao, string mauDauRa, string tag);
     }
     public class BTLuyenTapService:IBTLuyenTapService
@@ -137,6 +138,27 @@ namespace CodeSampleAPI.Service
         public int getSoLuongBaiLuyenTap()
         {
             return _codeSampleContext.BtLuyenTaps.ToList().Count();
+        }
+
+        public bool submitBT(string uId, int idBT, bool trangthai, string code)
+        {
+            try
+            {
+                var ct_LuyenTap = new CtLuyenTap() { 
+                UIdNguoiDung = uId,
+                IdBaiTap = idBT,
+                TrangThai = trangthai,
+                Code = code
+                };
+
+                _codeSampleContext.CtLuyenTaps.Add(ct_LuyenTap);
+                _codeSampleContext.SaveChanges();
+
+                return true;
+            }catch(Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

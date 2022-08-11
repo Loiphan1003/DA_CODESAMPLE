@@ -1,5 +1,9 @@
+using CodeSampleAPI.Authentication;
 using CodeSampleAPI.Data;
 using CodeSampleAPI.Service;
+using FirebaseAdmin;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
@@ -30,6 +35,26 @@ namespace CodeSampleAPI
         {
 
             services.AddControllers();
+
+           // services.AddSingleton(FirebaseApp.Create());
+
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                //  .AddScheme<AuthenticationSchemeOptions, FireBaseAuthenticationHandler>(JwtBearerDefaults.AuthenticationScheme, (o) => { });
+
+           services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+       .AddJwtBearer(options =>
+        {
+            options.Authority = "https://securetoken.google.com/first-web-91c0f";
+           options.TokenValidationParameters = new TokenValidationParameters
+           {
+                ValidateIssuer = true,
+                ValidIssuer = "https://securetoken.google.com/first-web-91c0f",
+                ValidateAudience = true,
+                ValidAudience = "first-web-91c0f",
+                ValidateLifetime = true
+            };
+        });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CodeSampleAPI", Version = "v1" });
@@ -77,8 +102,10 @@ namespace CodeSampleAPI
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            
 
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -18,18 +18,25 @@ namespace CodeSampleAPI.Data
         }
 
         public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<BaiLamGiaiDau> BaiLamGiaiDaus { get; set; }
         public virtual DbSet<BaiLamKiemTra> BaiLamKiemTras { get; set; }
         public virtual DbSet<BaiTapCode> BaiTapCodes { get; set; }
         public virtual DbSet<BaiTapTracNghiem> BaiTapTracNghiems { get; set; }
         public virtual DbSet<BtLuyenTap> BtLuyenTaps { get; set; }
         public virtual DbSet<CtBaiLamCode> CtBaiLamCodes { get; set; }
+        public virtual DbSet<CtBaiLamGiaiDau> CtBaiLamGiaiDaus { get; set; }
         public virtual DbSet<CtBaiLamTracNghiem> CtBaiLamTracNghiems { get; set; }
         public virtual DbSet<CtDeKiemTraCode> CtDeKiemTraCodes { get; set; }
         public virtual DbSet<CtDeKiemTraTracNghiem> CtDeKiemTraTracNghiems { get; set; }
+        public virtual DbSet<CtDeThiGiaiDau> CtDeThiGiaiDaus { get; set; }
+        public virtual DbSet<CtLamBaiTapCoThoiGian> CtLamBaiTapCoThoiGians { get; set; }
         public virtual DbSet<CtLuyenTap> CtLuyenTaps { get; set; }
         public virtual DbSet<CtPhongHoc> CtPhongHocs { get; set; }
+        public virtual DbSet<CtThamGiaGiaiDau> CtThamGiaGiaiDaus { get; set; }
         public virtual DbSet<DaHoc> DaHocs { get; set; }
+        public virtual DbSet<DeCauHoiGiaiDau> DeCauHoiGiaiDaus { get; set; }
         public virtual DbSet<DeKiemTra> DeKiemTras { get; set; }
+        public virtual DbSet<GiaiDau> GiaiDaus { get; set; }
         public virtual DbSet<GiangVien> GiangViens { get; set; }
         public virtual DbSet<LyThuyet> LyThuyets { get; set; }
         public virtual DbSet<MonHoc> MonHocs { get; set; }
@@ -43,7 +50,7 @@ namespace CodeSampleAPI.Data
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-CT0V15K\\SQLEXPRESS;Database=CodeSample;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-PDHA0NQ\\SQLEXPRESS;Database=CodeSample;Trusted_Connection=True;");
             }
         }
 
@@ -60,6 +67,30 @@ namespace CodeSampleAPI.Data
                 entity.Property(e => e.MatKhau)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<BaiLamGiaiDau>(entity =>
+            {
+                entity.HasKey(e => e.IdbaiLam);
+
+                entity.ToTable("BaiLamGiaiDau");
+
+                entity.Property(e => e.IdbaiLam).HasColumnName("IDBaiLam");
+
+                entity.Property(e => e.IddeCauHoiGiaiDau).HasColumnName("IDDeCauHoiGiaiDau");
+
+                entity.Property(e => e.NgayLam).HasColumnType("date");
+
+                entity.Property(e => e.UIdnguoiDung)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("uIDNguoiDung");
+
+                entity.HasOne(d => d.UIdnguoiDungNavigation)
+                    .WithMany(p => p.BaiLamGiaiDaus)
+                    .HasForeignKey(d => d.UIdnguoiDung)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_BaiLamGiaiDau_NguoiDung");
             });
 
             modelBuilder.Entity<BaiLamKiemTra>(entity =>
@@ -111,8 +142,7 @@ namespace CodeSampleAPI.Data
 
                 entity.Property(e => e.TieuDe)
                     .IsRequired()
-                    .HasMaxLength(100)
-                    .HasComment("SQL_Latin1_General_CP1_CI_AI");
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.UIdNguoiTao)
                     .HasMaxLength(50)
@@ -132,8 +162,7 @@ namespace CodeSampleAPI.Data
 
                 entity.Property(e => e.CauHoi)
                     .IsRequired()
-                    .HasMaxLength(1000)
-                    .HasComment("SQL_Latin1_General_CP1_CI_AI");
+                    .HasMaxLength(1000);
 
                 entity.Property(e => e.CauTraLoi1).HasMaxLength(500);
 
@@ -175,8 +204,7 @@ namespace CodeSampleAPI.Data
 
                 entity.Property(e => e.TieuDe)
                     .IsRequired()
-                    .HasMaxLength(100)
-                    .HasComment("SQL_Latin1_General_CP1_CI_AI");
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.UIdNguoiTao)
                     .HasMaxLength(50)
@@ -217,6 +245,33 @@ namespace CodeSampleAPI.Data
                     .HasForeignKey(d => new { d.IdDeKiemTra, d.IdBaiTapCode })
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CT_BaiLamCode_CT_DeKiemTraCode");
+            });
+
+            modelBuilder.Entity<CtBaiLamGiaiDau>(entity =>
+            {
+                entity.HasKey(e => new { e.IddeCauHoiGiaiDau, e.IdbaiLam, e.IdbaiTapCode });
+
+                entity.ToTable("CT_BaiLamGiaiDau");
+
+                entity.Property(e => e.IddeCauHoiGiaiDau).HasColumnName("IDDeCauHoiGiaiDau");
+
+                entity.Property(e => e.IdbaiLam).HasColumnName("IDBaiLam");
+
+                entity.Property(e => e.IdbaiTapCode).HasColumnName("IDBaiTapCode");
+
+                entity.Property(e => e.SttcauHoi).HasColumnName("STTCauHoi");
+
+                entity.HasOne(d => d.IdbaiLamNavigation)
+                    .WithMany(p => p.CtBaiLamGiaiDaus)
+                    .HasForeignKey(d => d.IdbaiLam)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CT_BaiLamGiaiDau_BaiLamGiaiDau");
+
+                entity.HasOne(d => d.Id)
+                    .WithMany(p => p.CtBaiLamGiaiDaus)
+                    .HasForeignKey(d => new { d.IddeCauHoiGiaiDau, d.IdbaiTapCode })
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CT_BaiLamGiaiDau_CT_DeThiGiaiDau");
             });
 
             modelBuilder.Entity<CtBaiLamTracNghiem>(entity =>
@@ -294,6 +349,57 @@ namespace CodeSampleAPI.Data
                     .HasConstraintName("FK_CT_DeKiemTraTracNghiem_DeKiemTra");
             });
 
+            modelBuilder.Entity<CtDeThiGiaiDau>(entity =>
+            {
+                entity.HasKey(e => new { e.IddeCauHoiGiaiDau, e.IdbaiTapCode })
+                    .HasName("PK_CT_DeThiGiaiDau_1");
+
+                entity.ToTable("CT_DeThiGiaiDau");
+
+                entity.Property(e => e.IddeCauHoiGiaiDau).HasColumnName("IDDeCauHoiGiaiDau");
+
+                entity.Property(e => e.IdbaiTapCode).HasColumnName("IDBaiTapCode");
+
+                entity.Property(e => e.SttcauHoi).HasColumnName("STTCauHoi");
+
+                entity.HasOne(d => d.IddeCauHoiGiaiDauNavigation)
+                    .WithMany(p => p.CtDeThiGiaiDaus)
+                    .HasForeignKey(d => d.IddeCauHoiGiaiDau)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CT_DeThiGiaiDau_DeCauHoiGiaiDau");
+            });
+
+            modelBuilder.Entity<CtLamBaiTapCoThoiGian>(entity =>
+            {
+                entity.HasKey(e => new { e.UIdnguoiDung, e.IdbaiTap });
+
+                entity.ToTable("CT_LamBaiTapCoThoiGian");
+
+                entity.Property(e => e.UIdnguoiDung)
+                    .HasMaxLength(50)
+                    .HasColumnName("uIDNguoiDung");
+
+                entity.Property(e => e.IdbaiTap).HasColumnName("IDBaiTap");
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasColumnType("text");
+
+                entity.Property(e => e.ThoiGianHoanThanh).HasColumnType("datetime");
+
+                entity.HasOne(d => d.IdbaiTapNavigation)
+                    .WithMany(p => p.CtLamBaiTapCoThoiGians)
+                    .HasForeignKey(d => d.IdbaiTap)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CT_LamBaiTapCoThoiGian_BT_LuyenTap");
+
+                entity.HasOne(d => d.UIdnguoiDungNavigation)
+                    .WithMany(p => p.CtLamBaiTapCoThoiGians)
+                    .HasForeignKey(d => d.UIdnguoiDung)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CT_LamBaiTapCoThoiGian_NguoiDung");
+            });
+
             modelBuilder.Entity<CtLuyenTap>(entity =>
             {
                 entity.HasKey(e => new { e.UIdNguoiDung, e.IdBaiTap });
@@ -350,6 +456,33 @@ namespace CodeSampleAPI.Data
                     .HasConstraintName("FK_CT_PhongHoc_NguoiDung");
             });
 
+            modelBuilder.Entity<CtThamGiaGiaiDau>(entity =>
+            {
+                entity.HasKey(e => new { e.IdgiaiDau, e.UIdnguoiDung });
+
+                entity.ToTable("CT_ThamGiaGiaiDau");
+
+                entity.Property(e => e.IdgiaiDau).HasColumnName("IDGiaiDau");
+
+                entity.Property(e => e.UIdnguoiDung)
+                    .HasMaxLength(50)
+                    .HasColumnName("uIDNguoiDung");
+
+                entity.Property(e => e.NgayThamGia).HasColumnType("date");
+
+                entity.HasOne(d => d.IdgiaiDauNavigation)
+                    .WithMany(p => p.CtThamGiaGiaiDaus)
+                    .HasForeignKey(d => d.IdgiaiDau)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CT_ThamGiaGiaiDau_GiaiDau");
+
+                entity.HasOne(d => d.UIdnguoiDungNavigation)
+                    .WithMany(p => p.CtThamGiaGiaiDaus)
+                    .HasForeignKey(d => d.UIdnguoiDung)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CT_ThamGiaGiaiDau_CT_ThamGiaGiaiDau");
+            });
+
             modelBuilder.Entity<DaHoc>(entity =>
             {
                 entity.HasKey(e => new { e.IdLyThuyet, e.UIdNguoiDung });
@@ -373,6 +506,25 @@ namespace CodeSampleAPI.Data
                     .HasForeignKey(d => d.UIdNguoiDung)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DaHoc_NguoiDung");
+            });
+
+            modelBuilder.Entity<DeCauHoiGiaiDau>(entity =>
+            {
+                entity.HasKey(e => e.IddeCauHoiGiaiDau);
+
+                entity.ToTable("DeCauHoiGiaiDau");
+
+                entity.Property(e => e.IddeCauHoiGiaiDau).HasColumnName("IDDeCauHoiGiaiDau");
+
+                entity.Property(e => e.IdgiaiDau).HasColumnName("IDGiaiDau");
+
+                entity.Property(e => e.NgayLam).HasColumnType("date");
+
+                entity.HasOne(d => d.IdgiaiDauNavigation)
+                    .WithMany(p => p.DeCauHoiGiaiDaus)
+                    .HasForeignKey(d => d.IdgiaiDau)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DeCauHoiGiaiDau_DeCauHoiGiaiDau");
             });
 
             modelBuilder.Entity<DeKiemTra>(entity =>
@@ -399,6 +551,31 @@ namespace CodeSampleAPI.Data
                     .HasConstraintName("FK_DeKiemTra_PhongHoc");
             });
 
+            modelBuilder.Entity<GiaiDau>(entity =>
+            {
+                entity.HasKey(e => e.IdgiaiDau);
+
+                entity.ToTable("GiaiDau");
+
+                entity.Property(e => e.IdgiaiDau).HasColumnName("IDGiaiDau");
+
+                entity.Property(e => e.MoTa)
+                    .IsRequired()
+                    .HasColumnType("text");
+
+                entity.Property(e => e.Tag)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.TenGiaiDau)
+                    .IsRequired()
+                    .HasColumnType("text");
+
+                entity.Property(e => e.ThoiGianBatDau).HasColumnType("date");
+
+                entity.Property(e => e.ThoiGianKetThuc).HasColumnType("date");
+            });
+
             modelBuilder.Entity<GiangVien>(entity =>
             {
                 entity.HasKey(e => e.UId);
@@ -417,7 +594,7 @@ namespace CodeSampleAPI.Data
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.LinkAvatar).HasMaxLength(50);
+                entity.Property(e => e.LinkAvatar).HasColumnType("text");
 
                 entity.Property(e => e.NamSinh).HasColumnType("date");
 
@@ -436,11 +613,11 @@ namespace CodeSampleAPI.Data
 
                 entity.Property(e => e.NoiDung)
                     .IsRequired()
-                    .HasMaxLength(4000);
+                    .HasColumnType("ntext");
 
                 entity.Property(e => e.TieuDe)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(400);
 
                 entity.HasOne(d => d.IdMonHocNavigation)
                     .WithMany(p => p.LyThuyets)
@@ -476,13 +653,15 @@ namespace CodeSampleAPI.Data
                     .HasMaxLength(50)
                     .HasColumnName("uID");
 
-                entity.Property(e => e.Email).HasMaxLength(50);
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.HoTen)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.LinkAvatar).HasMaxLength(50);
+                entity.Property(e => e.LinkAvatar).HasColumnType("text");
 
                 entity.Property(e => e.NamSinh).HasColumnType("date");
 
