@@ -21,6 +21,8 @@ namespace CodeSampleAPI.Service
 
         List<ThanhVien> getListThanhVienByIdPhong(string IdPhong);
 
+        bool removeMembers(string[] members);
+
     }
     public class PhongHocService : IPhongHocService
     {
@@ -121,6 +123,30 @@ namespace CodeSampleAPI.Service
             }).ToList();
 
             return res;
+        }
+
+        public bool removeMembers(string[] members)
+        {
+            try
+            {
+                foreach (string member in members)
+                {
+                    var nguoiDung = _codeSampleContext.NguoiDungs.FirstOrDefault(u => u.Email.Equals(member));
+                    if(nguoiDung != null)
+                    {
+                        var mb = _codeSampleContext.CtPhongHocs.FirstOrDefault(p => p.UIdNguoiDung.Equals(nguoiDung.UId));
+                        _codeSampleContext.CtPhongHocs.Remove(mb);
+                        _codeSampleContext.SaveChanges();
+                    }
+
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

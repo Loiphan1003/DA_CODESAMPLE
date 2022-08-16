@@ -53,5 +53,11 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_phongHocService.getListThanhVienByIdPhong(IdPhong));
         }
+        [HttpPost("removeMembers")]
+        public IActionResult removeMembers(string[] members)
+        {
+            return Ok(_phongHocService.removeMembers(members));
+        }
+
     }
 }
