@@ -74,6 +74,8 @@ namespace CodeSampleAPI
             services.AddTransient<INguoiDungService, NguoiDungService>();
             services.AddTransient<IGiangVienService, GiangVienService>();
             services.AddTransient<IAdminService, AdminService>();
+            services.AddTransient<ITaiKhoanService, TaiKhoanService>();
+
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );

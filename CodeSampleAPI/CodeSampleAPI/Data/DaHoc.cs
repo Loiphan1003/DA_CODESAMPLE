@@ -11,6 +11,6 @@ namespace CodeSampleAPI.Data
         public string UIdNguoiDung { get; set; }
 
         public virtual LyThuyet IdLyThuyetNavigation { get; set; }
-        public virtual NguoiDung UIdNguoiDungNavigation { get; set; }
+        public virtual TaiKhoan UIdNguoiDungNavigation { get; set; }
     }
 }

@@ -7,11 +7,11 @@ namespace CodeSampleAPI.Data
 {
     public partial class CtPhongHoc
     {
-        public string UIdNguoiDung { get; set; }
-        public string IdPhongHoc { get; set; }
-        public DateTime? NgayThamGia { get; set; }
+        public string UidNguoiDunng { get; set; }
+        public string Idphong { get; set; }
+        public DateTime NgayThamGia { get; set; }
 
-        public virtual PhongHoc IdPhongHocNavigation { get; set; }
-        public virtual NguoiDung UIdNguoiDungNavigation { get; set; }
+        public virtual PhongHoc IdphongNavigation { get; set; }
+        public virtual TaiKhoan UidNguoiDunngNavigation { get; set; }
     }
 }

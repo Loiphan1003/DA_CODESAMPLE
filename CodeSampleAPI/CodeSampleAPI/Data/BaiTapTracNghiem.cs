@@ -9,19 +9,21 @@ namespace CodeSampleAPI.Data
     {
         public BaiTapTracNghiem()
         {
+            CtBaiLamTracNghiems = new HashSet<CtBaiLamTracNghiem>();
             CtDeKiemTraTracNghiems = new HashSet<CtDeKiemTraTracNghiem>();
         }
 
-        public int Id { get; set; }
+        public int IdbaiTapTracNghiem { get; set; }
         public string CauHoi { get; set; }
         public string CauTraLoi1 { get; set; }
         public string CauTraLoi2 { get; set; }
         public string CauTraLoi3 { get; set; }
         public string CauTraLoi4 { get; set; }
         public int DapAn { get; set; }
-        public string UIdNguoiTao { get; set; }
+        public string UidNguoiTao { get; set; }
 
-        public virtual GiangVien UIdNguoiTaoNavigation { get; set; }
+        public virtual TaiKhoan UidNguoiTaoNavigation { get; set; }
+        public virtual ICollection<CtBaiLamTracNghiem> CtBaiLamTracNghiems { get; set; }
         public virtual ICollection<CtDeKiemTraTracNghiem> CtDeKiemTraTracNghiems { get; set; }
     }
 }

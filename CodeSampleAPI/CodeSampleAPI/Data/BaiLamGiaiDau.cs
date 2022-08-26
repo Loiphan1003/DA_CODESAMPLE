@@ -18,7 +18,8 @@ namespace CodeSampleAPI.Data
         public int IddeCauHoiGiaiDau { get; set; }
         public string UIdnguoiDung { get; set; }
 
-        public virtual NguoiDung UIdnguoiDungNavigation { get; set; }
+        public virtual DeCauHoiGiaiDau IddeCauHoiGiaiDauNavigation { get; set; }
+        public virtual TaiKhoan UIdnguoiDungNavigation { get; set; }
         public virtual ICollection<CtBaiLamGiaiDau> CtBaiLamGiaiDaus { get; set; }
     }
 }

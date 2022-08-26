@@ -13,6 +13,6 @@ namespace CodeSampleAPI.Data
         public int XepHang { get; set; }
 
         public virtual GiaiDau IdgiaiDauNavigation { get; set; }
-        public virtual NguoiDung UIdnguoiDungNavigation { get; set; }
+        public virtual TaiKhoan UIdnguoiDungNavigation { get; set; }
     }
 }

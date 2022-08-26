@@ -14,6 +14,6 @@ namespace CodeSampleAPI.Data
         public DateTime ThoiGianHoanThanh { get; set; }
 
         public virtual BtLuyenTap IdbaiTapNavigation { get; set; }
-        public virtual NguoiDung UIdnguoiDungNavigation { get; set; }
+        public virtual TaiKhoan UIdnguoiDungNavigation { get; set; }
     }
 }

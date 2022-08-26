@@ -27,8 +27,8 @@ namespace CodeSampleAPI.Data
         public string Tag { get; set; }
         public int? SoNguoiLam { get; set; }
         public int? SoNguoiThanhCong { get; set; }
+        public TimeSpan? ThoiGian { get; set; }
 
-        public virtual GiangVien UIdNguoiTaoNavigation { get; set; }
         public virtual ICollection<CtLamBaiTapCoThoiGian> CtLamBaiTapCoThoiGians { get; set; }
         public virtual ICollection<CtLuyenTap> CtLuyenTaps { get; set; }
         public virtual ICollection<TestCaseLuyenTap> TestCaseLuyenTaps { get; set; }

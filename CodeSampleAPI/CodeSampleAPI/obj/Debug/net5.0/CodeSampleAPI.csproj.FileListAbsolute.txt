@@ -149,4 +149,3 @@ D:\DoAnMonHoc\DoAnCoSo\github\Done\apicodesample\CodeSampleAPI\CodeSampleAPI\bin
 D:\DoAnMonHoc\DoAnCoSo\github\Done\apicodesample\CodeSampleAPI\CodeSampleAPI\bin\Debug\net5.0\Google.Apis.Auth.dll
 D:\DoAnMonHoc\DoAnCoSo\github\Done\apicodesample\CodeSampleAPI\CodeSampleAPI\bin\Debug\net5.0\Google.Apis.Core.dll
 D:\DoAnMonHoc\DoAnCoSo\github\Done\apicodesample\CodeSampleAPI\CodeSampleAPI\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
-D:\DoAnMonHoc\DoAnCoSo\github\Done\apicodesample\CodeSampleAPI\CodeSampleAPI\bin\Debug\net5.0\firebase-config.json

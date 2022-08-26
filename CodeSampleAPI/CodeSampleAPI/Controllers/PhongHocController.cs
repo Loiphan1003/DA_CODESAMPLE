@@ -32,32 +32,40 @@ namespace CodeSampleAPI.Controllers
             return Ok(_phongHocService.getListPhongHocByUidGiangVien(uID));
         }
 
-        [HttpGet("getOne")]
-        public IActionResult getOneById(string id)
-        {
-            return Ok(_phongHocService.getOneByID(id));
-        }
+        //[HttpGet("getOne")]
+        //public IActionResult getOneById(string id)
+        //{
+        //    return Ok(_phongHocService.getOneByID(id));
+        //}
 
-        [HttpPost("addUser")]
-        public IActionResult addUserToPhongHoc(string uID, string id)
-        {
-            return Ok(_phongHocService.addUserToPhongPhong(uID, id));
-        }
+        //[HttpPost("addUser")]
+        //public IActionResult addUserToPhongHoc(string uID, string id)
+        //{
+        //    return Ok(_phongHocService.addUserToPhongPhong(uID, id));
+        //}
+
         [HttpPost("createRoom")]
         public IActionResult createRoom(PhongHoc phong)
         {
             return Ok(_phongHocService.createPhongHoc(phong));
         }
-        [HttpGet("getMember")]
-        public IActionResult getMember(string IdPhong)
-        {
-            return Ok(_phongHocService.getListThanhVienByIdPhong(IdPhong));
-        }
-        [HttpPost("removeMembers")]
-        public IActionResult removeMembers(string[] members)
-        {
-            return Ok(_phongHocService.removeMembers(members));
-        }
+
+        //[HttpGet("getMember")]
+        //public IActionResult getMember(string IdPhong)
+        //{
+        //    return Ok(_phongHocService.getListThanhVienByIdPhong(IdPhong));
+        //}
+        //[HttpPost("removeMembers")]
+        //public IActionResult removeMembers(string[] members)
+        //{
+        //    return Ok(_phongHocService.removeMembers(members));
+        //}
+
+        //[HttpPost("addListMembers")]
+        //public IActionResult addListMembers(string[] members, string roomId)
+        //{
+        //    return Ok(_phongHocService.addListMembers(members, roomId));
+        //}
 
     }
 }

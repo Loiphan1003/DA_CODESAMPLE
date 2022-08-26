@@ -17,31 +17,31 @@ namespace CodeSampleAPI.Controllers
         {
             this._nguoiDungService = nguoiDungService;
         }
-        [HttpGet("getAllNguoiDung")]
-        public IActionResult getAllNguoiDung()
-        {
-            return Ok(_nguoiDungService.getAllNguoiDung());
-        }
+        //[HttpGet("getAllNguoiDung")]
+        //public IActionResult getAllNguoiDung()
+        //{
+        //    return Ok(_nguoiDungService.getAllNguoiDung());
+        //}
         
-        [HttpDelete("RemoveNguoiDung")]
-        public IActionResult RemoveNguoiDung(string id)
-        {
-            return Ok(_nguoiDungService.RemoveNguoiDung(id));
-        }
-        [HttpPut("AddOrUpdate")]
-        public IActionResult EditNguoiDung(string id, string ten, string tenHienThi, string linkAvatar, string mail, DateTime date, string shool)
-        {
-            return Ok(_nguoiDungService.AddOrUpdate(id, ten, tenHienThi, linkAvatar, mail, date, shool));
-        }
-        [HttpGet("getSoLuongUser")]
-        public IActionResult getSoLuongUser()
-        {
-            return Ok(_nguoiDungService.getSoLuongUser());
-        }
-        [HttpGet("getOne")]
-        public IActionResult getThongTinNguoiDung(string uID)
-        {
-            return Ok(_nguoiDungService.getOne(uID));
-        }
+        //[HttpDelete("RemoveNguoiDung")]
+        //public IActionResult RemoveNguoiDung(string id)
+        //{
+        //    return Ok(_nguoiDungService.RemoveNguoiDung(id));
+        //}
+        //[HttpPut("AddOrUpdate")]
+        //public IActionResult EditNguoiDung(string id, string ten, string tenHienThi, string linkAvatar, string mail, DateTime date, string shool)
+        //{
+        //    return Ok(_nguoiDungService.AddOrUpdate(id, ten, tenHienThi, linkAvatar, mail, date, shool));
+        //}
+        //[HttpGet("getSoLuongUser")]
+        //public IActionResult getSoLuongUser()
+        //{
+        //    return Ok(_nguoiDungService.getSoLuongUser());
+        //}
+        //[HttpGet("getOne")]
+        //public IActionResult getThongTinNguoiDung(string uID)
+        //{
+        //    return Ok(_nguoiDungService.getOne(uID));
+        //}
     }
 }

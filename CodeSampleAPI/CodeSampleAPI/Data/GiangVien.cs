@@ -12,6 +12,7 @@ namespace CodeSampleAPI.Data
             BaiTapCodes = new HashSet<BaiTapCode>();
             BaiTapTracNghiems = new HashSet<BaiTapTracNghiem>();
             BtLuyenTaps = new HashSet<BtLuyenTap>();
+            CtLuyenTaps = new HashSet<CtLuyenTap>();
             PhongHocs = new HashSet<PhongHoc>();
         }
 
@@ -26,6 +27,7 @@ namespace CodeSampleAPI.Data
         public virtual ICollection<BaiTapCode> BaiTapCodes { get; set; }
         public virtual ICollection<BaiTapTracNghiem> BaiTapTracNghiems { get; set; }
         public virtual ICollection<BtLuyenTap> BtLuyenTaps { get; set; }
+        public virtual ICollection<CtLuyenTap> CtLuyenTaps { get; set; }
         public virtual ICollection<PhongHoc> PhongHocs { get; set; }
     }
 }

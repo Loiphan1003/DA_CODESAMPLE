@@ -11,9 +11,10 @@ namespace CodeSampleAPI.Data
         public int IdbaiLam { get; set; }
         public int IdbaiTapCode { get; set; }
         public int? SttcauHoi { get; set; }
-        public int? Diem { get; set; }
+        public double? Diem { get; set; }
+        public string Code { get; set; }
 
-        public virtual CtDeThiGiaiDau Id { get; set; }
         public virtual BaiLamGiaiDau IdbaiLamNavigation { get; set; }
+        public virtual BaiTapCode IdbaiTapCodeNavigation { get; set; }
     }
 }

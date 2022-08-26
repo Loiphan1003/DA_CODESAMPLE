@@ -7,13 +7,13 @@ namespace CodeSampleAPI.Data
 {
     public partial class CtBaiLamTracNghiem
     {
-        public int IdBaiLamKt { get; set; }
-        public int IdDeKiemTra { get; set; }
-        public int IdBaiTapTracNghiem { get; set; }
+        public int IdbaiLam { get; set; }
+        public int IddeKiemTra { get; set; }
+        public int IdbaiTapTracNghiem { get; set; }
         public int DapAn { get; set; }
-        public double Diem { get; set; }
+        public double DiemDatDuoc { get; set; }
 
-        public virtual CtDeKiemTraTracNghiem Id { get; set; }
-        public virtual BaiLamKiemTra IdBaiLamKtNavigation { get; set; }
+        public virtual BaiLamKiemTra IdbaiLamNavigation { get; set; }
+        public virtual BaiTapTracNghiem IdbaiTapTracNghiemNavigation { get; set; }
     }
 }

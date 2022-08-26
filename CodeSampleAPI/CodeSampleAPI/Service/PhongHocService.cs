@@ -13,15 +13,17 @@ namespace CodeSampleAPI.Service
 
         bool createPhongHoc(PhongHoc phongHoc);
 
-        bool addUserToPhongPhong(string uID, string idPhongHoc);
+        //bool addUserToPhongPhong(string uID, string idPhongHoc);
 
         PhongHoc getOneByID(string id);
 
         List<PhongHocCustom> getListPhongHocByUidGiangVien(string uID);
 
-        List<ThanhVien> getListThanhVienByIdPhong(string IdPhong);
+        //List<ThanhVien> getListThanhVienByIdPhong(string IdPhong);
 
-        bool removeMembers(string[] members);
+        //bool removeMembers(string[] members);
+
+        //Task<String> addListMembers(string[] members, string roomId);
 
     }
     public class PhongHocService : IPhongHocService
@@ -35,62 +37,62 @@ namespace CodeSampleAPI.Service
         public List<PhongHocCustom> getListPhongHocByUidUser(string uID)
         {
             var res = (from ctph in _codeSampleContext.CtPhongHocs
-                       where ctph.UIdNguoiDung.Equals(uID)
+                       where ctph.UidNguoiDunng.Equals(uID)
                        select new PhongHocCustom()
                        {
-                          id = ctph.IdPhongHoc,
-                          tenPhong = ctph.IdPhongHocNavigation.TenPhong,
-                          soLuongThanhVien = ctph.IdPhongHocNavigation.SoThanhVien,
-                          linkAvatar = ctph.IdPhongHocNavigation.IdChuPhongNavigation.LinkAvatar,
-                          tenHienThi = ctph.IdPhongHocNavigation.IdChuPhongNavigation.TenHienThi
+                           id = ctph.Idphong,
+                           tenPhong = ctph.IdphongNavigation.TenPhong,
+                           soLuongThanhVien = ctph.IdphongNavigation.SoThanhVien,
+                           linkAvatar = ctph.IdphongNavigation.IdchuPhongNavigation.LinkAvatar,
+                           tenHienThi = ctph.IdphongNavigation.IdchuPhongNavigation.TenHienThi
                        }).ToList();
 
             return res;
         }
 
-        public bool addUserToPhongPhong(string uID, string idPhongHoc)
-        {
-            // kiểm tra phòng học có tồn tại không
-            PhongHoc phongHoc = _codeSampleContext.PhongHocs.FirstOrDefault(p => p.Id == idPhongHoc);
-            if (phongHoc == null)
-                return false;
-            //tồn tại rồi thì không thêm nữa
-            CtPhongHoc ctPH = _codeSampleContext.CtPhongHocs.FirstOrDefault(p => p.IdPhongHoc == idPhongHoc && p.UIdNguoiDung.Equals(uID));
-            if (ctPH != null)
-                return false;
-            // tiến hành thêm chi tiêt phòng học
-            try
-            {
-                DateTime Datenow = DateTime.Now;
+        //public bool addUserToPhongPhong(string uID, string idPhongHoc)
+        //{
+        //    // kiểm tra phòng học có tồn tại không
+        //    PhongHoc phongHoc = _codeSampleContext.PhongHocs.FirstOrDefault(p => p.Id == idPhongHoc);
+        //    if (phongHoc == null)
+        //        return false;
+        //    //tồn tại rồi thì không thêm nữa
+        //    CtPhongHoc ctPH = _codeSampleContext.CtPhongHocs.FirstOrDefault(p => p.IdPhongHoc == idPhongHoc && p.UIdNguoiDung.Equals(uID));
+        //    if (ctPH != null)
+        //        return false;
+        //    // tiến hành thêm chi tiêt phòng học
+        //    try
+        //    {
+        //        DateTime Datenow = DateTime.Now;
 
-                CtPhongHoc ctPhongHoc = new CtPhongHoc() { IdPhongHoc = idPhongHoc, UIdNguoiDung = uID, NgayThamGia = Datenow };
-                _codeSampleContext.CtPhongHocs.Add(ctPhongHoc);
-                _codeSampleContext.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            return true;
-        }
+        //        CtPhongHoc ctPhongHoc = new CtPhongHoc() { IdPhongHoc = idPhongHoc, UIdNguoiDung = uID, NgayThamGia = Datenow };
+        //        _codeSampleContext.CtPhongHocs.Add(ctPhongHoc);
+        //        _codeSampleContext.SaveChanges();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //    return true;
+        //}
 
         public PhongHoc getOneByID(string id)
         {
-            return _codeSampleContext.PhongHocs.FirstOrDefault(p => p.Id.Equals(id));
+            return _codeSampleContext.PhongHocs.FirstOrDefault(p => p.Idphong.Equals(id));
         }
 
         public List<PhongHocCustom> getListPhongHocByUidGiangVien(string uID)
         {
-            var res = (from ph in _codeSampleContext.PhongHocs
-                       where ph.IdChuPhong.Equals(uID)
+            var res = (from ph in _codeSampleContext.PhongHocs join user in _codeSampleContext.TaiKhoans on
+                       ph.IdchuPhong equals user.UidTaiKhoan
                        select new PhongHocCustom()
                        {
-                           id = ph.Id,
-                           linkAvatar = ph.IdChuPhongNavigation.LinkAvatar,
-                           tenHienThi = ph.IdChuPhongNavigation.TenHienThi,
+                           id = ph.Idphong,
+                           linkAvatar = user.LinkAvatar,
+                           tenHienThi = user.TenHienThi,
                            soLuongThanhVien = ph.SoThanhVien,
                            tenPhong = ph.TenPhong
-                           
+
                        }).ToList();
             return res;
         }
@@ -100,9 +102,9 @@ namespace CodeSampleAPI.Service
             try
             {
                 PhongHoc phong = new PhongHoc();
-                phong.Id = phongHoc.Id;
+                phong.Idphong = phongHoc.Idphong;
                 phong.TenPhong = phongHoc.TenPhong;
-                phong.IdChuPhong = phongHoc.IdChuPhong;
+                phong.IdchuPhong = phongHoc.IdchuPhong;
                 _codeSampleContext.PhongHocs.Add(phong);
                 _codeSampleContext.SaveChanges();
                 return true;
@@ -113,40 +115,67 @@ namespace CodeSampleAPI.Service
             }
         }
 
-        public List<ThanhVien> getListThanhVienByIdPhong(string IdPhong)
-        {
-            var res = (from phong in _codeSampleContext.CtPhongHocs where phong.IdPhongHoc.Equals(IdPhong) select new ThanhVien()
-            {
-                TenHienThi = phong.UIdNguoiDungNavigation.TenHienThi,
-                HoTen = phong.UIdNguoiDungNavigation.HoTen,
-                Email = phong.UIdNguoiDungNavigation.Email
-            }).ToList();
+        //public List<ThanhVien> getListThanhVienByIdPhong(string IdPhong)
+        //{
+        //    var res = (from phong in _codeSampleContext.CtPhongHocs where phong.IdPhongHoc.Equals(IdPhong) select new ThanhVien()
+        //    {
+        //        TenHienThi = phong.UIdNguoiDungNavigation.TenHienThi,
+        //        HoTen = phong.UIdNguoiDungNavigation.HoTen,
+        //        Email = phong.UIdNguoiDungNavigation.Email
+        //    }).ToList();
 
-            return res;
-        }
+        //    return res;
+        //}
 
-        public bool removeMembers(string[] members)
-        {
-            try
-            {
-                foreach (string member in members)
-                {
-                    var nguoiDung = _codeSampleContext.NguoiDungs.FirstOrDefault(u => u.Email.Equals(member));
-                    if(nguoiDung != null)
-                    {
-                        var mb = _codeSampleContext.CtPhongHocs.FirstOrDefault(p => p.UIdNguoiDung.Equals(nguoiDung.UId));
-                        _codeSampleContext.CtPhongHocs.Remove(mb);
-                        _codeSampleContext.SaveChanges();
-                    }
+        //public bool removeMembers(string[] members)
+        //{
+        //    try
+        //    {
+        //        foreach (string member in members)
+        //        {
+        //            var nguoiDung = _codeSampleContext.NguoiDungs.FirstOrDefault(u => u.Email.Equals(member));
+        //            if(nguoiDung != null)
+        //            {
+        //                var mb = _codeSampleContext.CtPhongHocs.FirstOrDefault(p => p.UIdNguoiDung.Equals(nguoiDung.UId));
+        //                _codeSampleContext.CtPhongHocs.Remove(mb);
+        //                _codeSampleContext.SaveChanges();
+        //            }
 
-                }
+        //        }
 
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //}
+
+        //public async Task<string> addListMembers(string[] members, string roomId)
+        //{
+
+        //    foreach (string i in members)
+        //    {
+        //        DateTime Datenow = DateTime.Now;
+
+        //        var user = _codeSampleContext.NguoiDungs.FirstOrDefault(u => u.Email.Equals(i));
+        //        PhongHoc room = _codeSampleContext.PhongHocs.FirstOrDefault(p => p.Id.Equals(roomId));
+        //        bool accountAlreadyExist = false;
+        //        if (user != null && room != null)
+        //        {
+        //            CtPhongHoc phong = new CtPhongHoc()
+        //            {
+        //                UIdNguoiDung = user.UId,
+        //                IdPhongHoc = roomId,
+        //                NgayThamGia = Datenow
+        //            };
+        //            _codeSampleContext.CtPhongHocs.Add(phong);
+        //            _codeSampleContext.SaveChanges();
+        //            accountAlreadyExist = true;
+        //        }
+        //        await MailUtils.SendGMail("phanvuloi001@gmail.com", i, "Thông báo tham gia phòng học", accountAlreadyExist , roomId);
+        //    }
+        //    return "true";
+        //}
     }
 }

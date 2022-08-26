@@ -13,14 +13,14 @@ namespace CodeSampleAPI.Data
             CtBaiLamTracNghiems = new HashSet<CtBaiLamTracNghiem>();
         }
 
-        public int Id { get; set; }
+        public int IdbaiLamKiemTra { get; set; }
         public double? TongDiem { get; set; }
-        public DateTime? NgayNopBai { get; set; }
-        public string UIdNguoiDung { get; set; }
-        public int? IdDeKiemTra { get; set; }
+        public DateTime? NgayLam { get; set; }
+        public string IdnguoiDung { get; set; }
+        public int? IddeKiemTra { get; set; }
 
-        public virtual DeKiemTra IdDeKiemTraNavigation { get; set; }
-        public virtual NguoiDung UIdNguoiDungNavigation { get; set; }
+        public virtual DeKiemTra IddeKiemTraNavigation { get; set; }
+        public virtual TaiKhoan IdnguoiDungNavigation { get; set; }
         public virtual ICollection<CtBaiLamCode> CtBaiLamCodes { get; set; }
         public virtual ICollection<CtBaiLamTracNghiem> CtBaiLamTracNghiems { get; set; }
     }
