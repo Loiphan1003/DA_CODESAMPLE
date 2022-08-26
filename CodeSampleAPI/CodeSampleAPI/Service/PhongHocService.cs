@@ -13,17 +13,17 @@ namespace CodeSampleAPI.Service
 
         bool createPhongHoc(PhongHoc phongHoc);
 
-        //bool addUserToPhongPhong(string uID, string idPhongHoc);
+        bool addUserToPhongPhong(string uID, string idPhongHoc);
 
         PhongHoc getOneByID(string id);
 
         List<PhongHocCustom> getListPhongHocByUidGiangVien(string uID);
 
-        //List<ThanhVien> getListThanhVienByIdPhong(string IdPhong);
+        List<ThanhVien> getListThanhVienByIdPhong(string IdPhong);
 
-        //bool removeMembers(string[] members);
+        bool removeMembers(string[] members);
 
-        //Task<String> addListMembers(string[] members, string roomId);
+        Task<String> addListMembers(string[] members, string roomId);
 
     }
     public class PhongHocService : IPhongHocService
@@ -50,31 +50,31 @@ namespace CodeSampleAPI.Service
             return res;
         }
 
-        //public bool addUserToPhongPhong(string uID, string idPhongHoc)
-        //{
-        //    // kiểm tra phòng học có tồn tại không
-        //    PhongHoc phongHoc = _codeSampleContext.PhongHocs.FirstOrDefault(p => p.Id == idPhongHoc);
-        //    if (phongHoc == null)
-        //        return false;
-        //    //tồn tại rồi thì không thêm nữa
-        //    CtPhongHoc ctPH = _codeSampleContext.CtPhongHocs.FirstOrDefault(p => p.IdPhongHoc == idPhongHoc && p.UIdNguoiDung.Equals(uID));
-        //    if (ctPH != null)
-        //        return false;
-        //    // tiến hành thêm chi tiêt phòng học
-        //    try
-        //    {
-        //        DateTime Datenow = DateTime.Now;
+        public bool addUserToPhongPhong(string uID, string idPhongHoc)
+        {
+            // kiểm tra phòng học có tồn tại không
+            PhongHoc phongHoc = _codeSampleContext.PhongHocs.FirstOrDefault(p => p.Idphong == idPhongHoc);
+            if (phongHoc == null)
+                return false;
+            //tồn tại rồi thì không thêm nữa
+            CtPhongHoc ctPH = _codeSampleContext.CtPhongHocs.FirstOrDefault(p => p.Idphong == idPhongHoc && p.UidNguoiDunng.Equals(uID));
+            if (ctPH != null)
+                return false;
+            // tiến hành thêm chi tiêt phòng học
+            try
+            {
+                DateTime Datenow = DateTime.Now;
 
-        //        CtPhongHoc ctPhongHoc = new CtPhongHoc() { IdPhongHoc = idPhongHoc, UIdNguoiDung = uID, NgayThamGia = Datenow };
-        //        _codeSampleContext.CtPhongHocs.Add(ctPhongHoc);
-        //        _codeSampleContext.SaveChanges();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return false;
-        //    }
-        //    return true;
-        //}
+                CtPhongHoc ctPhongHoc = new CtPhongHoc() { Idphong = idPhongHoc, UidNguoiDunng = uID, NgayThamGia = Datenow };
+                _codeSampleContext.CtPhongHocs.Add(ctPhongHoc);
+                _codeSampleContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
 
         public PhongHoc getOneByID(string id)
         {
@@ -115,67 +115,67 @@ namespace CodeSampleAPI.Service
             }
         }
 
-        //public List<ThanhVien> getListThanhVienByIdPhong(string IdPhong)
-        //{
-        //    var res = (from phong in _codeSampleContext.CtPhongHocs where phong.IdPhongHoc.Equals(IdPhong) select new ThanhVien()
-        //    {
-        //        TenHienThi = phong.UIdNguoiDungNavigation.TenHienThi,
-        //        HoTen = phong.UIdNguoiDungNavigation.HoTen,
-        //        Email = phong.UIdNguoiDungNavigation.Email
-        //    }).ToList();
+        public List<ThanhVien> getListThanhVienByIdPhong(string IdPhong)
+        {
+            var res = (from phong in _codeSampleContext.CtPhongHocs
+                       where phong.Idphong.Equals(IdPhong)
+                       select new ThanhVien()
+                       {
+                           TenHienThi = phong.UidNguoiDunngNavigation.TenHienThi,
+                           HoTen = phong.UidNguoiDunngNavigation.HoTen,
+                           Email = phong.UidNguoiDunngNavigation.Email
+                       }).ToList();
 
-        //    return res;
-        //}
+            return res;
+        }
 
-        //public bool removeMembers(string[] members)
-        //{
-        //    try
-        //    {
-        //        foreach (string member in members)
-        //        {
-        //            var nguoiDung = _codeSampleContext.NguoiDungs.FirstOrDefault(u => u.Email.Equals(member));
-        //            if(nguoiDung != null)
-        //            {
-        //                var mb = _codeSampleContext.CtPhongHocs.FirstOrDefault(p => p.UIdNguoiDung.Equals(nguoiDung.UId));
-        //                _codeSampleContext.CtPhongHocs.Remove(mb);
-        //                _codeSampleContext.SaveChanges();
-        //            }
+        public bool removeMembers(string[] members)
+        {
+            try
+            {
+                foreach (string member in members)
+                {
+                    var nguoiDung = _codeSampleContext.TaiKhoans.FirstOrDefault(u => u.Email.Equals(member));
+                    if (nguoiDung != null)
+                    {
+                        var mb = _codeSampleContext.CtPhongHocs.FirstOrDefault(p => p.UidNguoiDunng.Equals(nguoiDung.UidTaiKhoan));
+                        _codeSampleContext.CtPhongHocs.Remove(mb);
+                        _codeSampleContext.SaveChanges();
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
-        //        }
+        public async Task<string> addListMembers(string[] members, string roomId)
+        {
 
-        //        return true;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return false;
-        //    }
-        //}
+            foreach (string i in members)
+            {
+                DateTime Datenow = DateTime.Now;
 
-        //public async Task<string> addListMembers(string[] members, string roomId)
-        //{
-
-        //    foreach (string i in members)
-        //    {
-        //        DateTime Datenow = DateTime.Now;
-
-        //        var user = _codeSampleContext.NguoiDungs.FirstOrDefault(u => u.Email.Equals(i));
-        //        PhongHoc room = _codeSampleContext.PhongHocs.FirstOrDefault(p => p.Id.Equals(roomId));
-        //        bool accountAlreadyExist = false;
-        //        if (user != null && room != null)
-        //        {
-        //            CtPhongHoc phong = new CtPhongHoc()
-        //            {
-        //                UIdNguoiDung = user.UId,
-        //                IdPhongHoc = roomId,
-        //                NgayThamGia = Datenow
-        //            };
-        //            _codeSampleContext.CtPhongHocs.Add(phong);
-        //            _codeSampleContext.SaveChanges();
-        //            accountAlreadyExist = true;
-        //        }
-        //        await MailUtils.SendGMail("phanvuloi001@gmail.com", i, "Thông báo tham gia phòng học", accountAlreadyExist , roomId);
-        //    }
-        //    return "true";
-        //}
+                var user = _codeSampleContext.TaiKhoans.FirstOrDefault(u => u.Email.Equals(i));
+                PhongHoc room = _codeSampleContext.PhongHocs.FirstOrDefault(p => p.Idphong.Equals(roomId));
+                bool accountAlreadyExist = false;
+                if (user != null && room != null)
+                {
+                    CtPhongHoc phong = new CtPhongHoc()
+                    {
+                        UidNguoiDunng = user.UidTaiKhoan,
+                        Idphong = roomId,
+                        NgayThamGia = Datenow
+                    };
+                    _codeSampleContext.CtPhongHocs.Add(phong);
+                    _codeSampleContext.SaveChanges();
+                    accountAlreadyExist = true;
+                }
+                await MailUtils.SendGMail("phanvuloi001@gmail.com", i, "Thông báo tham gia phòng học", accountAlreadyExist, roomId);
+            }
+            return "true";
+        }
     }
 }
