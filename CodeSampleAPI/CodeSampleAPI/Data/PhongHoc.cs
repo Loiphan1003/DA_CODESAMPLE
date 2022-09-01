@@ -10,7 +10,6 @@ namespace CodeSampleAPI.Data
         public PhongHoc()
         {
             CtPhongHocs = new HashSet<CtPhongHoc>();
-            DeKiemTras = new HashSet<DeKiemTra>();
         }
 
         public string Idphong { get; set; }
@@ -20,6 +19,5 @@ namespace CodeSampleAPI.Data
 
         public virtual TaiKhoan IdchuPhongNavigation { get; set; }
         public virtual ICollection<CtPhongHoc> CtPhongHocs { get; set; }
-        public virtual ICollection<DeKiemTra> DeKiemTras { get; set; }
     }
 }

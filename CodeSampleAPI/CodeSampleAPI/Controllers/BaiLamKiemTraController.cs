@@ -19,22 +19,22 @@ namespace CodeSampleAPI.Controllers
             this._baiLamKiemTraService = baiLamKiemTraService;
         }
 
-        //[HttpPost]
-        //public IActionResult addBaiLamKiemTra(BaiLamKiemTraCustom baiLamKiemTraCustom )
-        //{
-        //    return Ok(_baiLamKiemTraService.add(baiLamKiemTraCustom));
-        //}
+        [HttpPost]
+        public IActionResult addBaiLamKiemTra(BaiLamKiemTraCustom baiLamKiemTraCustom)
+        {
+            return Ok(_baiLamKiemTraService.add(baiLamKiemTraCustom));
+        }
 
-        //[HttpGet("test-overview")]
-        //public IActionResult getTongQuanBaiLamKiemTra(int id)
-        //{
-        //    return Ok(_baiLamKiemTraService.getTongQuanByIdDeKiemTra(id));
-        //}
+        [HttpGet("test-overview")]
+        public IActionResult getTongQuanBaiLamKiemTra(int id)
+        {
+            return Ok(_baiLamKiemTraService.getTongQuanByIdDeKiemTra(id));
+        }
 
-        //[HttpGet("test-detail")]
-        //public IActionResult getChiTietBaiKiemTraByIdBaiLamKiemTra(int id)
-        //{
-        //    return Ok(_baiLamKiemTraService.getChiTietByIdBaiLamKiemTra(id));
-        //}
+        [HttpGet("test-detail")]
+        public IActionResult getChiTietBaiKiemTraByIdBaiLamKiemTra(int id)
+        {
+            return Ok(_baiLamKiemTraService.getChiTietByIdBaiLamKiemTra(id));
+        }
     }
 }
