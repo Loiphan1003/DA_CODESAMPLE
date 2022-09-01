@@ -10,6 +10,7 @@ namespace CodeSampleAPI.Data
         public GiaiDau()
         {
             CtThamGiaGiaiDaus = new HashSet<CtThamGiaGiaiDau>();
+            DeCauHoiGiaiDaus = new HashSet<DeCauHoiGiaiDau>();
         }
 
         public int IdgiaiDau { get; set; }
@@ -20,7 +21,7 @@ namespace CodeSampleAPI.Data
         public DateTime ThoiGianBatDau { get; set; }
         public DateTime ThoiGianKetThuc { get; set; }
 
-        public virtual DeCauHoiGiaiDau DeCauHoiGiaiDau { get; set; }
         public virtual ICollection<CtThamGiaGiaiDau> CtThamGiaGiaiDaus { get; set; }
+        public virtual ICollection<DeCauHoiGiaiDau> DeCauHoiGiaiDaus { get; set; }
     }
 }

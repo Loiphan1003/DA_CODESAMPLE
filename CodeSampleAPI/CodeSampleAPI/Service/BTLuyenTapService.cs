@@ -9,12 +9,15 @@ namespace CodeSampleAPI.Service
 {
     public interface IBTLuyenTapService
     {
-        List<BTLuyenTap_getAll> getAll();
+        List<BTLuyenTap_getAll> getAll(Filter.PaginationFilter validFilter);
 
-        //List<BtLuyenTap> getAllByAdmin();
+        List<BtLuyenTap> getAllByAdmin();
 
-        //BtLuyenTap getOne(int id);
-        //int getSoLuongBaiLuyenTap();
+        BtLuyenTap getOne(int id);
+
+
+        BTLuyenTap_getAll getOneOnList(int id);
+        int getSoLuongBaiLuyenTap();
         //bool add(BaiTapLuyenTap_Custom btLuyenTap_Cus);
         //bool DeleteBTLT(int id);
         //bool submitBT(string uId, int idBT, bool trangthai, string code, bool isTeacher);
@@ -108,7 +111,7 @@ namespace CodeSampleAPI.Service
         //    }
         //}
 
-        public List<BTLuyenTap_getAll> getAll()
+        public List<BTLuyenTap_getAll> getAll(Filter.PaginationFilter validFilter)
         {
             var res = (from bt in _codeSampleContext.BtLuyenTaps join user in _codeSampleContext.TaiKhoans on
                        bt.UIdNguoiTao equals user.UidTaiKhoan
@@ -122,24 +125,57 @@ namespace CodeSampleAPI.Service
                            Tag = bt.Tag,
                            TenHienThi = user.TenHienThi,
                            TieuDe = bt.TieuDe
-                       }).ToList();
+                       }).Skip((validFilter.PageNumber - 1) * validFilter.PageSize).Take(validFilter.PageSize).ToList();
+            return  res;
+        }
+
+        public List<BtLuyenTap> getAllByAdmin()
+        {
+            return _codeSampleContext.BtLuyenTaps.ToList();
+        }
+
+        public BtLuyenTap getOne(int id)
+        {
+            return _codeSampleContext.BtLuyenTaps.FirstOrDefault(p => p.Id == id);
+        }
+
+        public BTLuyenTap_getAll getOneOnList(int id)
+        {
+            var res = (from bt in _codeSampleContext.BtLuyenTaps
+                       join user in _codeSampleContext.TaiKhoans on
+                        bt.UIdNguoiTao equals user.UidTaiKhoan
+                       select new BTLuyenTap_getAll()
+                       {
+                           Id = bt.Id,
+                           DoKho = bt.DoKho,
+                           LinkAvatar = user.LinkAvatar,
+                           SoNguoiLam = bt.SoNguoiLam,
+                           SoNguoiThanhCong = bt.SoNguoiThanhCong,
+                           Tag = bt.Tag,
+                           TenHienThi = user.TenHienThi,
+                           TieuDe = bt.TieuDe
+                       }).FirstOrDefault();
             return res;
         }
 
-        //public List<BtLuyenTap> getAllByAdmin()
-        //{
-        //    return _codeSampleContext.BtLuyenTaps.ToList();
-        //}
-
-        //public BtLuyenTap getOne(int id)
-        //{
-        //    return _codeSampleContext.BtLuyenTaps.FirstOrDefault(p => p.Id == id);
-        //}
-
-        //public int getSoLuongBaiLuyenTap()
-        //{
-        //    return _codeSampleContext.BtLuyenTaps.ToList().Count();
-        //}
+        public int getSoLuongBaiLuyenTap()
+        {
+            int count = (from bt in _codeSampleContext.BtLuyenTaps
+                         join user in _codeSampleContext.TaiKhoans on
+                            bt.UIdNguoiTao equals user.UidTaiKhoan
+                         select new BTLuyenTap_getAll()
+                         {
+                             Id = bt.Id,
+                             DoKho = bt.DoKho,
+                             LinkAvatar = user.LinkAvatar,
+                             SoNguoiLam = bt.SoNguoiLam,
+                             SoNguoiThanhCong = bt.SoNguoiThanhCong,
+                             Tag = bt.Tag,
+                             TenHienThi = user.TenHienThi,
+                             TieuDe = bt.TieuDe
+                         }).Count();
+            return count;
+        }
 
         //public bool submitBT(string uId, int idBT, bool trangthai, string code, bool isTeacher)
         //{

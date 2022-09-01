@@ -9,8 +9,6 @@ namespace CodeSampleAPI.Data
     {
         public BaiTapCode()
         {
-            CtBaiLamCodes = new HashSet<CtBaiLamCode>();
-            CtBaiLamGiaiDaus = new HashSet<CtBaiLamGiaiDau>();
             CtDeKiemTraCodes = new HashSet<CtDeKiemTraCode>();
             CtDeThiGiaiDaus = new HashSet<CtDeThiGiaiDau>();
             TestCaseBtcodes = new HashSet<TestCaseBtcode>();
@@ -27,8 +25,6 @@ namespace CodeSampleAPI.Data
         public string MauDauVao { get; set; }
         public string MauDauRa { get; set; }
 
-        public virtual ICollection<CtBaiLamCode> CtBaiLamCodes { get; set; }
-        public virtual ICollection<CtBaiLamGiaiDau> CtBaiLamGiaiDaus { get; set; }
         public virtual ICollection<CtDeKiemTraCode> CtDeKiemTraCodes { get; set; }
         public virtual ICollection<CtDeThiGiaiDau> CtDeThiGiaiDaus { get; set; }
         public virtual ICollection<TestCaseBtcode> TestCaseBtcodes { get; set; }

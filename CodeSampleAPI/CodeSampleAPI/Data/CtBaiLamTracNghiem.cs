@@ -13,7 +13,7 @@ namespace CodeSampleAPI.Data
         public int DapAn { get; set; }
         public double DiemDatDuoc { get; set; }
 
+        public virtual CtDeKiemTraTracNghiem Id { get; set; }
         public virtual BaiLamKiemTra IdbaiLamNavigation { get; set; }
-        public virtual BaiTapTracNghiem IdbaiTapTracNghiemNavigation { get; set; }
     }
 }

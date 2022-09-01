@@ -9,7 +9,6 @@ namespace CodeSampleAPI.Data
     {
         public BaiTapTracNghiem()
         {
-            CtBaiLamTracNghiems = new HashSet<CtBaiLamTracNghiem>();
             CtDeKiemTraTracNghiems = new HashSet<CtDeKiemTraTracNghiem>();
         }
 
@@ -23,7 +22,6 @@ namespace CodeSampleAPI.Data
         public string UidNguoiTao { get; set; }
 
         public virtual TaiKhoan UidNguoiTaoNavigation { get; set; }
-        public virtual ICollection<CtBaiLamTracNghiem> CtBaiLamTracNghiems { get; set; }
         public virtual ICollection<CtDeKiemTraTracNghiem> CtDeKiemTraTracNghiems { get; set; }
     }
 }

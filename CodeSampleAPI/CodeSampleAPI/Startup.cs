@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -42,7 +43,7 @@ namespace CodeSampleAPI
                 //  .AddScheme<AuthenticationSchemeOptions, FireBaseAuthenticationHandler>(JwtBearerDefaults.AuthenticationScheme, (o) => { });
 
            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-       .AddJwtBearer(options =>
+           .AddJwtBearer(options =>
         {
             options.Authority = "https://securetoken.google.com/first-web-91c0f";
            options.TokenValidationParameters = new TokenValidationParameters
@@ -54,6 +55,15 @@ namespace CodeSampleAPI
                 ValidateLifetime = true
             };
         });
+
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IUriService>(o =>
+            {
+                var accessor = o.GetRequiredService<IHttpContextAccessor>();
+                var request = accessor.HttpContext.Request;
+                var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+                return new UriService(uri);
+            });
 
             services.AddSwaggerGen(c =>
             {
