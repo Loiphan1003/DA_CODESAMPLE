@@ -56,26 +56,26 @@ namespace CodeSampleAPI.Controllers
             return Ok(new Response<BTLuyenTap_getAll>(_btLuyenTapService.getOneOnList(id)));
         }
 
-        //[HttpPost("add")]
-        //public IActionResult add([FromBody]BaiTapLuyenTap_Custom bt)
-        //{
-        //    return Ok(_btLuyenTapService.add(bt));
-        //}
-        //[HttpDelete("DeleteBTLT")]
-        //public IActionResult DeleteBTLT(int id)
-        //{
-        //    return Ok(_btLuyenTapService.DeleteBTLT(id));
-        //}
-        //[HttpPut("EditBTLT")]
-        //public IActionResult EditBTLT(int id, int doKho, string tieuDe, string deBai, string rangBuoc, string dinhDangDauVao, string dinhDangDauRa, string mauDauVao, string mauDauRa, string tag)
-        //{
-        //    return Ok(_btLuyenTapService.EditBTLT(id, doKho, tieuDe, deBai, rangBuoc, dinhDangDauVao, dinhDangDauRa, mauDauVao, mauDauRa, tag));
-        //}
-        //[HttpGet("countAll")]
-        //public IActionResult countAll()
-        //{
-        //    return Ok(_btLuyenTapService.getSoLuongBaiLuyenTap());
-        //}
+        [HttpPost("add")]
+        public IActionResult add([FromBody] BaiTapLuyenTap_Custom bt)
+        {
+            return Ok(_btLuyenTapService.add(bt));
+        }
+        [HttpDelete("DeleteBTLT")]
+        public IActionResult DeleteBTLT(int id)
+        {
+            return Ok(_btLuyenTapService.DeleteBTLT(id));
+        }
+        [HttpPut("EditBTLT")]
+        public IActionResult EditBTLT(int id, int doKho, string tieuDe, string deBai, string rangBuoc, string dinhDangDauVao, string dinhDangDauRa, string mauDauVao, string mauDauRa, string tag)
+        {
+            return Ok(_btLuyenTapService.EditBTLT(id, doKho, tieuDe, deBai, rangBuoc, dinhDangDauVao, dinhDangDauRa, mauDauVao, mauDauRa, tag));
+        }
+        [HttpGet("countAll")]
+        public IActionResult countAll()
+        {
+            return Ok(_btLuyenTapService.getSoLuongBaiLuyenTap());
+        }
 
         //[HttpPost("SubmitBTCode")]
         //public IActionResult submitBT([FromBody] CtLuyenTap ctLuyenTap, string uId, bool isTeacher )
