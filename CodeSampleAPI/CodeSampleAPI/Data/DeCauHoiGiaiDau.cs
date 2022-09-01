@@ -18,7 +18,7 @@ namespace CodeSampleAPI.Data
         public DateTime NgayTao { get; set; }
         public int IdgiaiDau { get; set; }
 
-        public virtual GiaiDau IddeCauHoiGiaiDauNavigation { get; set; }
+        public virtual GiaiDau IdgiaiDauNavigation { get; set; }
         public virtual ICollection<BaiLamGiaiDau> BaiLamGiaiDaus { get; set; }
         public virtual ICollection<CtDeThiGiaiDau> CtDeThiGiaiDaus { get; set; }
     }

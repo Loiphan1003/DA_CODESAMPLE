@@ -7,6 +7,11 @@ namespace CodeSampleAPI.Data
 {
     public partial class CtDeKiemTraCode
     {
+        public CtDeKiemTraCode()
+        {
+            CtBaiLamCodes = new HashSet<CtBaiLamCode>();
+        }
+
         public int IddeKiemTra { get; set; }
         public int IdBaiTapCode { get; set; }
         public int SttcauHoi { get; set; }
@@ -14,5 +19,6 @@ namespace CodeSampleAPI.Data
 
         public virtual BaiTapCode IdBaiTapCodeNavigation { get; set; }
         public virtual DeKiemTra IddeKiemTraNavigation { get; set; }
+        public virtual ICollection<CtBaiLamCode> CtBaiLamCodes { get; set; }
     }
 }

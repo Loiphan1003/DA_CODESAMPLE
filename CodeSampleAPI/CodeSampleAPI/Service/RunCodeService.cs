@@ -21,8 +21,10 @@ namespace CodeSampleAPI.Service
         {
             using (var client = new HttpClient())
             {
+                //var url = "https://codex.jaagrav.in/";
                 var url = "https://codex-api.herokuapp.com/";
-
+                var headers = " Content-Type: application/x-www-form-urlencoded ";
+  
 
                 var data = new[]
                 {
@@ -31,7 +33,7 @@ namespace CodeSampleAPI.Service
                       new KeyValuePair<String, String>("language" , runCodeRequest.Language)
                 };
 
-                var response = await client.PostAsync(url, new FormUrlEncodedContent(data));
+                var response = await client.PostAsync(url,  new FormUrlEncodedContent(data));
 
                 if (response.IsSuccessStatusCode)
                 {

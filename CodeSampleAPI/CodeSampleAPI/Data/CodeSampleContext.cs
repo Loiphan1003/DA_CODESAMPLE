@@ -105,9 +105,7 @@ namespace CodeSampleAPI.Data
 
                 entity.ToTable("BaiLamKiemTra");
 
-                entity.Property(e => e.IdbaiLamKiemTra)
-                    .ValueGeneratedNever()
-                    .HasColumnName("IDBaiLamKiemTra");
+                entity.Property(e => e.IdbaiLamKiemTra).HasColumnName("IDBaiLamKiemTra");
 
                 entity.Property(e => e.IddeKiemTra).HasColumnName("IDDeKiemTra");
 
@@ -165,9 +163,7 @@ namespace CodeSampleAPI.Data
 
                 entity.ToTable("BaiTapTracNghiem");
 
-                entity.Property(e => e.IdbaiTapTracNghiem)
-                    .ValueGeneratedNever()
-                    .HasColumnName("IDBaiTapTracNghiem");
+                entity.Property(e => e.IdbaiTapTracNghiem).HasColumnName("IDBaiTapTracNghiem");
 
                 entity.Property(e => e.CauHoi)
                     .IsRequired()
@@ -252,9 +248,9 @@ namespace CodeSampleAPI.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CT_BaiLamCode_BaiLamKiemTra");
 
-                entity.HasOne(d => d.IdbaiTapCodeNavigation)
+                entity.HasOne(d => d.Id)
                     .WithMany(p => p.CtBaiLamCodes)
-                    .HasForeignKey(d => d.IdbaiTapCode)
+                    .HasForeignKey(d => new { d.IddeKiemTra, d.IdbaiTapCode })
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CT_BaiLamCode_BaiTapCode");
             });
@@ -281,11 +277,11 @@ namespace CodeSampleAPI.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CT_BaiLamGiaiDau_BaiLamGiaiDau");
 
-                entity.HasOne(d => d.IdbaiTapCodeNavigation)
+                entity.HasOne(d => d.Id)
                     .WithMany(p => p.CtBaiLamGiaiDaus)
-                    .HasForeignKey(d => d.IdbaiTapCode)
+                    .HasForeignKey(d => new { d.IddeCauHoiGiaiDau, d.IdbaiTapCode })
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_CT_BaiLamGiaiDau_BaiTapCode");
+                    .HasConstraintName("FK_CT_BaiLamGiaiDau_CT_DeThiGiaiDau");
             });
 
             modelBuilder.Entity<CtBaiLamTracNghiem>(entity =>
@@ -306,9 +302,9 @@ namespace CodeSampleAPI.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CT_BaiLamTracNghiem_BaiLamKiemTra");
 
-                entity.HasOne(d => d.IdbaiTapTracNghiemNavigation)
+                entity.HasOne(d => d.Id)
                     .WithMany(p => p.CtBaiLamTracNghiems)
-                    .HasForeignKey(d => d.IdbaiTapTracNghiem)
+                    .HasForeignKey(d => new { d.IddeKiemTra, d.IdbaiTapTracNghiem })
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CT_BaiLamTracNghiem_BaiTapTracNghiem");
             });
@@ -329,7 +325,7 @@ namespace CodeSampleAPI.Data
                     .WithMany(p => p.CtDeKiemTraCodes)
                     .HasForeignKey(d => d.IdBaiTapCode)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_CT_DeKiemTraCode_BaiTapCode1");
+                    .HasConstraintName("FK_CT_DeKiemTraCode_BaiTapCode");
 
                 entity.HasOne(d => d.IddeKiemTraNavigation)
                     .WithMany(p => p.CtDeKiemTraCodes)
@@ -538,17 +534,15 @@ namespace CodeSampleAPI.Data
 
                 entity.ToTable("DeCauHoiGiaiDau");
 
-                entity.Property(e => e.IddeCauHoiGiaiDau)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("IDDeCauHoiGiaiDau");
+                entity.Property(e => e.IddeCauHoiGiaiDau).HasColumnName("IDDeCauHoiGiaiDau");
 
                 entity.Property(e => e.IdgiaiDau).HasColumnName("IDGiaiDau");
 
                 entity.Property(e => e.NgayTao).HasColumnType("date");
 
-                entity.HasOne(d => d.IddeCauHoiGiaiDauNavigation)
-                    .WithOne(p => p.DeCauHoiGiaiDau)
-                    .HasForeignKey<DeCauHoiGiaiDau>(d => d.IddeCauHoiGiaiDau)
+                entity.HasOne(d => d.IdgiaiDauNavigation)
+                    .WithMany(p => p.DeCauHoiGiaiDaus)
+                    .HasForeignKey(d => d.IdgiaiDau)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DeCauHoiGiaiDau_GiaiDau");
             });
@@ -559,9 +553,7 @@ namespace CodeSampleAPI.Data
 
                 entity.ToTable("DeKiemTra");
 
-                entity.Property(e => e.IddeKiemTra)
-                    .ValueGeneratedNever()
-                    .HasColumnName("IDDeKiemTra");
+                entity.Property(e => e.IddeKiemTra).HasColumnName("IDDeKiemTra");
 
                 entity.Property(e => e.Idphong)
                     .HasMaxLength(10)
@@ -763,8 +755,7 @@ namespace CodeSampleAPI.Data
                 entity.HasOne(d => d.IdBtluyenTapNavigation)
                     .WithMany(p => p.TestCaseLuyenTaps)
                     .HasForeignKey(d => d.IdBtluyenTap)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TestCase_LuyenTap_BT_LuyenTap1");
+                    .HasConstraintName("FK_TestCase_LuyenTap_BT_LuyenTap");
             });
 
             OnModelCreatingPartial(modelBuilder);

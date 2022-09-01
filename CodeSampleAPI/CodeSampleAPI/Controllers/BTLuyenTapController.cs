@@ -1,9 +1,13 @@
 ﻿using CodeSampleAPI.Data;
+using CodeSampleAPI.Filter;
+using CodeSampleAPI.Helpers;
 using CodeSampleAPI.Model;
 using CodeSampleAPI.Service;
+using CodeSampleAPI.Wrappers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,28 +20,42 @@ namespace CodeSampleAPI.Controllers
     public class BTLuyenTapController : ControllerBase
     {
         private readonly IBTLuyenTapService _btLuyenTapService;
-        public BTLuyenTapController(IBTLuyenTapService btLuyenTapService)
+        private readonly IUriService uriService;
+        public BTLuyenTapController(IBTLuyenTapService btLuyenTapService, IUriService uriService)
         {
             this._btLuyenTapService = btLuyenTapService;
+            this.uriService = uriService;
         }
 
-        //[HttpGet("getOne")]
-        //public IActionResult getOne(int id)
-        //{
-        //    return Ok(_btLuyenTapService.getOne(id));
-        //}
+        [HttpGet("getOne")]
+        public IActionResult getOne(int id)
+        {
+            return Ok(_btLuyenTapService.getOne(id));
+        }
 
         ////[Authorize]
         [HttpGet("getAll")]
-        public IActionResult getAll()
+        public IActionResult getAll([FromQuery] PaginationFilter filter)
         {
-            return Ok(_btLuyenTapService.getAll());
+            var route = Request.Path.Value;
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+            var totalRecords = _btLuyenTapService.getSoLuongBaiLuyenTap();
+            var pagedReponse = PaginationHelper.CreatePagedReponse<BTLuyenTap_getAll>(_btLuyenTapService.getAll(validFilter), validFilter, totalRecords, uriService, route);
+            return Ok(pagedReponse);
         }
-        //[HttpGet("getAllByAdmin")]
-        //public IActionResult getAllByAdmin()
-        //{
-        //    return Ok(_btLuyenTapService.getAllByAdmin());
-        //}
+
+        [HttpGet("getAllByAdmin")]
+        public IActionResult getAllByAdmin()
+        {
+            return Ok(_btLuyenTapService.getAllByAdmin());
+        }
+
+        [HttpGet("getOneOnList")]
+        public IActionResult getOneOnList(int id)
+        {
+            return Ok(new Response<BTLuyenTap_getAll>(_btLuyenTapService.getOneOnList(id)));
+        }
+
         //[HttpPost("add")]
         //public IActionResult add([FromBody]BaiTapLuyenTap_Custom bt)
         //{

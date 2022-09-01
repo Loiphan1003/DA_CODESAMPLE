@@ -14,7 +14,7 @@ namespace CodeSampleAPI.Data
         public double? Diem { get; set; }
         public string Code { get; set; }
 
+        public virtual CtDeThiGiaiDau Id { get; set; }
         public virtual BaiLamGiaiDau IdbaiLamNavigation { get; set; }
-        public virtual BaiTapCode IdbaiTapCodeNavigation { get; set; }
     }
 }

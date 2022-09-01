@@ -1,4 +1,5 @@
-﻿using CodeSampleAPI.Service;
+﻿using CodeSampleAPI.Data;
+using CodeSampleAPI.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,10 +18,23 @@ namespace CodeSampleAPI.Controllers
         {
             this._taikhoanService = taikhoanService;
         }
+
         [HttpGet("getAllTaiKhoan")]
         public IActionResult getAllTaiKhoan()
         {
             return Ok(_taikhoanService.getAllTaiKhoan());
+        }
+
+        [HttpGet("getOne")]
+        public IActionResult getOne(String uId)
+        {
+            return Ok(_taikhoanService.getOne(uId));
+        }
+
+        [HttpPost("updateInfo")]
+        public IActionResult updateInfo(TaiKhoan taiKhoan )
+        {
+            return Ok(_taikhoanService.updateInfo(taiKhoan));
         }
     }
 }
