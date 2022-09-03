@@ -10,7 +10,8 @@ namespace CodeSampleAPI.Service
     public interface IMonHocService
     {
         MonHoc getMonHocByID(int id);
-        List<MonHoc> getAllMonHoc();
+        List<MonHoc> getAllMonHoc(Filter.PaginationFilter validFilter);
+        int getSoLuongMonHoc();
         bool AddMonHoc(MonHoc_Custom mh);
         bool EditMonHoc(MonHoc_Custom mh);
         bool DeleteMonHoc(int id);
@@ -27,9 +28,9 @@ namespace CodeSampleAPI.Service
         {
             return _codeSampleContext.MonHocs.FirstOrDefault(p => p.Id == id);
         }
-        public List<MonHoc> getAllMonHoc()
+        public List<MonHoc> getAllMonHoc(Filter.PaginationFilter validFilter)
         {
-            return _codeSampleContext.MonHocs.ToList();
+            return _codeSampleContext.MonHocs.Skip((validFilter.PageNumber - 1) * validFilter.PageSize).Take(validFilter.PageSize).ToList();
         }
 
         public bool AddMonHoc(MonHoc_Custom mh)
@@ -83,6 +84,12 @@ namespace CodeSampleAPI.Service
             {
                 return false;
             }
+        }
+
+        public int getSoLuongMonHoc()
+        {
+            var res = _codeSampleContext.MonHocs.Count();
+            return res;
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using CodeSampleAPI.Model;
+﻿using CodeSampleAPI.Data;
+using CodeSampleAPI.Filter;
+using CodeSampleAPI.Helpers;
+using CodeSampleAPI.Model;
 using CodeSampleAPI.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +17,12 @@ namespace CodeSampleAPI.Controllers
     public class MonHocController : ControllerBase
     {
         private readonly IMonHocService _monHocService;
-        public MonHocController(IMonHocService monHocService)
+        private readonly IUriService uriService;
+
+        public MonHocController(IMonHocService monHocService, IUriService uriService)
         {
             this._monHocService = monHocService;
+            this.uriService = uriService;
         }
 
         [HttpGet("getOne")]
@@ -26,9 +32,13 @@ namespace CodeSampleAPI.Controllers
         }
 
         [HttpGet("getAll")]
-        public IActionResult getAllMonHoc()
+        public IActionResult getAllMonHoc([FromQuery] PaginationFilter filter)
         {
-            return Ok(_monHocService.getAllMonHoc());
+            var route = Request.Path.Value;
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+            var totalRecords = _monHocService.getSoLuongMonHoc();
+            var pagedReponse = PaginationHelper.CreatePagedReponse<MonHoc>(_monHocService.getAllMonHoc(validFilter), validFilter, totalRecords, uriService, route);
+            return Ok(pagedReponse);
         }
         [HttpPost("AddMonHoc")]
         public IActionResult AddMonHoc([FromBody] MonHoc_Custom mh)

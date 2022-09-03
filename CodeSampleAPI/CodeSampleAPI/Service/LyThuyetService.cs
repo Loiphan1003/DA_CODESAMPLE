@@ -11,7 +11,7 @@ namespace CodeSampleAPI.Service
     {
         LyThuyet getLyThuyetByID(int id);
         LyThuyet_TenMonHoc getAllLyThuyetByIDMonHoc(int id);
-        int getSoLuongMon();
+
         bool AddLT(LyThuyets_Custom lt);
         bool EditLT(LyThuyets_Custom lt);
         bool DeleteLT(int id);

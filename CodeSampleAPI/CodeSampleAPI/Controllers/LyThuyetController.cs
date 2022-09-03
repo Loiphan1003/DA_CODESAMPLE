@@ -14,6 +14,7 @@ namespace CodeSampleAPI.Controllers
     public class LyThuyetController : ControllerBase
     {
         private readonly ILyThuyetService _lyThuyetService;
+
         public LyThuyetController(ILyThuyetService lyThuyetService)
         {
             this._lyThuyetService = lyThuyetService;
@@ -44,11 +45,6 @@ namespace CodeSampleAPI.Controllers
         public IActionResult DeleteLT(int id)
         {
             return Ok(_lyThuyetService.DeleteLT(id));
-        }
-        [HttpGet("countAll")]
-        public IActionResult countAll()
-        {
-            return Ok(_lyThuyetService.getSoLuongMon());
         }
     }
 }

@@ -23,8 +23,6 @@ namespace CodeSampleAPI.Service
             {
                 //var url = "https://codex.jaagrav.in/";
                 var url = "https://codex-api.herokuapp.com/";
-                var headers = " Content-Type: application/x-www-form-urlencoded ";
-  
 
                 var data = new[]
                 {
