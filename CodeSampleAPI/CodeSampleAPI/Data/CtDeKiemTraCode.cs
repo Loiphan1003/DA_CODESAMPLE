@@ -14,8 +14,8 @@ namespace CodeSampleAPI.Data
 
         public int IddeKiemTra { get; set; }
         public int IdBaiTapCode { get; set; }
-        public int SttcauHoi { get; set; }
-        public double Diem { get; set; }
+        public int? SttcauHoi { get; set; }
+        public double? Diem { get; set; }
 
         public virtual BaiTapCode IdBaiTapCodeNavigation { get; set; }
         public virtual DeKiemTra IddeKiemTraNavigation { get; set; }
