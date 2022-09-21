@@ -65,7 +65,9 @@ namespace CodeSampleAPI.Service
                 var user = _codeSampleContext.TaiKhoans.FirstOrDefault(u => u.UidTaiKhoan.Equals(taiKhoan.UidTaiKhoan));
                 if(user == null)
                 {
-                    return false;
+                    _codeSampleContext.TaiKhoans.Add(taiKhoan);
+                    _codeSampleContext.SaveChanges();
+                    return true;
                 }
 
                 user.TenHienThi = taiKhoan.TenHienThi;
@@ -74,11 +76,15 @@ namespace CodeSampleAPI.Service
                 user.HoTen = taiKhoan.HoTen;
                 user.GioiTinh = taiKhoan.GioiTinh;
                 user.Email = taiKhoan.Email;
+                user.GioiTinh = taiKhoan.GioiTinh;
+
+                _codeSampleContext.SaveChanges();
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return false;
             }
         }
