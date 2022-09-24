@@ -49,7 +49,7 @@ namespace CodeSampleAPI.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-PDHA0NQ\\SQLEXPRESS;Database=CodeSample;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("workstation id=codesample.mssql.somee.com;packet size=4096;user id=Loiphan1003_SQLLogin_1;pwd=96db3clfgn;data source=codesample.mssql.somee.com;persist security info=False;initial catalog=codesample");
             }
         }
 
