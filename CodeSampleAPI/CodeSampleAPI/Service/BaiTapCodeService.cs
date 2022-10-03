@@ -86,6 +86,22 @@ namespace CodeSampleAPI.Service
 
             try
             {
+                List<TestCase> testCases = (from bt in _codeSampleContext.TestCaseBtcodes
+                                                   where bt.IdBaiTap == btCode.Id
+                                                   select new TestCase()
+                                                   {
+                                                       Id = bt.Id,
+                                                       IdBaiTap = bt.IdBaiTap,
+                                                       Input = bt.Input,
+                                                       Output = bt.Output
+                                                   }).ToList(); ;
+                foreach (var testCase in testCases)
+                {
+                    TestCaseBtcode t = new TestCaseBtcode() { Id = testCase.Id, IdBaiTap = testCase.IdBaiTap, Input = testCase.Input, Output = testCase.Output };
+                    _codeSampleContext.TestCaseBtcodes.Remove(t);
+                    _codeSampleContext.SaveChanges();
+                }
+            
                 _codeSampleContext.BaiTapCodes.Remove(btCode);
                 _codeSampleContext.SaveChanges();
             }
