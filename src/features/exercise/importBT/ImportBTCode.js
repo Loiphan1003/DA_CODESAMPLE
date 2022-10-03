@@ -1,7 +1,7 @@
 import React from 'react';
 import * as XLSX from 'xlsx';
 import BaiTapCodeFile from '../../../files/BaiTapCode.xlsx';
-import BTTracnghiem from '../../../files/CauHoiTracNghiems.xlsx';
+import BTTracnghiem from '../../../files/CauHoiTracNghiem.xlsx';
 import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
