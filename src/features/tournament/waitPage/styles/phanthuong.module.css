@@ -1,0 +1,118 @@
+.App_phanThuong {
+  background-color: #282c34;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  font-size: calc(5px + 2vmin);
+  color: white;
+  line-height: 2;
+  padding: 20px 40px;
+}
+
+.App_phanThuong>h2 {
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+
+}
+
+.App_phanThuong>p {
+  font-size: calc(4px + 2vmin);
+  text-align: center;
+}
+
+.App_hinhanhThuong {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: space-around;
+}
+
+.App_hinhanhThuong>ul {
+  width: fit-content;
+  height: fit-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 2.5;
+}
+
+.App_hinhanhThuong>ul>li>p {
+  margin: 0;
+}
+
+.App_hinhanhThuong>div {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+}
+
+.App_hinhanhThuong>div>img {
+  width: 290px;
+  height: 250px;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 767px) {
+
+  .App_phanThuong {
+    height: fit-content;
+    padding: 30px 20px;
+  }
+
+  .App_phanThuong > p, .App_phanThuong > div{
+    font-size: 13px;
+  }
+
+  .App_hinhanhThuong {
+    display: block;
+    gap: 30px;
+    justify-content: space-around;
+  }
+
+  .App_hinhanhThuong>div {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+  }
+
+  .App_hinhanhThuong>div>img {
+    width: 150px;
+    height: 120px;
+    border-radius: 10px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-height: 600px) {
+  .App_phanThuong {
+    height: fit-content;
+    padding: 30px 40px;
+  }
+
+  .App_phanThuong > p, .App_phanThuong > div{
+    font-size: 17px;
+  }
+}
+
+
+@media only screen and (max-width: 63.9375em) {
+
+  .App_hinhanhThuong {
+    width: 100%;
+    display: flex;
+    /* text-align: center; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.5;
+    gap: 20px;
+  }
+
+  .App_phanThuong {
+    height: fit-content;
+    padding: 30px 40px;
+  }
+}

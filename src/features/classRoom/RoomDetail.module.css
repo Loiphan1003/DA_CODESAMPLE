@@ -1,0 +1,112 @@
+:root {
+    --main-color: #3F48CC;
+    --icon-color: #0070FF;
+    --status-draft-color: #b7b7a4;
+    --status-open-color: #74c69d;
+    --status-close-color: #d00000;
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 200px;
+    border-bottom: 1px solid #d0d8dc;
+}
+
+.header h2{
+    margin-bottom: 0;
+    color: #397cef;
+    padding: 2px 15px;
+    background-color: #f5f7f8;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px 0 rgb(40 50 56 / 24%);
+}
+
+
+.nameRoom{
+    display: flex;
+    align-items: center;
+}
+
+.iconHeader{
+    color: #7c909b;;
+    font-size: 30px;
+}
+    .nameRoom h1{
+        margin-left: 10px;
+        margin-bottom: 0;
+        font-weight: bold;
+        color: #404448;
+    }
+
+.container{
+    width: 80%;
+    margin: auto;
+}
+.content{
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+}
+/**/
+.roomdetail_header{
+    margin-top: 10px;
+    width: 100%;
+}
+.roomdetail_header button{
+    color: #7c909b;
+    text-transform: uppercase;
+    background: #f5f7f8;
+    border-radius: 4px;
+    width: 100px;
+    height: 35px;
+    border: 1px solid #d0d8dc;
+}
+.left_content_header{
+    width: 300px;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 30px;
+    /* background-color: green; */
+}
+.navItem{
+    text-decoration: none;
+    color: black;
+}
+.navItem_active{
+    text-decoration: none;
+    color: black;
+    color: var(--main-color);
+}
+/**/
+.none{
+    display: none;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .header{
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .header_left{
+        width: 300px;
+        font-size: 14px;
+        margin-left: 0px;
+    }
+    .header_left > h1{
+        width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .header_right{
+        width: 150px;
+        justify-content: center;
+        font-size: 12px;
+        margin-right: 0px;
+    }
+   
+}

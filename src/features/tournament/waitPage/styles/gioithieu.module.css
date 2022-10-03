@@ -1,0 +1,115 @@
+.App_gioiThieu {
+  background-color: #f5f6f8f9;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(2px + 2vmin);
+  color: black;
+  line-height: 2.0;
+  padding: 20px 30px;
+}
+
+.App_gioiThieu > div
+
+.App_gioiThieu>p {
+  text-align: center;
+}
+
+.App_gioiThieu>h2 {
+  text-align: center;
+  font-size: calc(15px + 2vmin);
+  text-transform: uppercase;
+}
+.App_gioiThieu > div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.App_gioiThieu > div > div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.App_gioiThieu > div > div > ul {
+  text-align: justify;
+  list-style: none;
+}
+
+.banner {
+  width: 450px;
+}
+
+@media only screen and (max-width: 767px) {
+
+  .App_gioiThieu {
+    /* background-color: #f5f6f8f9; */
+    height: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    font-size: calc(2px + 2vmin);
+    color: black;
+    /* line-height: 2.0; */
+    padding: 20px;
+  }
+
+  .App_gioiThieu>div {
+    font-size: 13px;
+    padding: 0px 20px;
+  }
+
+  .banner {
+    display: none;
+  }
+
+  .App_gioiThieu>div>ul {
+    padding: 0;
+    list-style: none;
+  }
+
+}
+
+@media only screen and (min-width: 768px) and (max-height: 600px) {
+
+  .App_gioiThieu>div {
+    font-size: 17px;
+    padding: 0px 20px;
+  }
+
+  .App_gioiThieu>div>ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  .banner {
+    display: none;
+  }
+}
+
+
+
+@media only screen and (max-width: 63.9375em) {
+  .App_gioiThieu {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .App_gioiThieu>div {
+    font-size: 17px;
+    padding: 0px 20px;
+  }
+
+  .App_gioiThieu>div>ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  .banner {
+    display: none;
+  }
+}

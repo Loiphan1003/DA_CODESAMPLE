@@ -1,0 +1,93 @@
+:root {
+    --main-color: #3F48CC;
+    --icon-color: #0070FF;
+    --gray-color: #b7b7a4;
+    --status-open-color: #74c69d;
+    --status-close-color: #d00000;
+}
+.member{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    /* background-color: black; */
+}
+.memberHeader{
+    width: 450px;
+    text-decoration: solid;
+}
+.header{
+    margin-top: 10px;
+    height: 50px;
+    padding: 0 20px;
+    border-radius: 5px;
+    background-color: var(--gray-color);
+    box-sizing: border-box;
+}
+.header_find{
+    margin-top: 10px;
+    padding: 0 20px;
+    background-color: white;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+.header_find > input{
+    margin-left: 5px;
+    border-style: none;
+    outline: none;
+    width: 120px;
+    height: 30px;
+}
+
+.importMember{
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    display: flex;
+    color: #1976d2;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.importMember:hover{
+    background-color: rgba(25, 118, 210, 0.04);
+}
+.importMember > p{
+    margin: 0;
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.deleteMember{
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    display: flex;
+    color: red;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.deleteMember:hover{
+    background-color: rgba(25, 118, 210, 0.04);
+}
+.deleteMember > p{
+    margin: 0;
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.none{
+    display: none;
+}
+

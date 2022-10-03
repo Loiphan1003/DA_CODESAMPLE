@@ -1,0 +1,29 @@
+:root {
+    --main-color: #3F48CC;
+    --header-color: #e8e8e8;
+
+}
+
+.header{
+    height: 70px;
+    padding: 5px 20px;
+    display: flex;
+    color: #636668;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #d2d4d6;
+}
+.header svg{
+    margin-right: 10px;
+    font-size: 35px;
+}
+.header h1{
+    color: #636668;
+    margin: 0;
+}
+.content{
+    margin-top: 40px;
+    margin-left: 180px;
+    margin-right: 180px;
+    padding-bottom: 30px;
+}

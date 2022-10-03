@@ -1,0 +1,150 @@
+:root {
+    --main-color: #3F48CC;
+    --header-theory: #03045E;
+}
+
+
+.theory {
+    height: fit-content;
+}
+
+.theoryHeader {
+    width: 100%;
+    height: 150px;
+    background-color: var(--header-theory);
+    flex-direction: row;
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.theoryHeaderLeft {
+    width: auto;
+    padding-top: 1%;
+
+}
+
+.theoryHeader h1 {
+    color: white;
+    font-size: 25px;
+    box-sizing: border-box;
+}
+
+.nameTheory {
+    border-style: none;
+    border-radius: none;
+    width: 430px;
+    font-size: 15px;
+    outline: none;
+}
+
+
+.findTheory {
+    display: flex;
+    height: 39px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    width: 470px;
+    background-color: white;
+}
+
+.container {
+    width: 100%;
+    padding: 30px 150px 30px 150px;
+}
+
+.kienthuccoso {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.kienthuccoso h1 {
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+.listCourse {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 28px;
+    align-items: stretch;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    margin-bottom: 200px;
+}
+
+
+
+.course {
+    width: 243px;
+    /* background-color: var(--main-color); */
+    border-radius: 5px;
+    height: 320px;
+    display: flex;
+    text-decoration: none;
+    color: black;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0px 5px 5px 0px gray;
+}
+
+.course > img {
+    height: 160px;
+    border-radius: 5px 5px 0px 0px;
+    cursor: pointer;
+}
+
+.course > div {
+    width: 100%;
+    height: 59%;
+    display: block;
+    top: 42%;
+    position: absolute;
+    padding: 10px 5px;
+    /* flex-direction: column; */
+    border-radius: 0px 20px 5px 5px;
+    background-color: white;
+    box-sizing: border-box;
+    /* justify-content: flex-start; */
+}
+
+.discription {
+    font-size: 14px;
+    width: auto;
+    height: 100px;
+    /* background-color: red; */
+    display: block;
+
+    overflow: hidden;
+    /* white-space:nowrap; */
+    text-overflow: ellipsis;
+}
+
+.title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.course div .line {
+    width: 235px;
+    margin-right: 10px;
+    height: 1px;
+    background-color: red;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.kind {
+    margin-top: 5px;
+    color: var(--main-color);
+    height: 10px;
+}
+
