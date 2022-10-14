@@ -439,6 +439,36 @@ function Exercise(props) {
         data();
     }
 
+    const handleDeleteImportQuestions = (value, type) => {
+
+        const list = [];
+
+        if (type === "tracnghiem") {
+            importCauHoiTracNghiem.map((a, index) => {
+                if (index !== value) {
+                    list.push(a)
+                }
+                return null;
+            });
+            dispatch(
+                importDataSlice.actions.setCauHoiTracNghiem(list)
+            )
+        }
+
+        if(type === "cauhoicode"){
+            importCauHoiCode.map((a, index) => {
+                if (index !== value) {
+                    list.push(a)
+                }
+                return null;
+            });
+            dispatch(
+                importDataSlice.actions.setCauHoiCode(list)
+            )
+        }
+    }
+
+
     return (
         <>
             <div className={styles.container}>
@@ -503,7 +533,7 @@ function Exercise(props) {
 
                         <ImportBTCode type={"BaiTapTracNghiem"} style={{ marginBottom: "20px", float: "right" }} />
 
-                        <Button sx={{ marginBottom: "20px", marginRight: "20px" ,float: "right" }} variant="contained"
+                        <Button sx={{ marginBottom: "20px", marginRight: "20px", float: "right" }} variant="contained"
                             endIcon={<AddCircleOutlinedIcon />}
                             onClick={() => {
                                 navigate('/exercise/multiplechoice')
@@ -622,7 +652,10 @@ function Exercise(props) {
 
                                             <TableCell align="center" >
                                                 <DeleteIcon sx={{ cursor: "pointer", color: "#f04530" }}
-                                                    onClick={() => console.log(index)}
+                                                    onClick={() => 
+                                                        // console.log(index)
+                                                        handleDeleteImportQuestions(index, "cauhoicode")
+                                                    }
                                                 />
                                             </TableCell>
                                         </TableRow>
@@ -653,7 +686,10 @@ function Exercise(props) {
 
                                             <TableCell align="center" >
                                                 <DeleteIcon sx={{ cursor: "pointer", color: "#f04530" }}
-                                                    onClick={() => console.log(index)}
+                                                    onClick={() =>
+                                                        // console.log(index)
+                                                        handleDeleteImportQuestions(index, "tracnghiem")
+                                                    }
                                                 />
                                             </TableCell>
                                         </TableRow>
