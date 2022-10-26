@@ -5,6 +5,8 @@ import btLuyenTapSlice from "./btLuyenTapSlice";
 import giaiDauSlice from "./giaiDauSlice";
 import theorySlice from './theorySlice';
 import importDataSlice from './importDataSlice';
+import testOverviewSlice from "./testOverviewSlice";
+import roomSlice from "./roomSlice";
 
 const store = configureStore({
     reducer: {
@@ -15,6 +17,8 @@ const store = configureStore({
         theory: theorySlice.reducer,
         // Them slice cua import data
         importData: importDataSlice.reducer,
+        testOverview: testOverviewSlice.reducer,
+        roomSlice: roomSlice.reducer,
     },
     devTools: true
 

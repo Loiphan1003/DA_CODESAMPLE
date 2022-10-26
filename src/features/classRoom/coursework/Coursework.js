@@ -80,6 +80,7 @@ function Coursework(props) {
 
     const handleAccept = (id) => {
         const publicBaiKiemTra = async () => {
+            console.log(id);
             try {
                 const response = await DeKiemTraAPI.publicDeKiemTra(id);
                 if(response.data)
@@ -88,7 +89,7 @@ function Coursework(props) {
                     setOpenDialogPublic(false);
                 }
             } catch (error) {
-                console.log(5)
+                console.log(error)
             }
         }
         publicBaiKiemTra();
@@ -97,7 +98,7 @@ function Coursework(props) {
     const handleExerciseClose = (id) => {
         console.log(id);
         if( isTeacher === true ){
-            navigate(`/test-overview/${id}`)
+            navigate(`/test-overview/${idPhong}/${id}`)
         }
         if(isTeacher === false){
             alert("Bài tập đã kết thúc")
@@ -226,7 +227,7 @@ function Coursework(props) {
                             <div className={styles.coursework_content_item} key={index}>
                                 <div className={styles.item_info}>
                                     <FontAwesomeIcon icon={faTableList} />
-                                    <NavLink className={styles.item_name} to={isTeacher ? `/test-overview/${test.id}`:`/test/${test.id}`} >{test.moTa}</NavLink>
+                                    <NavLink className={styles.item_name} to={isTeacher ? `/test-overview/${idPhong}/${test.iddeKiemTra}`:`/test/${test.iddeKiemTra}`} >{test.moTa}</NavLink>
                                     <p className={styles.item_time}>Bắt đầu lúc {test.ngayBatDau} kết thúc lúc {test.ngayKetThuc}</p>
                                 </div>
                                 <p className={styles.item_open}>Mở</p>
@@ -248,7 +249,7 @@ function Coursework(props) {
                             <div className={styles.coursework_content_item_close} key={index}>
                                 <div className={styles.item_info}>
                                     <FontAwesomeIcon icon={faTableList} />
-                                    <p className={styles.item_name_close}  onClick={() => handleExerciseClose(test.id)} >{test.moTa}</p>
+                                    <p className={styles.item_name_close}  onClick={() => handleExerciseClose(test.iddeKiemTra)} >{test.moTa}</p>
                                     <p className={styles.item_time}>Đã kết thúc vào lúc {test.ngayKetThuc}</p>
                                 </div>
                                 <p className={styles.item_close}>Kết thúc</p>
@@ -308,7 +309,7 @@ function Coursework(props) {
                 </DialogContent>
                 <DialogActions>
                 <Button onClick={handleClose}>Hủy</Button>
-                <Button onClick={() => handleAccept(testSelect.id)} autoFocus>
+                <Button onClick={() => handleAccept(testSelect.iddeKiemTra)} autoFocus>
                     Đồng ý
                 </Button>
                 </DialogActions>

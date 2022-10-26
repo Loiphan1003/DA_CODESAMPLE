@@ -120,7 +120,7 @@ function App() {
                             <UseInfomation />
                         </DefaultLayout>
                     } />
-                    <Route path='/test-overview/:idTest' element={<TestOverview />} />
+                    <Route path='/test-overview/:idPhong/:idTest' element={<TestOverview />} />
 
                     <Route path='/confirm/:email&:idRoom'
                         element={
