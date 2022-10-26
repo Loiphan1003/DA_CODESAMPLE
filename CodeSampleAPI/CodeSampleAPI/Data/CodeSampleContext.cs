@@ -49,7 +49,8 @@ namespace CodeSampleAPI.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("workstation id=codesample.mssql.somee.com;packet size=4096;user id=Loiphan1003_SQLLogin_1;pwd=96db3clfgn;data source=codesample.mssql.somee.com;persist security info=False;initial catalog=codesample");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=DESKTOP-PDHA0NQ\\SQLEXPRESS;Database=CodeSample;Trusted_Connection=True;");
             }
         }
 
@@ -537,7 +538,7 @@ namespace CodeSampleAPI.Data
 
                 entity.Property(e => e.IdgiaiDau).HasColumnName("IDGiaiDau");
 
-                entity.Property(e => e.NgayTao).HasColumnType("date");
+                entity.Property(e => e.NgayTao).HasColumnType("datetime");
 
                 entity.HasOne(d => d.IdgiaiDauNavigation)
                     .WithMany(p => p.DeCauHoiGiaiDaus)
@@ -573,9 +574,23 @@ namespace CodeSampleAPI.Data
 
                 entity.Property(e => e.IdgiaiDau).HasColumnName("IDGiaiDau");
 
+                entity.Property(e => e.LinkImgGiaiDau).HasColumnType("text");
+
+                entity.Property(e => e.LinkImgGifTop1).HasColumnType("text");
+
+                entity.Property(e => e.LinkImgGifTop2).HasColumnType("text");
+
+                entity.Property(e => e.LinkImgGifTop3).HasColumnType("text");
+
                 entity.Property(e => e.MoTa)
                     .IsRequired()
-                    .HasColumnType("text");
+                    .HasColumnType("ntext");
+
+                entity.Property(e => e.MoTaGifTop1).HasMaxLength(100);
+
+                entity.Property(e => e.MoTaGifTop2).HasMaxLength(100);
+
+                entity.Property(e => e.MoTaGifTop3).HasMaxLength(100);
 
                 entity.Property(e => e.Tag)
                     .IsRequired()
@@ -583,11 +598,22 @@ namespace CodeSampleAPI.Data
 
                 entity.Property(e => e.TenGiaiDau)
                     .IsRequired()
-                    .HasColumnType("text");
+                    .HasColumnType("ntext");
 
                 entity.Property(e => e.ThoiGianBatDau).HasColumnType("datetime");
 
                 entity.Property(e => e.ThoiGianKetThuc).HasColumnType("datetime");
+
+                entity.Property(e => e.UidTaiKhoan)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("UIdTaiKhoan");
+
+                entity.HasOne(d => d.UidTaiKhoanNavigation)
+                    .WithMany(p => p.GiaiDaus)
+                    .HasForeignKey(d => d.UidTaiKhoan)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GiaiDau_TaiKhoan");
             });
 
             modelBuilder.Entity<LoaiTaiKhoan>(entity =>

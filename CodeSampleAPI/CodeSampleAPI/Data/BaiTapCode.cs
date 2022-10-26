@@ -24,6 +24,8 @@ namespace CodeSampleAPI.Data
         public string DinhDangDauRa { get; set; }
         public string MauDauVao { get; set; }
         public string MauDauRa { get; set; }
+        public byte? CongKhai { get; set; }
+        public int? DoKho { get; set; }
 
         public virtual ICollection<CtDeKiemTraCode> CtDeKiemTraCodes { get; set; }
         public virtual ICollection<CtDeThiGiaiDau> CtDeThiGiaiDaus { get; set; }

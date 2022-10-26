@@ -17,6 +17,7 @@ namespace CodeSampleAPI.Data
             CtPhongHocs = new HashSet<CtPhongHoc>();
             CtThamGiaGiaiDaus = new HashSet<CtThamGiaGiaiDau>();
             DaHocs = new HashSet<DaHoc>();
+            GiaiDaus = new HashSet<GiaiDau>();
             PhongHocs = new HashSet<PhongHoc>();
         }
 
@@ -39,6 +40,7 @@ namespace CodeSampleAPI.Data
         public virtual ICollection<CtPhongHoc> CtPhongHocs { get; set; }
         public virtual ICollection<CtThamGiaGiaiDau> CtThamGiaGiaiDaus { get; set; }
         public virtual ICollection<DaHoc> DaHocs { get; set; }
+        public virtual ICollection<GiaiDau> GiaiDaus { get; set; }
         public virtual ICollection<PhongHoc> PhongHocs { get; set; }
     }
 }

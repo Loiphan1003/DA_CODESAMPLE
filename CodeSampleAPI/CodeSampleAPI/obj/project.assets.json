@@ -8373,11 +8373,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DoAnMonHoc\\DoAnCoSo\\github\\Done\\apicodesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
+      "projectUniqueName": "D:\\DoAnMonHoc\\DoAnCoSo\\github\\Test\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
       "projectName": "CodeSampleAPI",
-      "projectPath": "D:\\DoAnMonHoc\\DoAnCoSo\\github\\Done\\apicodesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
+      "projectPath": "D:\\DoAnMonHoc\\DoAnCoSo\\github\\Test\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
       "packagesPath": "C:\\Users\\pvtha\\.nuget\\packages\\",
-      "outputPath": "D:\\DoAnMonHoc\\DoAnCoSo\\github\\Done\\apicodesample\\CodeSampleAPI\\CodeSampleAPI\\obj\\",
+      "outputPath": "D:\\DoAnMonHoc\\DoAnCoSo\\github\\Test\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pvtha\\AppData\\Roaming\\NuGet\\NuGet.Config",
