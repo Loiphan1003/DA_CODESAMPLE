@@ -35,6 +35,9 @@ function Room({render}) {
     }
     const uId = JSON.parse(localStorage.getItem('uId')); 
     const isTeacher = JSON.parse(localStorage.getItem('isTeacher')); 
+
+    console.log(rooms);
+
     useEffect(() => {
         if(!!uId)
         {
