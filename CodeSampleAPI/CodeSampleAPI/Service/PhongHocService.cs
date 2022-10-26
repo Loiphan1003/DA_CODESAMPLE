@@ -121,6 +121,7 @@ namespace CodeSampleAPI.Service
                        where phong.Idphong.Equals(IdPhong)
                        select new ThanhVien()
                        {
+                           Uid = phong.UidNguoiDunng,
                            TenHienThi = phong.UidNguoiDunngNavigation.TenHienThi,
                            HoTen = phong.UidNguoiDunngNavigation.HoTen,
                            Email = phong.UidNguoiDunngNavigation.Email
