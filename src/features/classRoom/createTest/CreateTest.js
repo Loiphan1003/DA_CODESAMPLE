@@ -64,6 +64,7 @@ function CreateTest(props) {
     const questions = useSelector((state) => state.createTest.questions)
 
     const handleSave = () => {
+        
         const lsCauHoi = questions.map((item, index) => ({
             id: parseInt(item.id),
             stt: index + 1,
@@ -80,12 +81,18 @@ function CreateTest(props) {
         }
         const addDeKiemTra = async () => {
             try {
-                const response = await DeKiemTraAPI.add(baiKiemTra);
-                console.log(response.data);
-                if (response.data) {
-                    alert("Thêm bài kiểm tra thành công!");
-                    dispatch(createTestSlice.actions.clearQuestion([]));
-                    navigate(-1)
+                //truong hop khac rong
+                if(nameTest !== '')
+                {
+                    const response = await DeKiemTraAPI.add(baiKiemTra);
+                    console.log(response.data);
+                    if (response.data) {
+                        alert("Thêm bài kiểm tra thành công!");
+                        dispatch(createTestSlice.actions.clearQuestion([]));
+                        navigate(-1)
+                    }
+                }else{
+                    alert("Vui lòng nhập tên bài tập!");
                 }
 
             } catch (error) {
