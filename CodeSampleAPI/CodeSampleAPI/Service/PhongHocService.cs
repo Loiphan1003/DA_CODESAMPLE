@@ -83,17 +83,23 @@ namespace CodeSampleAPI.Service
 
         public List<PhongHocCustom> getListPhongHocByUidGiangVien(string uID)
         {
-            var res = (from ph in _codeSampleContext.PhongHocs join user in _codeSampleContext.TaiKhoans on
-                       ph.IdchuPhong equals user.UidTaiKhoan
-                       select new PhongHocCustom()
-                       {
-                           id = ph.Idphong,
-                           linkAvatar = user.LinkAvatar,
-                           tenHienThi = user.TenHienThi,
-                           soLuongThanhVien = ph.SoThanhVien,
-                           tenPhong = ph.TenPhong
+            TaiKhoan user = _codeSampleContext.TaiKhoans.FirstOrDefault(u => u.UidTaiKhoan.Equals(uID));
+            if (user == null)
+            {
+                return null;
+            }
+            var res = (from ph in _codeSampleContext.PhongHocs
+                   where
+                    ph.IdchuPhong == uID
+                   select new PhongHocCustom()
+                   {
+                       id = ph.Idphong,
+                       linkAvatar = user.LinkAvatar,
+                       tenHienThi = user.TenHienThi,
+                       soLuongThanhVien = ph.SoThanhVien,
+                       tenPhong = ph.TenPhong
 
-                       }).ToList();
+                   }).ToList();
             return res;
         }
 
