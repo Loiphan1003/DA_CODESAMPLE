@@ -7,6 +7,7 @@ namespace CodeSampleAPI.Model
 {
     public class ThanhVien
     {
+        public string Uid { get; set; }
         public string HoTen { get; set; }
         public string TenHienThi { get; set; }
         public string Email { get; set; }
