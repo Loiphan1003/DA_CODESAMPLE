@@ -36,6 +36,10 @@ function UIAddMember(props) {
         arr.forEach(e => list.push(e.toString()) )
 
         const response = await phongHocApi.addListMembers(list, params.roomId);
+        // if(response.data === true){
+        //     alert("Thêm thành viên thành công")
+            window.location.reload(true);
+        // }
         // if(response.data)
     }
 

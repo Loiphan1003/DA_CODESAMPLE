@@ -21,11 +21,17 @@ function Login({isGiangVien, login}) {
             navigate('/infomation')
         }
         else{
-            navigate('/home');
+            navigate('/');
             localStorage.setItem('linkAvatar', JSON.stringify(response.data.linkAvatar));
         }
+
+        let getdate = new Date()
+        let date = new Date(getdate.toISOString());
+        date.setDate(date.getDate() + 1);
+
         localStorage.setItem('isTeacher', JSON.stringify(isGiangVien));
         localStorage.setItem('uId', JSON.stringify(data.user.uid));
+        document.cookie =`uId=${JSON.stringify(data.user.uid)}; expires=${(date.toUTCString())}`;
         login(false);
     }
 

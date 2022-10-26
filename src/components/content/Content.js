@@ -11,7 +11,7 @@ import "react-ace-builds/webpack-resolver-min";
 import { useNavigate } from "react-router-dom";
 import SelectedLogin from '../Login/SelectedLogin';
 
-// import Footer from '../footer/Footer';
+import Header from "../header/Header";
 import styles from './Content.module.css';
 import Backdrop from '../Backdrop';
 import Login from '../Login/Login';
@@ -30,10 +30,25 @@ function Content(props) {
     let uId = JSON.parse(localStorage.getItem('uId'));
 
     useEffect(() => {
-        if (uId)
-            navigate('/home');
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [uId, navigate])
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) === 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        console.log(getCookie("uId"));
+
+    }, [])
 
     const editor = useRef();
 
@@ -77,34 +92,40 @@ function Content(props) {
         <React.Fragment>
             <div className={styles.Content}>
                 <div className={styles.first_content}>
-                    <div className={styles.left_content}>
+                    <Header />
 
-                        <h1>CodeSample</h1>
+                    <div>
+                        <div className={styles.left_content}>
 
-                        <div>
-                            <span>Khơi dậy đam mê lập trình</span>
-                            <br />
-                            <span>Dễ dàng để bắt đầu với CodeSample</span>
+                            <h1>CodeSample</h1>
+
+                            <p>
+                                <span>Khơi dậy đam mê lập trình</span>
+                                <br />
+                                <span>Dễ dàng để bắt đầu với CodeSample</span>
+                            </p>
+
+                            {uId === null && <div className={styles.content_GV} >
+
+                                <button className={styles.button_login_content}
+                                    onClick={() => {
+                                        setSelectLogin(true)
+                                    }}
+                                >
+                                    Đăng nhập
+                                </button>
+                                <div className={styles.group2} >
+                                    <span>Chưa có tài khoản ?</span>
+                                    <p onClick={() => setStudentSignUp(true)} >Tạo mới miễn phí</p>
+                                </div>
+                            </div>}
+
                         </div>
 
-                        <div className={styles.content_GV} >
-
-                            <button className={styles.button_login_content}
-                                onClick={() => {
-                                    setSelectLogin(true)
-                                }}
-                            >
-                                Đăng nhập
-                            </button>
-                            <div className={styles.group2} >
-                                <span>Chưa có tài khoản ?</span>
-                                <p onClick={() => setStudentSignUp(true)} >Tạo mới miễn phí</p>
-                            </div>
-                        </div>
-
+                        <img className={styles.right_content} alt="hình ảnh" src={imghead} />
                     </div>
 
-                    <img className={styles.right_content} alt="hình ảnh" src={imghead} />
+
                 </div>
 
                 <div className={styles.seccond_content}>

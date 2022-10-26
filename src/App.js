@@ -23,6 +23,7 @@ import UseInfomation from './features/userInfomation/UserInformation';
 import UserOverView from './features/userInfomation/UserOverView';
 import AdminHome from './features/admin/HomeMainAdmin';
 import LoginAdmin from './components/Login/LoginAdmin.js';
+import Tournaments from './features/tournament/tournaments/Tournaments';
 import CreateMonHoc from './features/create/createMonHoc';
 import CreateLyThuyet from './features/create/createLyThuyet';
 import QuanLyGV from './features/admin/QuanLyGV';
@@ -36,6 +37,7 @@ import ConfirmAccount from './features/confirmAccount/ConfirmAccount';
 import JoinRoom from './components/pagesmeet/join';
 import Video from './components/pagesmeet/meeting';
 import WaitPage from './features/tournament/waitPage/WaitPage';
+import { HomeLayout } from './layouts/exportLayout';
 
 
 function App() {
@@ -97,9 +99,9 @@ function App() {
                     <Route path='/practice/code/:id' element={<CodeUi />} />
 
                     <Route exact path='/' element={
-                        <DefaultLayout >
+                        <HomeLayout >
                             <Content />
-                        </DefaultLayout>}
+                        </HomeLayout>}
                     />
 
                     <Route path='/test/:idDeKiemTra' element={<Test />} />
@@ -109,7 +111,7 @@ function App() {
 
                     <Route path='/over' element={
                         <DefaultLayout>
-                            <UserOverView/>
+                            <UserOverView />
                         </DefaultLayout>
                     } />
 
@@ -125,6 +127,13 @@ function App() {
                             <ConfirmAccount />
                         }
                     />
+
+                    {/* Giai dau */}
+                    <Route path="/tournament" element={
+                        <DefaultLayout>
+                            <Tournaments />
+                        </DefaultLayout>
+                    } />
 
                     <Route path="/waitpage/tournament" element={<WaitPage />} />
 
@@ -147,7 +156,7 @@ function App() {
                         path='/Admin/Quanlygv'
                         element={
                             <LayoutAdmin>
-                                <QuanLyGV/>
+                                <QuanLyGV />
                             </LayoutAdmin>
                         }
                     />
@@ -156,7 +165,7 @@ function App() {
                         path='/Admin/Quanlyuser'
                         element={
                             <LayoutAdmin>
-                                <QuanLyNguoiDung/>
+                                <QuanLyNguoiDung />
                             </LayoutAdmin>
                         }
                     />
@@ -165,7 +174,7 @@ function App() {
                         path='/Admin/Quanlybaitapcode'
                         element={
                             <LayoutAdmin>
-                                <QuanLyBTCode/>
+                                <QuanLyBTCode />
                             </LayoutAdmin>
                         }
                     />
@@ -174,22 +183,22 @@ function App() {
                         path='/Admin/Quanlybailythuyet'
                         element={
                             <LayoutAdmin>
-                                <QuanLyLT/>
+                                <QuanLyLT />
                             </LayoutAdmin>
                         }
                     />
                     <Route path='/QuanLyLT/createLyThuyet/:IdMonHoc/:TenMonHoc' element={
                         <LayoutAdmin>
-                            <CreateLyThuyet  />
+                            <CreateLyThuyet />
                         </LayoutAdmin>}
                     />
                     <Route path='/Admin/CreateBTCode' element={
                         <LayoutAdmin>
-                            <CreateBTCodeLT  />
+                            <CreateBTCodeLT />
                         </LayoutAdmin>}
                     />
-                    <Route path="/Meeting" element={<JoinRoom/>}/>
-                    <Route path="/video/:id" element={<Video/>}/>
+                    <Route path="/Meeting" element={<JoinRoom />} />
+                    <Route path="/video/:id" element={<Video />} />
                 </Routes>
             </Router>
         </div>
