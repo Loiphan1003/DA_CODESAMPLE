@@ -12,32 +12,36 @@ const cx = classNames.bind(styles);
 function UserNav(props) {
 
     const navigate = useNavigate();
-    const isTeacher = JSON.parse(localStorage.getItem('isTeacher')); 
+    const isTeacher = JSON.parse(localStorage.getItem('isTeacher'));
 
     const logoutAccount = () => {
-        
+
         let confirm = window.confirm("Bạn thật sự muốn thoát")
-        if(confirm === true){
+        if (confirm === true) {
             auth.signOut();
             localStorage.clear();
             navigate('/');
+            let getdate = new Date()
+            let date = new Date(getdate.toISOString());
+            date.setDate(date.getDate() - 2);
+            document.cookie = `uId=;expirse=${date.toUTCString()}`
         }
     }
 
     return (
         <div className={cx('userNavItems')} onClick={props.onClick}>
             <div className={cx('item_userNav')} onClick={() => navigate("/over")} >
-                <FontAwesomeIcon className={cx('item-icon')} icon={faUser}/>
+                <FontAwesomeIcon className={cx('item-icon')} icon={faUser} />
                 <p>Thông tin cá nhân</p>
             </div>
-        {   isTeacher &&
-            <div className={cx('item_userNav')} onClick={() => navigate("/exercise")}>
-                <FontAwesomeIcon className={cx('item-icon')} icon={faAddressBook}/>
-                <p>Quản lý bài tập</p>
-            </div>
-        }   
+            {isTeacher &&
+                <div className={cx('item_userNav')} onClick={() => navigate("/exercise")}>
+                    <FontAwesomeIcon className={cx('item-icon')} icon={faAddressBook} />
+                    <p>Quản lý bài tập</p>
+                </div>
+            }
             <div className={cx('item_userNav')} onClick={logoutAccount}>
-                <FontAwesomeIcon className={cx('item-icon')} icon={faPowerOff}/>
+                <FontAwesomeIcon className={cx('item-icon')} icon={faPowerOff} />
                 <p>Đăng xuất</p>
             </div>
         </div>

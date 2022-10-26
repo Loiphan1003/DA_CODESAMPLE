@@ -1,0 +1,30 @@
+
+.container{
+    width: 350px;
+    background-color: #D9D9D9;
+    height: fit-content;
+    border-radius: 10px;
+    padding-bottom: 6px;
+}
+
+.container > img{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: inherit;
+}
+.container  p{
+    padding: 0 20px;
+    width: auto;
+}
+.container > div{
+    display: flex;
+    padding: 0 20px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+/* .listTournaments{
+
+} */

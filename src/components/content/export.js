@@ -11,6 +11,7 @@ import image_10 from '../../images/image 10.png';
 import image_11 from '../../images/image 11.png';
 import imghead from '../../images/Frame-2.png';
 import imgmeet from '../../images/meet1.png';
-import imgmeet2 from '../../images/meet3.png'
+import imgmeet2 from '../../images/meet3.png';
+import home from '../../images/homepng.png';
 
-export  {image_1, image_2, image_3, image_4, image_5, image_6, image_7, image_8, image_9, image_10, image_11, imghead, imgmeet, imgmeet2};
+export  {home, image_1, image_2, image_3, image_4, image_5, image_6, image_7, image_8, image_9, image_10, image_11, imghead, imgmeet, imgmeet2};

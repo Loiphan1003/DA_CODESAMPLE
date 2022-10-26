@@ -30,10 +30,10 @@ function Header(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const menuItem = [
-        {
-            path: "/home",
-            name: "Trang chủ",
-        },
+        // {
+        //     path: "/home",
+        //     name: "Trang chủ",
+        // },
         {
             path: "/practice",
             name: "Luyện tập",
@@ -45,17 +45,17 @@ function Header(props) {
         {
             path: "/room",
             name: "Phòng học",
+        },
+        {
+            path: "/tournament",
+            name: "Giải đấu",
         }
-        // {
-        //     path: "/aaa",
-        //     name: "Trợ giúp",
-        // }
     ]
 
     return (
             <div id={styles.header} >
                 <div className={styles.List_menu}>
-                    <NavLink className={styles.logo} to={localStorage.getItem("uId") !== null ? "/home" : "/"}>
+                    <NavLink className={styles.logo} to={localStorage.getItem("uId") !== null ? "/" : "/"}>
                         <img src={companyLogo} alt="Logo" />
                     </NavLink>
 
