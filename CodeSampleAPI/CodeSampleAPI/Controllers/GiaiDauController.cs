@@ -1,6 +1,7 @@
 ﻿using CodeSampleAPI.Data;
 using CodeSampleAPI.Filter;
 using CodeSampleAPI.Helpers;
+using CodeSampleAPI.Model;
 using CodeSampleAPI.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,12 @@ namespace CodeSampleAPI.Controllers
         {
             this._giaiDauService = giaiDauService;
             this.uriService = uriService;
+        }
+
+        [HttpPost("AddGiaiDau")]
+        public IActionResult AddGiaiDau([FromBody] GiaiDau_Custom giaiDau_Custom)
+        {
+            return Ok(_giaiDauService.AddGiaiDau(giaiDau_Custom));
         }
 
         [HttpGet("getAll")]

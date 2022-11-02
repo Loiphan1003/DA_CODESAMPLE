@@ -1,4 +1,5 @@
 ﻿using CodeSampleAPI.Data;
+using CodeSampleAPI.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace CodeSampleAPI.Service
 {
     public interface IGiaiDauService
     {
+        bool AddGiaiDau(GiaiDau_Custom giaiDau_Custom);
         List<GiaiDau> getAll(Filter.PaginationFilter validFilter);
         List<GiaiDau> getListToDay();
         int getSoLuongGiaiDauKhongPhaiHomNay();
@@ -38,6 +40,21 @@ namespace CodeSampleAPI.Service
         {
             DateTime date = DateTime.Today;
             return _codeSampleContext.GiaiDaus.Where(g => g.ThoiGianBatDau != date).Count();
+        }
+
+        public bool AddGiaiDau(GiaiDau_Custom giaiDau_Custom)
+        {
+            GiaiDau giaiDau = new GiaiDau();
+            giaiDau.TenGiaiDau = giaiDau_Custom.TenGiaiDau;
+            giaiDau.MoTa = giaiDau_Custom.MoTa;
+            giaiDau.Tag = giaiDau_Custom.Tag;
+            giaiDau.UidTaiKhoan = giaiDau_Custom.UidTaiKhoan;
+            giaiDau.ThoiGianBatDau = giaiDau_Custom.ThoiGianBatDau;
+            giaiDau.ThoiGianKetThuc = giaiDau_Custom.ThoiGianKetThuc;
+            giaiDau.LinkImgGiaiDau = giaiDau_Custom.LinkImgGiaiDau;
+            _codeSampleContext.GiaiDaus.Add(giaiDau);
+            _codeSampleContext.SaveChanges();
+            return true;
         }
     }
 }

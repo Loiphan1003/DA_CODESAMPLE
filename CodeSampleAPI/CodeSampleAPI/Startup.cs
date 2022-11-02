@@ -1,3 +1,4 @@
+using ChatService;
 using CodeSampleAPI.Authentication;
 using CodeSampleAPI.Data;
 using CodeSampleAPI.Service;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SignalRChat.Hubs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,6 +94,20 @@ namespace CodeSampleAPI
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
+            services.AddSignalR();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CORSPolicy", policy =>
+                {
+                    policy.SetIsOriginAllowed(origin => true)
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                });
+            });
+
+            services.AddSingleton<IDictionary<string, UserConnection>>(opts => new Dictionary<string, UserConnection>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -104,25 +120,26 @@ namespace CodeSampleAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CodeSampleAPI v1"));
             }
 
-            app.UseCors( builder =>
-            {
-                builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-            });
+            //app.UseCors( builder =>
+            //{
+            //    builder
+            //    .AllowAnyOrigin()
+            //    .AllowAnyMethod()
+            //    .AllowAnyHeader();
+            //});
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            
+            app.UseCors("CORSPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/socket");
             });
         }
     }
