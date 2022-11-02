@@ -45,5 +45,15 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_giaiDauService.getListToDay());
         }
+
+        [HttpGet("getAllGiaiDauByIdGiangVien")]
+        public IActionResult getAllGiaiDauByIdGiangVien(string id, [FromQuery] PaginationFilter filter)
+        {
+            var route = Request.Path.Value;
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+            var totalRecords = _giaiDauService.getSoLuongGiaiDau(id);
+            var pagedReponse = PaginationHelper.CreatePagedReponse<GiaiDau>(_giaiDauService.getAllGiaiDauByIdGiangVien(id, validFilter), validFilter, totalRecords, uriService, route);
+            return Ok(pagedReponse);
+        }
     }
 }

@@ -13,6 +13,8 @@ namespace CodeSampleAPI.Service
         List<GiaiDau> getAll(Filter.PaginationFilter validFilter);
         List<GiaiDau> getListToDay();
         int getSoLuongGiaiDauKhongPhaiHomNay();
+        List<GiaiDau> getAllGiaiDauByIdGiangVien(string id, Filter.PaginationFilter validFilter);
+        int getSoLuongGiaiDau(string id);
     }
 
     public class GiaiDauService : IGiaiDauService
@@ -55,6 +57,56 @@ namespace CodeSampleAPI.Service
             _codeSampleContext.GiaiDaus.Add(giaiDau);
             _codeSampleContext.SaveChanges();
             return true;
+        }
+
+        public List<GiaiDau> getAllGiaiDauByIdGiangVien(string id, Filter.PaginationFilter validFilter)
+        {
+            var res = (from gd in _codeSampleContext.GiaiDaus
+                       where gd.UidTaiKhoan == id
+                       select new GiaiDau()
+                       {
+                           IdgiaiDau = gd.IdgiaiDau,
+                           TenGiaiDau = gd.TenGiaiDau,
+                           MoTa = gd.MoTa,
+                           SoNguoiThamGia = gd.SoNguoiThamGia,
+                           Tag = gd.Tag,
+                           ThoiGianBatDau = gd.ThoiGianBatDau,
+                           ThoiGianKetThuc = gd.ThoiGianKetThuc,
+                           LinkImgGifTop1 = gd.LinkImgGifTop1,
+                           MoTaGifTop1 = gd.MoTaGifTop1,
+                           LinkImgGifTop2 = gd.LinkImgGifTop2,
+                           MoTaGifTop2 = gd.MoTaGifTop2,
+                           LinkImgGifTop3 = gd.MoTaGifTop3,
+                           MoTaGifTop3 = gd.MoTaGifTop3,
+                           UidTaiKhoan = gd.UidTaiKhoan,
+                           LinkImgGiaiDau = gd.LinkImgGiaiDau,
+                       }).Skip((validFilter.PageNumber - 1) * validFilter.PageSize).Take(validFilter.PageSize).ToList();
+            return res;
+        }
+
+        public int getSoLuongGiaiDau(string id)
+        {
+            var res = (from gd in _codeSampleContext.GiaiDaus
+                       where gd.UidTaiKhoan == id
+                       select new GiaiDau()
+                       {
+                           IdgiaiDau = gd.IdgiaiDau,
+                           TenGiaiDau = gd.TenGiaiDau,
+                           MoTa = gd.MoTa,
+                           SoNguoiThamGia = gd.SoNguoiThamGia,
+                           Tag = gd.Tag,
+                           ThoiGianBatDau = gd.ThoiGianBatDau,
+                           ThoiGianKetThuc = gd.ThoiGianKetThuc,
+                           LinkImgGifTop1 = gd.LinkImgGifTop1,
+                           MoTaGifTop1 = gd.MoTaGifTop1,
+                           LinkImgGifTop2 = gd.LinkImgGifTop2,
+                           MoTaGifTop2 = gd.MoTaGifTop2,
+                           LinkImgGifTop3 = gd.MoTaGifTop3,
+                           MoTaGifTop3 = gd.MoTaGifTop3,
+                           UidTaiKhoan = gd.UidTaiKhoan,
+                           LinkImgGiaiDau = gd.LinkImgGiaiDau,
+                       }).Count();
+            return res;
         }
     }
 }

@@ -88,7 +88,8 @@ namespace CodeSampleAPI
             services.AddTransient<IAdminService, AdminService>();
             services.AddTransient<ITaiKhoanService, TaiKhoanService>();
             services.AddTransient<IGiaiDauService, GiaiDauService>();
-
+            services.AddTransient<IDeCauHoiGiaiDauService, DeCauHoiGiaiDauService>();
+            services.AddTransient<IBaiLamGiaiDauService, BaiLamGiaiDauService>();
 
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
