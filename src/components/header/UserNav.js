@@ -1,4 +1,4 @@
-import { faAddressBook, faUser } from '@fortawesome/free-regular-svg-icons';
+import { faAddressBook, faUser, faChessQueen } from '@fortawesome/free-regular-svg-icons';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
@@ -35,10 +35,16 @@ function UserNav(props) {
                 <p>Thông tin cá nhân</p>
             </div>
             {isTeacher &&
-                <div className={cx('item_userNav')} onClick={() => navigate("/exercise")}>
-                    <FontAwesomeIcon className={cx('item-icon')} icon={faAddressBook} />
-                    <p>Quản lý bài tập</p>
+                <div>
+                    <div className={cx('item_userNav')} onClick={() => navigate("/exercise")}>
+                        <FontAwesomeIcon className={cx('item-icon')} icon={faAddressBook} />
+                        <p>Quản lý bài tập</p>
+                    </div>
+                    <div className={cx('item_userNav')} onClick={() => navigate("/match")}>
+                        <FontAwesomeIcon className={cx('item-icon')} icon={faChessQueen}/>
+                    <p>Tạo cuộc thi</p>
                 </div>
+                </div>    
             }
             <div className={cx('item_userNav')} onClick={logoutAccount}>
                 <FontAwesomeIcon className={cx('item-icon')} icon={faPowerOff} />
