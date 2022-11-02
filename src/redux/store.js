@@ -7,6 +7,7 @@ import theorySlice from './theorySlice';
 import importDataSlice from './importDataSlice';
 import testOverviewSlice from "./testOverviewSlice";
 import roomSlice from "./roomSlice";
+import matchSlice from "./matchSlice";
 
 const store = configureStore({
     reducer: {
@@ -19,6 +20,7 @@ const store = configureStore({
         importData: importDataSlice.reducer,
         testOverview: testOverviewSlice.reducer,
         roomSlice: roomSlice.reducer,
+        match: matchSlice.reducer
     },
     devTools: true
 

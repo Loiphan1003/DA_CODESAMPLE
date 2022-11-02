@@ -38,6 +38,10 @@ import JoinRoom from './components/pagesmeet/join';
 import Video from './components/pagesmeet/meeting';
 import WaitPage from './features/tournament/waitPage/WaitPage';
 import { HomeLayout } from './layouts/exportLayout';
+import CreateMatch from './features/Match/creatematch';
+import CreateTestMatch from './features/Match/createtestmatch/createtestmatch';
+import DetailMatch from './features/Match/detailMatch/DetailMatch';
+import DoTest from './features/Match/doTestMatch/doTest';
 
 
 function App() {
@@ -103,6 +107,15 @@ function App() {
                             <Content />
                         </HomeLayout>}
                     />
+                    
+                    <Route path='/match' element={
+                        <DefaultLayout>
+                            <CreateMatch />
+                        </DefaultLayout>}
+                    />
+                    <Route path='/match/createMatch/:nameMatch/:idMatch' element={<CreateTestMatch />}/>
+                    <Route path='/match/detailMatch/:nameMatch/:idMatch/:idDeCauHoiGiaiDau' element={<DetailMatch />}/>
+                    <Route path='/domatch/:idDeMatch' element={<DoTest />} />
 
                     <Route path='/test/:idDeKiemTra' element={<Test />} />
 

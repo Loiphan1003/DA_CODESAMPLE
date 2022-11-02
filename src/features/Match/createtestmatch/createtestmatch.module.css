@@ -1,0 +1,196 @@
+
+.header{
+    height: 52px;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 0 100px;
+    box-shadow: 0 0 2px 0 rgb(40 50 56 / 24%), 0 2px 4px 0 rgb(40 50 56 / 24%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.header h2{
+    font-size: 18px;
+    margin: 0;
+    color: #636668;
+}
+
+.content{
+    min-height: 100vh;
+    background-color: #f5f7f8;
+    /* position: relative;
+    top:52px; */
+    overflow: auto;
+    padding-top: 52px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.content-center{
+    width: 100%;
+    max-width: 960px;
+    margin: 24px auto;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 32px 48px;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 0 rgb(40 50 56 / 24%), 0 2px 4px 0 rgb(40 50 56 / 24%);
+}
+
+.input-nameTest{
+    box-sizing: border-box;
+    height: 64px;
+    outline: none;
+    padding: 12px 20px;
+    border: 1px solid transparent;
+    background: transparent;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 32px;
+    width: 100%;
+    color: #4e5052;
+    border-radius: 4px;
+    padding: 12px 0px;
+}
+/* .input-nameTest:hover{ 
+    box-shadow: 0 0 2px 0 rgb(40 50 56 / 24%), 0 2px 4px 0 rgb(40 50 56 / 24%);
+} */
+/* 
+.input-nameTest:focus {
+    outline: solid 2px #5fa0f5;
+} */
+
+.title-row{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 14px;
+    text-transform: uppercase;
+    color: #7c909b;
+}
+.visible-text{
+    height: 13px;
+    color: #7c909b;
+    display: flex;
+    margin-top: 8px;
+    
+}
+/* Nội dung các câu hỏi */
+.content-questions{
+    margin-top: 30px;
+}
+
+
+/* Khu vực nút thêm câu hỏi */
+
+.add-question{
+    margin-top: 40px;
+}
+
+.content-btn-add{
+    background-color: #fff;
+    width: 170px;
+    border-radius: 3px;
+    border: solid 0.5px rgb(40 50 56 / 24%);
+    box-shadow: 0 0 2px 0 rgb(40 50 56 / 24%), 0 2px 4px 0 rgb(40 50 56 / 24%);
+
+}
+.title-btn-add{
+    height: 34px;
+    padding-left: 10px;
+    padding-right: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #eceff1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #696d70;
+}
+.item-btn-add{
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    color: #696d70;
+    cursor: pointer;
+}
+    .item-btn-add:hover{
+        color: #ffffff;
+        background-color: #696d70; 
+    }  
+.line{
+    height: 0.1px;
+    background-color: #dde4ea;
+}
+
+.item-btn-add p{
+    font-weight: 600;
+    margin: 0;
+    margin-left: 10px;
+}
+
+
+.btn-add-question{
+    height: 36px;
+    width: 170px;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #5e9ff5;
+    border: 1px solid #d0d8dc;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 0 12px;
+    cursor: pointer;
+    box-shadow: 0 0 2px 0 rgb(40 50 56 / 24%), 0 2px 4px 0 rgb(40 50 56 / 24%);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* tìm kiếm bài tập theo id hoặc tên để thêm vào bài kiểm tra */
+
+.backdrop-add-ques{
+    width: 300px;
+    background-color: white;
+    height: 70px;
+    border-radius: 4px;
+}
+.search-result{
+    overflow: auto;
+    border-radius: 2px;
+    width: 450px;
+    max-height: 100px;
+    box-shadow: 0 0 2px 0 rgb(40 50 56 / 24%), 0 2px 4px 0 rgb(40 50 56 / 24%);
+    background-color: #fff;
+    color:#696d70 ;
+}
+.item-search-res{
+    height: 30px;
+    padding: 0 10px;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.item-search-res:hover{
+    background-color: #f1f1f2;
+}
+
+.item-res-nameAns{
+    padding-left:4px;
+    margin-left: 7px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.icon-x{
+    cursor: pointer;
+}

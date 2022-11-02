@@ -4,8 +4,9 @@ export const fillterLevel = (state) => state.btLuyenTap.searchLevel;
 export const practiceQuestionList = (state) => state.btLuyenTap.questions;
 const searchTextPractice = (state) => state.btLuyenTap.searchText;
 const searchTextTheory = (state) => state.theory.searchText;
+const searchTextMatch = (state) => state.match.searchText;
 const theoryList = (state) => state.theory.data;
-
+const matchList = (state) => state.match.data;
 
 
 const findValueInArrayPractice = (value1, level, title) => {
@@ -75,5 +76,26 @@ const theoryRemainingSelector = createSelector(
     }
 )
 
+const matchRemainingSelector = createSelector(
+    searchTextMatch,
+    matchList,
+    (searchText, matchs) => {
+        if(searchText !== ""){
+            let list = [];
+            matchs.map(
+                (lt) => {
+                    if(lt.tenGiaiDau.includes(searchText)){
+                        list.push(lt);
+                    }
+                    return [];
+                }
+            )
+            return list;
+        } else{
+            return matchs;
+        }
+    }
+)
 
-export { practiceRemainingSelector, theoryRemainingSelector };
+
+export { practiceRemainingSelector, theoryRemainingSelector, matchRemainingSelector };
