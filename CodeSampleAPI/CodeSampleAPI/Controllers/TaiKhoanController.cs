@@ -36,5 +36,11 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_taikhoanService.updateInfo(taiKhoan));
         }
+
+        [HttpGet("getNameTK")]
+        public IActionResult getNameTK(string uid)
+        {
+            return Ok(_taikhoanService.getNameTK(uid));
+        }
     }
 }

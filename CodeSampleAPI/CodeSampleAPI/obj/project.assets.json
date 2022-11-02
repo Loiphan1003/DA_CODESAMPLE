@@ -8375,11 +8375,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CloneGit\\Done_DACS\\API - Copy\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
+      "projectUniqueName": "D:\\CloneGit\\Done_DACS\\API - Copy - Copy\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
       "projectName": "CodeSampleAPI",
-      "projectPath": "D:\\CloneGit\\Done_DACS\\API - Copy\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
+      "projectPath": "D:\\CloneGit\\Done_DACS\\API - Copy - Copy\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
       "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "D:\\CloneGit\\Done_DACS\\API - Copy\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\obj\\",
+      "outputPath": "D:\\CloneGit\\Done_DACS\\API - Copy - Copy\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

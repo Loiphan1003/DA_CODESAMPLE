@@ -13,6 +13,7 @@ namespace CodeSampleAPI.Service
         TaiKhoan getOne(string uId);
         bool updateInfo(TaiKhoan taiKhoan);
         bool removeTaiKhoan(string uid);
+        TaiKhoan getNameTK(string uid);
     }
 
     public class TaiKhoanService : ITaiKhoanService
@@ -87,6 +88,13 @@ namespace CodeSampleAPI.Service
                 Console.WriteLine(ex);
                 return false;
             }
+        }
+
+        public TaiKhoan getNameTK(string uid)
+        {
+            TaiKhoan taiKhoan = new TaiKhoan();
+            taiKhoan = _codeSampleContext.TaiKhoans.FirstOrDefault(p => p.UidTaiKhoan == uid);
+            return taiKhoan;
         }
     }
 }
