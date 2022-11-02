@@ -50,7 +50,7 @@ namespace CodeSampleAPI.Data
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-PDHA0NQ\\SQLEXPRESS;Database=CodeSample;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-NPHPAPH\\SQLEXPRESS;Database=CodeSample;Trusted_Connection=True;");
             }
         }
 
@@ -79,23 +79,20 @@ namespace CodeSampleAPI.Data
 
                 entity.Property(e => e.IddeCauHoiGiaiDau).HasColumnName("IDDeCauHoiGiaiDau");
 
-                entity.Property(e => e.NgayLam).HasColumnType("date");
+                entity.Property(e => e.NgayLam).HasColumnType("datetime");
 
                 entity.Property(e => e.UIdnguoiDung)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("uIDNguoiDung");
 
                 entity.HasOne(d => d.IddeCauHoiGiaiDauNavigation)
                     .WithMany(p => p.BaiLamGiaiDaus)
                     .HasForeignKey(d => d.IddeCauHoiGiaiDau)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_BaiLamGiaiDau_DeCauHoiGiaiDau");
 
                 entity.HasOne(d => d.UIdnguoiDungNavigation)
                     .WithMany(p => p.BaiLamGiaiDaus)
                     .HasForeignKey(d => d.UIdnguoiDung)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_BaiLamGiaiDau_TaiKhoan");
             });
 

@@ -13,9 +13,9 @@ namespace CodeSampleAPI.Data
         }
 
         public int IdbaiLam { get; set; }
-        public DateTime NgayLam { get; set; }
-        public int DiemTong { get; set; }
-        public int IddeCauHoiGiaiDau { get; set; }
+        public DateTime? NgayLam { get; set; }
+        public double? DiemTong { get; set; }
+        public int? IddeCauHoiGiaiDau { get; set; }
         public string UIdnguoiDung { get; set; }
 
         public virtual DeCauHoiGiaiDau IddeCauHoiGiaiDauNavigation { get; set; }
