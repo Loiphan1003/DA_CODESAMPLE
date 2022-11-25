@@ -23,6 +23,8 @@ namespace CodeSampleAPI.Service
         bool submitBT(string uId, int idBT, bool trangthai, string tinhTrang, string ngonNgu, string code);
         bool EditBTLT(int id, int doKho, string tieuDe, string deBai, string rangBuoc, string dinhDangDauVao, string dinhDangDauRa, string mauDauVao, string mauDauRa, string tag);
         List<BTLuyenTapOverViewcs> getBaiTapDaLam(string uId);
+        List<BTLuyenTapOverViewcs> getLichSuLamBaiTap(string uId, int id);
+
         List<BtLuyenTap> getAllOver();
         List<CtLuyenTap> getTest(string uId);
     }
@@ -143,6 +145,32 @@ namespace CodeSampleAPI.Service
         public List<BTLuyenTapOverViewcs> getBaiTapDaLam(string uId)
         {
             List<CtLuyenTap> listCtLuyenTap = _codeSampleContext.CtLuyenTaps.Where(i => i.UId.Equals(uId)).ToList();
+            List<BTLuyenTapOverViewcs> btLuyenTaps = new List<BTLuyenTapOverViewcs>();
+            foreach (var i in listCtLuyenTap)
+            {
+                BTLuyenTapOverViewcs btLuyenTap = (from bt in _codeSampleContext.BtLuyenTaps
+                                                   where bt.Id == i.IdBaiTap
+                                                   select new BTLuyenTapOverViewcs()
+                                                   {
+                                                       Id = bt.Id,
+                                                       TenBai = bt.TieuDe,
+                                                       NgayLam = i.Date,
+                                                       DoKho = bt.DoKho,
+                                                       TrangThai = i.TrangThai,
+                                                       NgonNgu = i.NgonNgu,
+                                                   }).FirstOrDefault();
+
+                if (btLuyenTap != null)
+                {
+                    btLuyenTaps.Add(btLuyenTap);
+                }
+            }
+            return btLuyenTaps;
+        }
+
+        public List<BTLuyenTapOverViewcs> getLichSuLamBaiTap(string uId, int id)
+        {
+            List<CtLuyenTap> listCtLuyenTap = _codeSampleContext.CtLuyenTaps.Where(i => i.UId.Equals(uId) && i.IdBaiTap == id ).ToList();
             List<BTLuyenTapOverViewcs> btLuyenTaps = new List<BTLuyenTapOverViewcs>();
             foreach (var i in listCtLuyenTap)
             {

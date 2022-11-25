@@ -99,5 +99,10 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_btLuyenTapService.getTest(uid));
         }
+        [HttpGet("getLichSuLamBai")]
+        public IActionResult getLichSuLamBai(string uid, int id)
+        {
+            return Ok(_btLuyenTapService.getLichSuLamBaiTap(uid, id));
+        }
     }
 }
