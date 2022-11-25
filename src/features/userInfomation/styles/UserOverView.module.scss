@@ -136,152 +136,27 @@ $color_gray: #d3d3d3;
 
             .statistics {
                 width: 50%;
-                height: 200px;
+                height: 250px;
+                display: flex;
+                flex-direction: row;
                 background-color: white;
                 border-radius: 5px;
 
                 h3 {
-                    margin-left: 30px;
-                    margin-top: 5px;
+                    margin: 0px;
+                    padding: 10px;
                 }
 
-                div {
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    justify-content: space-between;
-                    padding: 0px 20px;
-                    box-sizing: border-box;
-
-                    .progress {
-                        min-width: 100px;
-                        margin-top: 10px;
-                        min-height: 100px;
-                        position: relative;
-                        border-radius: 50%;
-                        border: 1px solid black;
-                        display: flex;
-                        justify-content: center;
-
-                        &:before {
-                            content: '';
-                            position: absolute;
-                            width: 80%;
-                            height: 80%;
-                            background-color: white;
-                            border-radius: 50%;
-                        }
-
-                        span {
-                            position: relative;
-                            font-size: 20px;
-                            color: black;
-                        }
-                    }
-
-
-
-                    .level_questions {
-                        display: flex;
-                        width: 100%;
-                        align-items: flex-start;
-                        gap: 10px;
-                        padding: 0;
-                        flex-direction: column;
-
-                        div {
-                            width: inherit;
-                            height: fit-content;
-                            display: block;
-
-                            .title_level {
-                                width: inherit;
-                                height: fit-content;
-                                display: inline-flex;
-                                flex-direction: row;
-                                justify-content: space-between;
-                                padding: 0px;
-
-                                p {
-                                    margin: 0;
-                                }
-                            }
-
-                            >.progress_easy {
-                                width: 100%;
-                                height: 10px;
-                                padding: 0px;
-                                position: relative;
-                                border-radius: 10px;
-                                // animation: animate ;    
-                                background-color: $color_green_300;
-
-                                span {
-                                    height: 100%;
-                                    width: 0%;
-                                    transition: width;
-                                    transition-duration: 1s;
-                                    transition-timing-function: cubic-bezier(.36, .55, .63, .48);
-                                    position: absolute;
-                                    transform-origin: left;
-                                    background-color: $color_green_500;
-                                    border-radius: 10px;
-                                }
-                            }
-
-                            >.progress_normal {
-                                width: 100%;
-                                height: 10px;
-                                padding: 0px;
-                                position: relative;
-                                border-radius: 10px;
-                                // animation: animate ;    
-                                background-color: $color_orange_300;
-
-                                span {
-                                    height: 100%;
-                                    width: 0%;
-                                    transition: width;
-                                    transition-duration: 1s;
-                                    transition-timing-function: cubic-bezier(.36, .55, .63, .48);
-                                    position: absolute;
-                                    transform-origin: left;
-                                    background-color: $color_orange_500;
-                                    border-radius: 10px;
-                                }
-                            }
-
-                            >.progress_hard {
-                                width: 100%;
-                                height: 10px;
-                                padding: 0px;
-                                position: relative;
-                                border-radius: 10px;
-                                // animation: animate ;    
-                                background-color: $color_red_300;
-
-                                span {
-                                    height: 100%;
-                                    width: 0%;
-                                    transition: width;
-                                    transition-duration: 1s;
-                                    transition-timing-function: cubic-bezier(.36, .55, .63, .48);
-                                    position: absolute;
-                                    transform-origin: left;
-                                    background-color: $color_red_500;
-                                    border-radius: 10px;
-                                }
-                            }
-                        }
-
-
-                    }
+                .bieudo {
+                    height: 240px;
+                    width: 300px;
+                    padding: 10px;
                 }
             }
 
             .tournaments {
                 width: 50%;
-                height: 200px;
+                height: 250px;
                 background-color: white;
                 border-radius: 5px;
                 padding: 10px 20px;
@@ -485,152 +360,30 @@ $color_gray: #d3d3d3;
 
             .right_col_head {
                 width: auto;
-                height: 350px;
+                height: fit-content;
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
 
                 .statistics {
                     width: auto;
-                    height: 180px;
+                    height: 290px;
+                    display: flex;
+                    flex-direction: column;
                     background-color: white;
                     border-radius: 5px;
 
                     h3 {
-                        margin-left: 30px;
-                        margin-top: 5px;
+                        // margin-left: 30px;
+                        // margin-top: 5px;
+                        margin: 0px;
+                        padding: 10px;
                     }
 
-                    div {
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                        padding: 0px 20px;
-                        box-sizing: border-box;
-
-                        // .progress:before {}
-
-                        .progress {
-                            width: 100px;
-                            height: 100px;
-                            position: relative;
-                            border-radius: 50%;
-                            background-color: orange;
-                            display: grid;
-                            place-items: center;
-
-                            &:before {
-                                content: '';
-                                position: absolute;
-                                width: 90%;
-                                height: 90%;
-                                background-color: white;
-                                border-radius: 50%;
-                            }
-
-                            span {
-                                position: relative;
-                                font-size: 20px;
-                                color: black;
-                            }
-                        }
-
-
-
-                        .level_questions {
-                            display: flex;
-                            // width: auto;
-                            gap: 10px;
-                            padding: 0;
-                            flex-direction: column;
-
-                            div {
-                                // width: auto;
-                                // height: fit-content;
-                                // display: block;
-
-                                .title_level {
-                                    // width: 150px;
-                                    height: fit-content;
-                                    display: inline-flex;
-                                    flex-direction: row;
-                                    justify-content: space-between;
-                                    padding: 0px;
-
-                                    p {
-                                        margin: 0;
-                                    }
-                                }
-
-                                >.progress_easy {
-                                    width: 100%;
-                                    height: 10px;
-                                    padding: 0px;
-                                    position: relative;
-                                    border-radius: 10px;
-                                    // animation: animate ;    
-                                    background-color: $color_green_300;
-
-                                    span {
-                                        height: 100%;
-                                        width: 0%;
-                                        transition: width;
-                                        transition-duration: 1s;
-                                        transition-timing-function: cubic-bezier(.36, .55, .63, .48);
-                                        position: absolute;
-                                        transform-origin: left;
-                                        background-color: $color_green_500;
-                                        border-radius: 10px;
-                                    }
-                                }
-
-                                >.progress_normal {
-                                    width: 100%;
-                                    height: 10px;
-                                    padding: 0px;
-                                    position: relative;
-                                    border-radius: 10px;
-                                    // animation: animate ;    
-                                    background-color: $color_orange_300;
-
-                                    span {
-                                        height: 100%;
-                                        width: 0%;
-                                        transition: width;
-                                        transition-duration: 1s;
-                                        transition-timing-function: cubic-bezier(.36, .55, .63, .48);
-                                        position: absolute;
-                                        transform-origin: left;
-                                        background-color: $color_orange_500;
-                                        border-radius: 10px;
-                                    }
-                                }
-
-                                >.progress_hard {
-                                    width: 100%;
-                                    height: 10px;
-                                    padding: 0px;
-                                    position: relative;
-                                    border-radius: 10px;
-                                    // animation: animate ;    
-                                    background-color: $color_red_300;
-
-                                    span {
-                                        height: 100%;
-                                        width: 0%;
-                                        transition: width;
-                                        transition-duration: 1s;
-                                        transition-timing-function: cubic-bezier(.36, .55, .63, .48);
-                                        position: absolute;
-                                        transform-origin: left;
-                                        background-color: $color_red_500;
-                                        border-radius: 10px;
-                                    }
-                                }
-                            }
-
-
-                        }
+                    .bieudo {
+                        height: 240px;
+                        width: 300px;
+                        padding: 10px;
                     }
                 }
 
@@ -834,154 +587,28 @@ $color_gray: #d3d3d3;
 
             .right_col_head {
                 width: auto;
-                height: 350px;
+                height: fit-content;
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
 
                 .statistics {
                     width: auto;
-                    height: 180px;
+                    height: 260px;
+                    flex-direction: row;
                     background-color: white;
                     border-radius: 5px;
                     padding: 20px;
 
                     h3 {
                         margin: 0;
-                        // margin-left: 30px;
-                        // margin-top: 5px;
                     }
 
-                    div {
-                        // display: flex;
-                        // flex-direction: row;
-                        // align-items: center;
-                        // padding: 0px 20px;
-                        // box-sizing: border-box;
+                    .bieudo {
+                        height: 240px;
+                        width: 300px;
 
-                        // .progress:before {}
-
-                        .progress {
-                            width: 120px;
-                            height: 120px;
-                            position: relative;
-                            border-radius: 50%;
-                            background-color: orange;
-                            // display: grid;
-                            // place-items: center;
-
-                            &:before {
-                                content: '';
-                                position: absolute;
-                                width: 90%;
-                                height: 90%;
-                                background-color: white;
-                                border-radius: 50%;
-                            }
-
-                            span {
-                                position: relative;
-                                font-size: 20px;
-                                color: black;
-                            }
-                        }
-
-
-
-                        .level_questions {
-                            display: flex;
-                            width: 70%;
-                            gap: 10px;
-                            padding: 0;
-                            flex-direction: column;
-
-                            div {
-                                width: 100%;
-                                // height: fit-content;
-                                display: block;
-
-                                .title_level {
-                                    width: inherit;
-                                    height: fit-content;
-                                    display: inline-flex;
-                                    flex-direction: row;
-                                    justify-content: space-between;
-                                    padding: 0px;
-
-                                    p {
-                                        margin: 0;
-                                    }
-                                }
-
-                                >.progress_easy {
-                                    // width: 100%;
-                                    height: 10px;
-                                    padding: 0px;
-                                    position: relative;
-                                    border-radius: 10px;
-                                    // animation: animate ;    
-                                    background-color: $color_green_300;
-
-                                    span {
-                                        height: 100%;
-                                        width: 0%;
-                                        transition: width;
-                                        transition-duration: 1s;
-                                        transition-timing-function: cubic-bezier(.36, .55, .63, .48);
-                                        position: absolute;
-                                        transform-origin: left;
-                                        background-color: $color_green_500;
-                                        border-radius: 10px;
-                                    }
-                                }
-
-                                >.progress_normal {
-                                    width: 100%;
-                                    height: 10px;
-                                    padding: 0px;
-                                    position: relative;
-                                    border-radius: 10px;
-                                    // animation: animate ;    
-                                    background-color: $color_orange_300;
-
-                                    span {
-                                        height: 100%;
-                                        width: 0%;
-                                        transition: width;
-                                        transition-duration: 1s;
-                                        transition-timing-function: cubic-bezier(.36, .55, .63, .48);
-                                        position: absolute;
-                                        transform-origin: left;
-                                        background-color: $color_orange_500;
-                                        border-radius: 10px;
-                                    }
-                                }
-
-                                >.progress_red {
-                                    width: 100%;
-                                    height: 10px;
-                                    padding: 0px;
-                                    position: relative;
-                                    border-radius: 10px;
-                                    // animation: animate ;    
-                                    background-color: $color_red_300;
-
-                                    span {
-                                        height: 100%;
-                                        width: 0%;
-                                        transition: width;
-                                        transition-duration: 1s;
-                                        transition-timing-function: cubic-bezier(.36, .55, .63, .48);
-                                        position: absolute;
-                                        transform-origin: left;
-                                        background-color: $color_red_500;
-                                        border-radius: 10px;
-                                    }
-                                }
-                            }
-
-
-                        }
+                        padding: 10px;
                     }
                 }
 
