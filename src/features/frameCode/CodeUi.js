@@ -33,6 +33,7 @@ import "react-ace-builds/webpack-resolver-min";
 
 import { useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
+import Clock from "./Clock";
 
 function CodeUi() {
   const editor = useRef();
@@ -44,6 +45,8 @@ function CodeUi() {
   const [baiTapCode, setBaiTapCode] = useState({});
   const [testCases, setTestCases] = useState([]);
   const [historySubmit, setHistorySubmit] = useState([]);
+  const [time, setTime] = useState("null");
+  const [isSubmit, setIsSubmit] = useState(false);
 
   let params = useParams();
 
@@ -68,6 +71,15 @@ function CodeUi() {
     { field: "trangThai", headerName: "Trạng thái", width: 200 },
     // { field: 'email', headerName: 'Email', width: 230 }
   ];
+
+  // console.log("Time: ", baiTapCode.thoiGian);
+
+  useEffect(() => {
+    if (time === true) {
+      alert("hết giờ làm bài");
+      setIsSubmit(true);
+    }
+  }, [time]);
 
   useEffect(() => {
     const auth = getAuth();
@@ -103,7 +115,7 @@ function CodeUi() {
           );
           let arrTemp = res.data;
 
-          console.log("D: ", res.data);
+          // console.log("D: ", res.data);
           const formatDate = (value) => {
             let date = new Date(value);
             return `${date.getDate()}-${
@@ -202,9 +214,13 @@ function CodeUi() {
         ))}
       </div>
       <div className={styles.content}>
+        {baiTapCode.thoiGian !== null && baiTapCode.thoiGian !== undefined && (
+          <Clock time={baiTapCode.thoiGian} value={setTime} />
+        )}
+
         {/* <!-- Nội dung bài tập --> */}
         {tabType === "content" && (
-          <>
+          <div>
             <h1>{baiTapCode.tieuDe}</h1>
             <div className={styles.question}>
               <p>{baiTapCode.deBai}</p>
@@ -240,11 +256,11 @@ function CodeUi() {
                   baiTapCode.mauDauRa.replace(/\\n/g, "\n")}
               </div>
             </div>
-          </>
+          </div>
         )}
 
         {tabType === "history" && (
-          <>
+          <div>
             <h1>Lịch sử nộp bài</h1>
             <DataGrid
               autoHeight
@@ -273,7 +289,7 @@ function CodeUi() {
                 filterPanelOperators: "So sánh",
               }}
             />
-          </>
+          </div>
         )}
       </div>
 
@@ -336,6 +352,16 @@ function CodeUi() {
           <button
             className={styles.submit_code}
             onClick={handleClickSubmitCode}
+            disabled={isSubmit}
+            style={
+              isSubmit
+                ? {
+                    cursor: "not-allowed",
+                  }
+                : {
+                    cursor: "pointer",
+                  }
+            }
           >
             <span>Nộp Bài</span>
           </button>
