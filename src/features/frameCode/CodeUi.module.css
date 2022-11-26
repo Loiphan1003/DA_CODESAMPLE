@@ -263,7 +263,21 @@
     outline: none;
     border-radius: 10px;
 }
-
+.timeFrame{
+    position: absolute;
+    top: 10;
+    left: 45%;
+    height: fit-content;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: gray;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+}
+.timeFrame > p{
+    margin: 0;
+}
 
 
 /* Extra small devices (phones, 600px and down) */
