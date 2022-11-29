@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+@import url('https://fonts.googleapis.com/css2?famisignUp_contently=Lora&display=swap');
 
 :root {
     --main-background-color: #F8F4EB;
@@ -209,11 +209,12 @@
 .three_content_list_info>li {
     display: inline-flex;
     align-items: center;
+    gap: 10px;
     box-sizing: border-box;
 }
 
 .three_content_list_info>li>p {
-    margin-left: 20px;
+    margin: 0px;
     font-family: 'Roboto';
     font-weight: 500;
     font-size: 20px;
