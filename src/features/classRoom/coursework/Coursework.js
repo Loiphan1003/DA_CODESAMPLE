@@ -61,22 +61,26 @@ function Coursework(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const [filter, setFilter] = useState({
-        draft: false,
-        open: false,
-        close: false,
-        code: false,
-        mutiple_question: false,
-    });
-    const handleFilterChange = (event) => {
-        setFilter({
-            // copy filter
-            ...filter,
-            // thay đổi giá trị
-            [event.target.name]: event.target.checked,
-        })
+    // const [filter, setFilter] = useState({
+    //     draft: false,
+    //     open: false,
+    //     close: false,
+    //     code: false,
+    //     mutiple_question: false,
+    // });
+    // const handleFilterChange = (event) => {
+    //     console.log("Runn")
+    //     // setFilter({
+    //     //     // copy filter
+    //     //     ...filter,
+    //     //     // thay đổi giá trị
+    //     //     [event.target.name]: event.target.checked,
+    //     // })
+    //     // console.log(`${event.target.name}: ${event.target.checked}`)
 
-    }
+    // }
+
+   
 
     const handleAccept = (id) => {
         const publicBaiKiemTra = async () => {
@@ -143,22 +147,26 @@ function Coursework(props) {
                         <FormGroup>
                             <FormControlLabel
                                 control={
-                                    <Checkbox onChange={handleFilterChange} name="draft" />
+                                    <Checkbox  name="draft" checked={draft}
+                                    />
                                 }
+                                onClick={() => setDarft(!draft)}
                                 label="Nháp"
                             />
 
                             <FormControlLabel
                                 control={
-                                    <Checkbox name="open" />
+                                    <Checkbox name="open" checked={open} />
                                 }
+                                onClick={() => setOpen(!open)}
                                 label="Mở"
                             />
 
                             <FormControlLabel
                                 control={
-                                    <Checkbox name="close" />
+                                    <Checkbox name="close" checked={close} />
                                 }
+                                onClick={() => setClose(!close)}
                                 label="Đóng"
                             />
                         </FormGroup>
@@ -278,17 +286,17 @@ function Coursework(props) {
 
                     {isTeacher === true &&
                     <div className={styles.status}>
-                        <input id='Draft' type="checkbox" value="Nháp" />
+                        <input id='Draft' onClick={() => setDarft(!draft)} checked={draft} type="checkbox" value="Nháp" />
                         <label id={styles.draft} htmlFor="Draft">Nháp</label>
                     </div>}
 
                     <div className={styles.status}>
-                        <input id='Open' type="checkbox" value="Nháp" />
+                        <input id='Open' type="checkbox" onClick={() => setOpen(!open)} checked={open} value="Mở" />
                         <label id={styles.open} htmlFor="Open">Mở</label>
                     </div>
 
                     <div className={styles.status} >
-                        <input id='Close' type="checkbox" value="Nháp" />
+                        <input id='Close' type="checkbox" onClick={() => setClose(!close)} checked={close} value="Kết thúc" />
                         <label id={styles.close} htmlFor="Close">Kết thúc</label>
                     </div>
                 </div>

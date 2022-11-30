@@ -131,6 +131,9 @@ function UserOverView(props) {
           <div className={styles.user_info}>
             <div>
               <img
+                style={{
+                  height: "100px",
+                }}
                 src={image}
                 // 'https://assets.leetcode.com/users/user8961DO/avatar_1625471241.png'
                 alt="avatar"
