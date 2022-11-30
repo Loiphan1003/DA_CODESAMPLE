@@ -21,10 +21,11 @@ function UserNav(props) {
             auth.signOut();
             localStorage.clear();
             navigate('/');
-            let getdate = new Date()
+            let getdate = new Date();
             let date = new Date(getdate.toISOString());
             date.setDate(date.getDate() - 2);
-            document.cookie = `uId=;expirse=${date.toUTCString()}`
+            document.cookie = `uId=;expirse=${date.toUTCString()}`;
+            window.location.reload(true);
         }
     }
 

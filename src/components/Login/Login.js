@@ -93,6 +93,7 @@ function Login({ isGiangVien, login }) {
             localStorage.setItem("isTeacher", JSON.stringify(isGiangVien));
             localStorage.setItem("uId", JSON.stringify(user.uid));
             alert("Đăng nhập thành công");
+            login(false)
           };
           fetchData();
           // ...
