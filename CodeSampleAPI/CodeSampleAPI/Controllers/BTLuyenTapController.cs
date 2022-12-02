@@ -66,6 +66,7 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_btLuyenTapService.DeleteBTLT(id));
         }
+
         [HttpPut("EditBTLT")]
         public IActionResult EditBTLT(int id, int doKho, string tieuDe, string deBai, string rangBuoc, string dinhDangDauVao, string dinhDangDauRa, string mauDauVao, string mauDauRa, string tag)
         {
@@ -77,10 +78,31 @@ namespace CodeSampleAPI.Controllers
             return Ok(_btLuyenTapService.getSoLuongBaiLuyenTap());
         }
 
-        //[HttpPost("SubmitBTCode")]
-        //public IActionResult submitBT([FromBody] CtLuyenTap ctLuyenTap, string uId, bool isTeacher )
-        //{
-        //    return Ok(_btLuyenTapService.submitBT(uId, ctLuyenTap.IdBaiTap, (bool)ctLuyenTap.TrangThai, ctLuyenTap.Code, isTeacher));
-        //}
+        [HttpPost("SubmitBTCode")]
+        public IActionResult submitBT(CtLuyenTap ctLuyenTap)
+        {
+            return Ok(_btLuyenTapService.submitBT(ctLuyenTap.UId, ctLuyenTap.IdBaiTap, (bool)ctLuyenTap.TrangThai, ctLuyenTap.TinhTrang, ctLuyenTap.NgonNgu, ctLuyenTap.Code));
+        }
+
+        [HttpGet("getBaiTapDaLam")]
+        public IActionResult getBaiTapDaLam(string uId)
+        {
+            return Ok(_btLuyenTapService.getBaiTapDaLam(uId));
+        }
+        [HttpGet("getAllOverView")]
+        public IActionResult getAllOver()
+        {
+            return Ok(_btLuyenTapService.getAllOver());
+        }
+        [HttpGet("getTest")]
+        public IActionResult getTest(string uid)
+        {
+            return Ok(_btLuyenTapService.getTest(uid));
+        }
+        [HttpGet("getLichSuLamBai")]
+        public IActionResult getLichSuLamBai(string uid, int id)
+        {
+            return Ok(_btLuyenTapService.getLichSuLamBaiTap(uid, id));
+        }
     }
 }

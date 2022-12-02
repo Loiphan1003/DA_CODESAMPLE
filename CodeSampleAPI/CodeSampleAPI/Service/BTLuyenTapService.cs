@@ -20,8 +20,13 @@ namespace CodeSampleAPI.Service
         int getSoLuongBaiLuyenTap();
         bool add(BaiTapLuyenTap_Custom btLuyenTap_Cus);
         bool DeleteBTLT(int id);
-        //bool submitBT(string uId, int idBT, bool trangthai, string code, bool isTeacher);
+        bool submitBT(string uId, int idBT, bool trangthai, string tinhTrang, string ngonNgu, string code);
         bool EditBTLT(int id, int doKho, string tieuDe, string deBai, string rangBuoc, string dinhDangDauVao, string dinhDangDauRa, string mauDauVao, string mauDauRa, string tag);
+        List<BTLuyenTapOverViewcs> getBaiTapDaLam(string uId);
+        List<BTLuyenTapOverViewcs> getLichSuLamBaiTap(string uId, int id);
+
+        List<BtLuyenTap> getAllOver();
+        List<CtLuyenTap> getTest(string uId);
     }
     public class BTLuyenTapService:IBTLuyenTapService
     {
@@ -123,7 +128,8 @@ namespace CodeSampleAPI.Service
                            SoNguoiThanhCong = bt.SoNguoiThanhCong,
                            Tag = bt.Tag,
                            TenHienThi = user.TenHienThi,
-                           TieuDe = bt.TieuDe
+                           TieuDe = bt.TieuDe,
+                           ThoiGian = bt.ThoiGian,
                        }).Skip((validFilter.PageNumber - 1) * validFilter.PageSize).Take(validFilter.PageSize).ToList();
             return  res;
         }
@@ -131,6 +137,63 @@ namespace CodeSampleAPI.Service
         public List<BtLuyenTap> getAllByAdmin()
         {
             return _codeSampleContext.BtLuyenTaps.ToList();
+        }
+
+        public List<BtLuyenTap> getAllOver()
+        {
+            return _codeSampleContext.BtLuyenTaps.ToList();
+        }
+
+        public List<BTLuyenTapOverViewcs> getBaiTapDaLam(string uId)
+        {
+            List<CtLuyenTap> listCtLuyenTap = _codeSampleContext.CtLuyenTaps.Where(i => i.UId.Equals(uId)).ToList();
+            List<BTLuyenTapOverViewcs> btLuyenTaps = new List<BTLuyenTapOverViewcs>();
+            foreach (var i in listCtLuyenTap)
+            {
+                BTLuyenTapOverViewcs btLuyenTap = (from bt in _codeSampleContext.BtLuyenTaps
+                                                   where bt.Id == i.IdBaiTap
+                                                   select new BTLuyenTapOverViewcs()
+                                                   {
+                                                       Id = bt.Id,
+                                                       TenBai = bt.TieuDe,
+                                                       NgayLam = i.Date,
+                                                       DoKho = bt.DoKho,
+                                                       TrangThai = i.TrangThai,
+                                                       NgonNgu = i.NgonNgu,
+                                                   }).FirstOrDefault();
+
+                if (btLuyenTap != null)
+                {
+                    btLuyenTaps.Add(btLuyenTap);
+                }
+            }
+            return btLuyenTaps;
+        }
+
+        public List<BTLuyenTapOverViewcs> getLichSuLamBaiTap(string uId, int id)
+        {
+            List<CtLuyenTap> listCtLuyenTap = _codeSampleContext.CtLuyenTaps.Where(i => i.UId.Equals(uId) && i.IdBaiTap == id ).ToList();
+            List<BTLuyenTapOverViewcs> btLuyenTaps = new List<BTLuyenTapOverViewcs>();
+            foreach (var i in listCtLuyenTap)
+            {
+                BTLuyenTapOverViewcs btLuyenTap = (from bt in _codeSampleContext.BtLuyenTaps
+                                                   where bt.Id == i.IdBaiTap
+                                                   select new BTLuyenTapOverViewcs()
+                                                   {
+                                                       Id = bt.Id,
+                                                       TenBai = bt.TieuDe,
+                                                       NgayLam = i.Date,
+                                                       DoKho = bt.DoKho,
+                                                       TrangThai = i.TrangThai,
+                                                       NgonNgu = i.NgonNgu,
+                                                   }).FirstOrDefault();
+
+                if (btLuyenTap != null)
+                {
+                    btLuyenTaps.Add(btLuyenTap);
+                }
+            }
+            return btLuyenTaps;
         }
 
         public BtLuyenTap getOne(int id)
@@ -176,46 +239,37 @@ namespace CodeSampleAPI.Service
             return count;
         }
 
-        //public bool submitBT(string uId, int idBT, bool trangthai, string code, bool isTeacher)
-        //{
-        //    try
-        //    {
-        //        DateTime date = DateTime.Now;
-        //        var ct_LuyenTap = new CtLuyenTap()
-        //        {
-        //            IdBaiTap = idBT,
-        //            TrangThai = trangthai,
-        //            Code = code,
-        //            // Date = date
-        //        };
-        //        if (isTeacher == true)
-        //        {
-        //            var user = _codeSampleContext.GiangViens.FirstOrDefault(u => u.UId.Equals(uId));
-        //            if (user == null)
-        //            {
-        //                return false;
-        //            }
-        //            ct_LuyenTap.UIdNguoiDung = user.UId;
-        //        }
-        //        else
-        //        {
-        //            var user = _codeSampleContext.NguoiDungs.FirstOrDefault(u => u.UId.Equals(uId));
-        //            if (user == null)
-        //            {
-        //                return false;
-        //            }
-        //            ct_LuyenTap.UIdNguoiDung = user.UId;
+        public List<CtLuyenTap> getTest(string uId)
+        {
+            return _codeSampleContext.CtLuyenTaps.Where(i => i.UId == uId).ToList();
+        }
 
-        //        }
-        //        _codeSampleContext.CtLuyenTaps.Add(ct_LuyenTap);
-        //        _codeSampleContext.SaveChanges();
+        public bool submitBT(string uId, int idBT, bool trangthai, string tinhTrang, string ngonNgu, string code)
+        {
+            try
+            {
+                
+                DateTime dateTime = DateTime.Now;
 
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return false;
-        //    }
-        //}
+                CtLuyenTap ctLuyenTap = new CtLuyenTap();
+                ctLuyenTap.UId = uId;
+                ctLuyenTap.IdBaiTap = idBT;
+                ctLuyenTap.TrangThai = trangthai;
+                ctLuyenTap.TinhTrang = tinhTrang;
+                ctLuyenTap.NgonNgu = ngonNgu;
+                ctLuyenTap.Code = code;
+                ctLuyenTap.Date = dateTime;
+
+                _codeSampleContext.CtLuyenTaps.Add(ctLuyenTap);
+                _codeSampleContext.SaveChanges();
+                
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
