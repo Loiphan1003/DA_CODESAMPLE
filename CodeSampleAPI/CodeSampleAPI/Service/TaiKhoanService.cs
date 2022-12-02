@@ -14,6 +14,7 @@ namespace CodeSampleAPI.Service
         bool updateInfo(TaiKhoan taiKhoan);
         bool removeTaiKhoan(string uid);
         TaiKhoan getNameTK(string uid);
+        bool addTaiKhoan(TaiKhoan taiKhoan);
     }
 
     public class TaiKhoanService : ITaiKhoanService
@@ -95,6 +96,19 @@ namespace CodeSampleAPI.Service
             TaiKhoan taiKhoan = new TaiKhoan();
             taiKhoan = _codeSampleContext.TaiKhoans.FirstOrDefault(p => p.UidTaiKhoan == uid);
             return taiKhoan;
+        }
+
+        public bool addTaiKhoan(TaiKhoan taiKhoan)
+        {
+            TaiKhoan tk = _codeSampleContext.TaiKhoans.FirstOrDefault(u => u.Email.Equals(taiKhoan.Email));
+            if (tk != null)
+            {
+                return false;
+            }
+
+            _codeSampleContext.TaiKhoans.Add(taiKhoan);
+            _codeSampleContext.SaveChanges();
+            return true;
         }
     }
 }

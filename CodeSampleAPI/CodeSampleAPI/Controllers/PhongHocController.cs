@@ -67,6 +67,11 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_phongHocService.addListMembers(members, roomId));
         }
+        [HttpPost("addUserByEmail")]
+        public IActionResult addUserToPhongHocByEmail(string email, string id)
+        {
+            return Ok(_phongHocService.addUserToPhongPhongByEmail(email, id));
+        }
 
     }
 }

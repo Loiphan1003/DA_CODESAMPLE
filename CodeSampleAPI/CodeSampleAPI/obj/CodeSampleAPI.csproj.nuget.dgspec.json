@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\test\\T\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj": {}
+    "D:\\test\\1\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj": {}
   },
   "projects": {
-    "D:\\test\\T\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj": {
+    "D:\\test\\1\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\test\\T\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
+        "projectUniqueName": "D:\\test\\1\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
         "projectName": "CodeSampleAPI",
-        "projectPath": "D:\\test\\T\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
+        "projectPath": "D:\\test\\1\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
         "packagesPath": "C:\\Users\\pvtha\\.nuget\\packages\\",
-        "outputPath": "D:\\test\\T\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\obj\\",
+        "outputPath": "D:\\test\\1\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pvtha\\AppData\\Roaming\\NuGet\\NuGet.Config",

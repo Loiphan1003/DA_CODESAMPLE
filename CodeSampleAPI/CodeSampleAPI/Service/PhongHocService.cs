@@ -24,6 +24,7 @@ namespace CodeSampleAPI.Service
         bool removeMembers(string[] members);
 
         Task<String> addListMembers(string[] members, string roomId);
+        bool addUserToPhongPhongByEmail(string email, string idPhongHoc);
 
     }
     public class PhongHocService : IPhongHocService
@@ -183,6 +184,32 @@ namespace CodeSampleAPI.Service
                 await MailUtils.SendGMail("phanvuloi001@gmail.com", i, "Thông báo tham gia phòng học", accountAlreadyExist, roomId);
             }
             return "true";
+        }
+
+        public bool addUserToPhongPhongByEmail(string email, string idPhongHoc)
+        {
+            PhongHoc phongHoc = _codeSampleContext.PhongHocs.FirstOrDefault(p => p.Idphong == idPhongHoc);
+            TaiKhoan tk = _codeSampleContext.TaiKhoans.FirstOrDefault(u => u.Email.Equals(email));
+            if (phongHoc == null || tk == null)
+                return false;
+            //tồn tại rồi thì không thêm nữa
+            CtPhongHoc ctPH = _codeSampleContext.CtPhongHocs.FirstOrDefault(p => p.Idphong == idPhongHoc && p.UidNguoiDunng.Equals(tk.UidTaiKhoan));
+            if (ctPH != null)
+                return false;
+            // tiến hành thêm chi tiêt phòng học
+            try
+            {
+                DateTime Datenow = DateTime.Now;
+
+                CtPhongHoc ctPhongHoc = new CtPhongHoc() { Idphong = idPhongHoc, UidNguoiDunng = tk.UidTaiKhoan, NgayThamGia = Datenow };
+                _codeSampleContext.CtPhongHocs.Add(ctPhongHoc);
+                _codeSampleContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
