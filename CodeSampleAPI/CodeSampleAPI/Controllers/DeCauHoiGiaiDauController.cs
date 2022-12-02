@@ -47,5 +47,11 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_deCauHoiGiaiDauService.getGiauDauByIdDeThi(id));
         }
+
+        [HttpGet("countSlCau")]
+        public IActionResult countSlCau(int id)
+        {
+            return Ok(_deCauHoiGiaiDauService.countSlCau(id));
+        }
     }
 }

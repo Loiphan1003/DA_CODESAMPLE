@@ -46,5 +46,10 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_lyThuyetService.DeleteLT(id));
         }
+        [HttpGet("countAll")]
+        public IActionResult getSoLuongMon()
+        {
+            return Ok(_lyThuyetService.getSoLuongMon());
+        }
     }
 }

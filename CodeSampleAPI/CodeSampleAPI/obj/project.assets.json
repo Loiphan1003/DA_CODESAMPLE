@@ -8373,11 +8373,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
+      "projectUniqueName": "D:\\CloneGit\\Done_DACS\\API_CodeSample\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
+      "projectName": "CodeSampleAPI",
+      "projectPath": "D:\\CloneGit\\Done_DACS\\API_CodeSample\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
+      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+      "outputPath": "D:\\CloneGit\\Done_DACS\\API_CodeSample\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\obj\\",
+=======
       "projectUniqueName": "D:\\test\\T\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
       "projectName": "CodeSampleAPI",
       "projectPath": "D:\\test\\T\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\CodeSampleAPI.csproj",
       "packagesPath": "C:\\Users\\pvtha\\.nuget\\packages\\",
       "outputPath": "D:\\test\\T\\api-codesample\\CodeSampleAPI\\CodeSampleAPI\\obj\\",
+>>>>>>> main
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pvtha\\AppData\\Roaming\\NuGet\\NuGet.Config",

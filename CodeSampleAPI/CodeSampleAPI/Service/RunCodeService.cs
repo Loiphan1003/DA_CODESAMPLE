@@ -22,7 +22,9 @@ namespace CodeSampleAPI.Service
             using (var client = new HttpClient())
             {
                 //var url = "https://codex.jaagrav.in/";
-                var url = "https://codex-api.herokuapp.com/";
+                //var url = "https://codex-api.herokuapp.com/";
+                var url = "https://compile-run-co-prod-compile-run-code-tqoamn.mo1.mogenius.io/";
+                //var url = "https://compile-run-code.herokuapp.com/";
 
                 var data = new[]
                 {

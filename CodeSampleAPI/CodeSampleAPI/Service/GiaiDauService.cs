@@ -15,6 +15,9 @@ namespace CodeSampleAPI.Service
         int getSoLuongGiaiDauKhongPhaiHomNay();
         List<GiaiDau> getAllGiaiDauByIdGiangVien(string id, Filter.PaginationFilter validFilter);
         int getSoLuongGiaiDau(string id);
+        int count();
+        GiaiDau getThongTinGiaiDau(int id);
+        GiaiDau getThongtinGiaiDauByIdDe(int id);
     }
 
     public class GiaiDauService : IGiaiDauService
@@ -24,6 +27,12 @@ namespace CodeSampleAPI.Service
         public GiaiDauService(CodeSampleContext codeSampleContext)
         {
             this._codeSampleContext = codeSampleContext;
+        }
+
+        public int count()
+        {
+            int count = _codeSampleContext.GiaiDaus.ToList().Count();
+            return count;
         }
 
         public List<GiaiDau> getAll(Filter.PaginationFilter validFilter)
@@ -107,6 +116,20 @@ namespace CodeSampleAPI.Service
                            LinkImgGiaiDau = gd.LinkImgGiaiDau,
                        }).Count();
             return res;
+        }
+
+        public GiaiDau getThongTinGiaiDau(int id)
+        {
+            GiaiDau giaidau = new GiaiDau();
+            giaidau = _codeSampleContext.GiaiDaus.FirstOrDefault(p => p.IdgiaiDau == id);
+            return giaidau;
+        }
+
+        public GiaiDau getThongtinGiaiDauByIdDe(int id)
+        {
+            DeCauHoiGiaiDau de = _codeSampleContext.DeCauHoiGiaiDaus.FirstOrDefault(p => p.IddeCauHoiGiaiDau == id);
+            int idGiaiDau = de.IdgiaiDau;
+            return getThongTinGiaiDau(idGiaiDau);
         }
     }
 }

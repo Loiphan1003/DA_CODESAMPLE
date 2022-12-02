@@ -57,6 +57,7 @@ namespace CodeSampleAPI.Service
             try
             {
                 _codeSampleContext.BtLuyenTaps.Add(baiLuyenTap);
+                _codeSampleContext.SaveChanges();
                 foreach (var testCase in testCases)
                 {
                     TestCaseLuyenTap t = new TestCaseLuyenTap() { IdBtluyenTap = baiLuyenTap.Id, Input = testCase.Input, Output = testCase.Output };

@@ -14,6 +14,7 @@ namespace CodeSampleAPI.Service
         DeCauHoiGiaiDau_Custom getDeCauHoiGiaiDauByID(int id);
         int getIdDeCauHoiGiaiDauByID(int id);
         GiaiDau getGiauDauByIdDeThi(int id);
+        int countSlCau(int id);
     }
     public class DeCauHoiGiaiDauService : IDeCauHoiGiaiDauService
     {
@@ -124,6 +125,20 @@ namespace CodeSampleAPI.Service
                 return null;
             }
             return null;
+        }
+
+        public int countSlCau(int id)
+        {
+            var res = (from CtDe in _codeSampleContext.CtDeThiGiaiDaus
+                       where CtDe.IddeCauHoiGiaiDau == id
+                       select new CtDeThiGiaiDau()
+                       {
+                           IddeCauHoiGiaiDau = CtDe.IddeCauHoiGiaiDau,
+                           IdbaiTapCode = CtDe.IdbaiTapCode,
+                           SttcauHoi = CtDe.SttcauHoi,
+                           Diem = CtDe.Diem,
+                       }).ToList().Count();
+            return res;
         }
     }
 }

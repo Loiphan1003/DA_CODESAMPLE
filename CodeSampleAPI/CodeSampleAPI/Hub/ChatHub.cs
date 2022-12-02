@@ -41,11 +41,11 @@ namespace SignalRChat.Hubs
             await SendUsersConnected(userConnection.Room);
         }
 
-        public async Task SendMessage(string message)
+        public async Task SendMessage(string message, string sttCau)
         {
             if (_connections.TryGetValue(Context.ConnectionId, out UserConnection userConnection))
             {
-                await Clients.Group(userConnection.Room).SendAsync("ReceiveMessage", userConnection.User, message);
+                await Clients.Group(userConnection.Room).SendAsync("ReceiveMessage", userConnection.User, message, sttCau);
             }
         }
 

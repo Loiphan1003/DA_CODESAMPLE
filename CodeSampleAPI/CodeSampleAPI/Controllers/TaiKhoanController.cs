@@ -42,10 +42,18 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_taikhoanService.getNameTK(uid));
         }
+<<<<<<< HEAD
+
+        [HttpGet("countAll")]
+        public IActionResult countAll()
+        {
+            return Ok(_taikhoanService.countAll());
+=======
         [HttpPost("TaoTaiKhoan")]
         public IActionResult taoTaoKhoan(TaiKhoan taikhoan)
         {
             return Ok(_taikhoanService.addTaiKhoan(taikhoan));
+>>>>>>> main
         }
     }
 }
