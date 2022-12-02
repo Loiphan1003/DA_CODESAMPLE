@@ -42,5 +42,10 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_taikhoanService.getNameTK(uid));
         }
+        [HttpPost("TaoTaiKhoan")]
+        public IActionResult taoTaoKhoan(TaiKhoan taikhoan)
+        {
+            return Ok(_taikhoanService.addTaiKhoan(taikhoan));
+        }
     }
 }
