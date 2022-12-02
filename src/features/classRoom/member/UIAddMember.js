@@ -55,6 +55,7 @@ function UIAddMember({onOpen}) {
             console.log(response.data)
             if(response.data === true){
                 alert("Thêm thành viên thành công")
+                window.location.reload(true);
             }
         } catch (error) {
             console.log(error)
