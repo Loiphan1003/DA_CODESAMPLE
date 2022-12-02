@@ -127,7 +127,8 @@ namespace CodeSampleAPI.Service
                            SoNguoiThanhCong = bt.SoNguoiThanhCong,
                            Tag = bt.Tag,
                            TenHienThi = user.TenHienThi,
-                           TieuDe = bt.TieuDe
+                           TieuDe = bt.TieuDe,
+                           ThoiGian = bt.ThoiGian,
                        }).Skip((validFilter.PageNumber - 1) * validFilter.PageSize).Take(validFilter.PageSize).ToList();
             return  res;
         }

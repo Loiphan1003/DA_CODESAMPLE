@@ -15,6 +15,7 @@ namespace CodeSampleAPI.Model
         public int? SoNguoiLam { get; set; }
         public int? SoNguoiThanhCong { get; set; }
         public int DoKho { get; set; }
+        public TimeSpan? ThoiGian { get; set; }
 
     }
 }
