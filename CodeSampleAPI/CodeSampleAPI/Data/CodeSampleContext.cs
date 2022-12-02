@@ -49,7 +49,6 @@ namespace CodeSampleAPI.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=DESKTOP-NPHPAPH\\SQLEXPRESS;Database=CodeSample;Trusted_Connection=True;");
             }
         }
@@ -415,21 +414,26 @@ namespace CodeSampleAPI.Data
 
             modelBuilder.Entity<CtLuyenTap>(entity =>
             {
-                entity.HasKey(e => new { e.UId, e.IdBaiTap });
-
                 entity.ToTable("CT_LuyenTap");
 
-                entity.Property(e => e.UId)
-                    .HasMaxLength(50)
-                    .HasColumnName("uID");
-
-                entity.Property(e => e.IdBaiTap).HasColumnName("ID_BaiTap");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Code).HasColumnType("text");
 
                 entity.Property(e => e.Date)
                     .HasColumnType("datetime")
                     .HasColumnName("date");
+
+                entity.Property(e => e.IdBaiTap).HasColumnName("ID_BaiTap");
+
+                entity.Property(e => e.NgonNgu).HasMaxLength(20);
+
+                entity.Property(e => e.TinhTrang).HasMaxLength(20);
+
+                entity.Property(e => e.UId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("uID");
 
                 entity.HasOne(d => d.IdBaiTapNavigation)
                     .WithMany(p => p.CtLuyenTaps)
@@ -657,7 +661,7 @@ namespace CodeSampleAPI.Data
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.HinhAnh).HasMaxLength(50);
+                entity.Property(e => e.HinhAnh).HasColumnType("ntext");
 
                 entity.Property(e => e.MoTa)
                     .IsRequired()

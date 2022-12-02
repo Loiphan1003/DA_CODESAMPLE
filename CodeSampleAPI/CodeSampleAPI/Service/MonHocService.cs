@@ -11,6 +11,7 @@ namespace CodeSampleAPI.Service
     {
         MonHoc getMonHocByID(int id);
         List<MonHoc> getAllMonHoc(Filter.PaginationFilter validFilter);
+        List<MonHoc> getAll();
         int getSoLuongMonHoc();
         bool AddMonHoc(MonHoc_Custom mh);
         bool EditMonHoc(MonHoc_Custom mh);
@@ -22,6 +23,11 @@ namespace CodeSampleAPI.Service
         public MonHocService(CodeSampleContext codeSampleContext)
         {
             this._codeSampleContext = codeSampleContext;
+        }
+
+        public List<MonHoc> getAll()
+        {
+            return _codeSampleContext.MonHocs.ToList();
         }
 
         public MonHoc getMonHocByID(int id)

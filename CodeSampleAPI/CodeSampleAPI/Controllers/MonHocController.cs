@@ -55,6 +55,10 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_monHocService.DeleteMonHoc(id));
         }
-
+        [HttpGet("getAllMH")]
+        public IActionResult getAll()
+        {
+            return Ok(_monHocService.getAll());
+        }
     }
 }

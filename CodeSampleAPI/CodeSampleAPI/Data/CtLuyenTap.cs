@@ -7,11 +7,14 @@ namespace CodeSampleAPI.Data
 {
     public partial class CtLuyenTap
     {
+        public int Id { get; set; }
         public string UId { get; set; }
         public int IdBaiTap { get; set; }
         public bool? TrangThai { get; set; }
         public string Code { get; set; }
         public DateTime? Date { get; set; }
+        public string NgonNgu { get; set; }
+        public string TinhTrang { get; set; }
 
         public virtual BtLuyenTap IdBaiTapNavigation { get; set; }
         public virtual TaiKhoan UIdNavigation { get; set; }

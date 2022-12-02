@@ -55,5 +55,23 @@ namespace CodeSampleAPI.Controllers
             var pagedReponse = PaginationHelper.CreatePagedReponse<GiaiDau>(_giaiDauService.getAllGiaiDauByIdGiangVien(id, validFilter), validFilter, totalRecords, uriService, route);
             return Ok(pagedReponse);
         }
+
+        [HttpGet("count")]
+        public IActionResult count()
+        {
+            return Ok(_giaiDauService.count());
+        }
+
+        [HttpGet("getThongTinGiaiDau")]
+        public IActionResult getThongTinGiaiDau(int id)
+        {
+            return Ok(_giaiDauService.getThongTinGiaiDau(id));
+        }
+
+        [HttpGet("getThongtinGiaiDauByIdDe")]
+        public IActionResult getThongtinGiaiDauByIdDe(int id)
+        {
+            return Ok(_giaiDauService.getThongtinGiaiDauByIdDe(id));
+        }
     }
 }

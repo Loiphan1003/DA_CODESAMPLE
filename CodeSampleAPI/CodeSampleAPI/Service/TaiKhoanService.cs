@@ -14,6 +14,7 @@ namespace CodeSampleAPI.Service
         bool updateInfo(TaiKhoan taiKhoan);
         bool removeTaiKhoan(string uid);
         TaiKhoan getNameTK(string uid);
+        int countAll();
     }
 
     public class TaiKhoanService : ITaiKhoanService
@@ -96,5 +97,13 @@ namespace CodeSampleAPI.Service
             taiKhoan = _codeSampleContext.TaiKhoans.FirstOrDefault(p => p.UidTaiKhoan == uid);
             return taiKhoan;
         }
+
+        public int countAll()
+        {
+            int count = _codeSampleContext.TaiKhoans.ToList().Count();
+            return count;
+        }
+
+
     }
 }

@@ -42,5 +42,11 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_taikhoanService.getNameTK(uid));
         }
+
+        [HttpGet("countAll")]
+        public IActionResult countAll()
+        {
+            return Ok(_taikhoanService.countAll());
+        }
     }
 }
