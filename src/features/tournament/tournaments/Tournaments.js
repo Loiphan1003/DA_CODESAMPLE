@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles/Tournament.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGroup } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import giaiDauSilce from '../../../redux/giaiDauSlice';
-
+import { useNavigate } from 'react-router-dom';
+import { color, width } from '@mui/system';
 
 const responsive = {
     desktop: {
@@ -20,7 +21,7 @@ const responsive = {
             max: 3000,
             min: 1024
         },
-        items: 3,
+        items: 2,
         partialVisibilityGutter: 40
     },
     mobile: {
@@ -43,11 +44,10 @@ const responsive = {
 
 
 function Tournaments(props) {
-
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const listTournament = useSelector((state) => state.giaiDau.listTournament);
     const listTournamentStartSoon = useSelector((state) => state.giaiDau.listTournamentStartSoon);
-
     const paginations = useSelector((state) => state.giaiDau.totalPages);
 
     useEffect(() => {
@@ -68,7 +68,7 @@ function Tournaments(props) {
 
     const formatTime = (time) => {
         let date = new Date(time);
-        return `${date.getDate()} / ${date.getMonth()}/${date.getFullYear()} : ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+        return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} : ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
     }
 
     const handleTypeTournament = (time) => {
@@ -77,7 +77,7 @@ function Tournaments(props) {
         if (date > getDay) {
             return "Mở";
         } else {
-            return "Kết thúc";
+            return "Đóng";
         }
     }
 
@@ -86,14 +86,14 @@ function Tournaments(props) {
             <img src={Tournamnet} alt="banner" />
 
             <div className={styles.block} >
-
+                <h1 style={{fontWeight: "bold"}}>Giải đấu sắp bắt đầu</h1>
                 {listTournamentStartSoon != null && <Carousel
                     additionalTransfrom={0}
                     arrows
                     autoPlay
-                    autoPlaySpeed={10000}
+                    autoPlaySpeed={7000}
                     centerMode={false}
-                    className=""
+                    className={styles.form}
                     containerClass="container-with-dots"
                     dotListClass=""
                     draggable
@@ -126,30 +126,27 @@ function Tournaments(props) {
                 <div className={styles.list} >
                     <div>
                         <p>
-                            <span>Các giải đấu</span>
+                            <span style={{fontSize:"30px", fontWeight: "bold"}} className={styles.tieuDe}>Các giải đấu khác</span>
+                            <span className={styles.tieuDe} style={{float:"right", marginTop: "10px", fontWeight: "350"}}>Trạng thái</span>
                         </p>
-                        {/* <p>
-                            <span>Các giải đấu của </span>
-                        </p> */}
                     </div>
 
                     <div className={styles.listTournaments} >
 
                         {listTournament.map(item => (
-
-                            <div key={item.idgiaiDau}>
+                            <div className={styles.customGD} key={item.idgiaiDau} onClick={() => navigate(`/waitpage/tournament/${item.idgiaiDau}`)}>
                                 <div className={styles.ItemLeft} >
-                                    <img src='https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png' alt='avatar' />
+                                    <img className={styles.thamGia} src='https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png' alt='avatar' />
                                     <div>
-                                        <p>{item.tenGiaiDau}</p>
-                                        <p>
-                                            Thời gian: <span>{formatTime(item.thoiGianBatDau)}</span>
+                                        <p style={{fontSize: "20px", fontWeight: "600"}}>{item.tenGiaiDau}</p>
+                                        <p style={{fontWeight: "350"}}>
+                                            Thời gian kết thúc: <span>{formatTime(item.thoiGianBatDau)}</span>
                                         </p>
                                         {/* <FontAwesomeIcon icon={faUserGroup} /> */}
                                     </div>
                                 </div>
                                 <div className={styles.ItemType} >
-                                    <p >{handleTypeTournament(item.thoiGianKetThuc)}</p>
+                                    <p style={{color: handleTypeTournament(item.thoiGianKetThuc) === "Mở" ? "green" : "red"}}>{handleTypeTournament(item.thoiGianKetThuc)}</p>
                                 </div>
                             </div>
 

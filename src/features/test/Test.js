@@ -26,6 +26,7 @@ function Test(props) {
     let answers = useSelector((state) => state.doTest.answer);
     answers = [...answers].sort((a,b) => a.stt-b.stt);
     const uId = JSON.parse(localStorage.getItem('uId')); 
+    const [listDe, setListDe] = useState([]);
 
     useEffect(() => {
         const getBaiKiemTra = async ()=>{
@@ -38,6 +39,13 @@ function Test(props) {
         
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [idDeKiemTra]);
+
+    useEffect(() => {
+        for (let index = 0; index < questions.length; index++) {
+            var randomCauHoanDoi = Math.floor(Math.random() * questions.length);
+            [questions[index], questions[randomCauHoanDoi]] = [questions[randomCauHoanDoi], questions[index]];
+        }
+    },[questions.length])
 
     const handleNopBai = () => {
         setResultView(true);
@@ -70,6 +78,7 @@ function Test(props) {
     const handleSelect = (index) => {
         setSelect(questions.at(index));
     }
+
     return (
         <div className={styles.test} >
             <div className={collapse === true ? styles.left_frame_collapse : styles.left_frame} >
@@ -90,7 +99,7 @@ function Test(props) {
                         { questions.map((data, index) => (
                             <div className={collapse === true ? styles.question_item_collapse :styles.question_item} key={index} onClick={() => handleSelect(index)}  >
                                 
-                                <p>{collapse === true ? 'C'+(data.stt) : `Câu hỏi ${data.stt}`}</p>
+                                <p>{collapse === true ? 'C'+(index + 1) : `Câu hỏi ${index + 1}`}</p>
                                 <div className={collapse === true ? styles.none : styles.question_discription} >
                                     Câu hỏi {data.loaiCauHoi === 0 ? 'trắc nghiệm' :'code' }, {data.diem} điểm
                                 </div>

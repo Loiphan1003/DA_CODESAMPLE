@@ -23,6 +23,16 @@ const taiKhoanAPI = {
     getNameTK: (uId) => {
         const url = `TaiKhoan/getNameTK?uid=${uId}`;
         return axiosClient.get(url, {uId});
+    },
+
+    countAll: () => {
+        const url = `TaiKhoan/countAll`;
+        return axiosClient.get(url);
+    },
+
+    getAll: () => {
+        const url = `TaiKhoan/getAllTaiKhoan`;
+        return axiosClient.get(url);
     }
 }
 

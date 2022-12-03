@@ -44,7 +44,7 @@ function QuanlyLT() {
     useEffect(() => {
         const data = async () => {
             try {
-                const response = await MonHocAPI.getAll();
+                const response = await MonHocAPI.getAllMH();
                 setMonHoc(response.data);
             } catch (error) {
                 console.log("Error...", error);

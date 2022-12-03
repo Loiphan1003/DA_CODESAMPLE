@@ -12,6 +12,7 @@ import Pagination from '@mui/material/Pagination';
 import { useSelector, useDispatch } from "react-redux";
 import matchSlice, {callApiGetListMatch, formatDateTime} from "../../redux/matchSlice";
 import { matchRemainingSelector } from "../../redux/selectors";
+import { imgRanMatch1, imgRanMatch2, imgRanMatch3, imgRanMatch4, imgRanMatch5, imgRanMatch6 } from "../../components/content/export";
 
 function CreateMatch() {
     const dispatch = useDispatch();
@@ -21,7 +22,16 @@ function CreateMatch() {
     const uId = JSON.parse(localStorage.getItem('uId'));
     const [restart, setRestart] = useState(false);
     const listMatchs = useSelector(matchRemainingSelector);
-    console.log(listMatchs);
+    const imgRandom = [
+        imgRanMatch1,
+        imgRanMatch2,
+        imgRanMatch3,
+        imgRanMatch4,
+        imgRanMatch5,
+        imgRanMatch6
+    ]
+
+
     useEffect(() => {
         if (!!uId) {
             try {
@@ -61,6 +71,10 @@ function CreateMatch() {
         dispatch(matchSlice.actions.setListMatch(res.data.data))
     }
 
+    const handleRandomImageMatch = () => {
+        var numRandom = Math.floor(Math.random() * imgRandom.length);
+        return imgRandom[numRandom];
+    }
 
     return (
         <div className={styles.body_main}>
@@ -81,6 +95,7 @@ function CreateMatch() {
                         return (
                             <div className={styles.itemMatch} key={index}  onClick={() => handleDetaiMatch(item.tenGiaiDau, item.idgiaiDau)}>
                                 <div className={styles.imgMatch}>
+                                    <img className={styles.imgRandom} src={handleRandomImageMatch()} alt = "This is image of match"></img>
                                 </div>
                                 <div className={styles.infoMatch}>
                                     <h3>{item.tenGiaiDau}</h3>

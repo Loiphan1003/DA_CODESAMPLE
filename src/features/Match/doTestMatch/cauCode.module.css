@@ -104,6 +104,10 @@
     cursor: pointer;
 }
 
+.twoButon>button:hover{
+    background-color: #5a9d4d;
+}
+
 .testcaseTitle{
     display: flex;
     align-items: center;

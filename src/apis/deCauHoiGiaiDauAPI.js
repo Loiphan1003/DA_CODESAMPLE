@@ -20,6 +20,10 @@ const DeCauHoiGiaiDauAPI = {
     getGiauDauByIdDeThi: (id) =>{
         const url = `DeCauHoiGiaiDau/getGiauDauByIdDeThi?id=${id}`
         return axiosClient.get(url, {id});
+    },
+    countSlCau: (id) =>{
+        const url = `DeCauHoiGiaiDau/countSlCau?id=${id}`
+        return axiosClient.get(url, {id});
     }
 }
 

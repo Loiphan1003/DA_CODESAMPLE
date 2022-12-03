@@ -25,6 +25,7 @@
     color: white;
     padding-top: 2%;
     background-color:#24859A;
+    border-radius: 5px 5px 0px 0px;
 }
 
 .roomName {

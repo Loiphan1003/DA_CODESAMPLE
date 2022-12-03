@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import ResultView from '../../../features/test/ResultView';
 import { useParams } from 'react-router-dom';
 import { useStateIfMounted } from "use-state-if-mounted";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CauCode from "./cauCode";
 import FlagIcon from '@mui/icons-material/Flag';
 import { faChevronLeft, faChevronRight, faCircle, faMedal, faRankingStar, faTrophy } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +14,7 @@ import DeCauHoiGiaiDauAPI from "../../../apis/deCauHoiGiaiDauAPI";
 import BaiLamGiaiDauAPI from "../../../apis/baiLamGiaiDauAPI";
 import {HubConnectionBuilder, LogLevel} from '@microsoft/signalr';
 import MessageContainer from "./MessageContainer";
+import matchSlice from "../../../redux/matchSlice";
 
 function DoTest(){
     const [connection, setConnection] = useState();
@@ -27,14 +28,15 @@ function DoTest(){
     const [questions,setQuestions] = useStateIfMounted([]);
     const [resultView,setResultView] = useState(false);
     const [tongDiem,setTongDiem] = useState(0);
-    const [giaiDau, setGiaiDau] = useState();
     const [timeEnd, setTimeEnd] = useState();
     const [time, setTime] = useState();
+    const [disableButton, setDisableButton] = useState(false);
+    const [sttCau, setSttCau] = useState([]);
     const idDeMatch = params.idDeMatch;
     let answers = useSelector((state) => state.doTest.answer);
     answers = [...answers].sort((a,b) => a.stt-b.stt);
     const uId = JSON.parse(localStorage.getItem('uId'));
-
+    const dispatch = useDispatch();
     const user = uId;
     const room = idDeMatch;
 
@@ -45,9 +47,9 @@ function DoTest(){
                     .withUrl("https://localhost:44307/socket")
                     .configureLogging(LogLevel.Information)
                     .build();
-                connection.on("ReceiveMessage", (uId, message) => {
-                    setMessages(messages => [...messages, { uId, message }]);
-                    // setMessages({ uId, message });
+                connection.on("ReceiveMessage", (uId, message, sttCau) => {
+                    setMessages(messages => [...messages, { uId, message, sttCau }]);
+                    setSttCau(prev => [...prev, {uId, sttCau}]);
                 });
             
                 connection.on("UsersInRoom", (users) => {
@@ -88,14 +90,14 @@ function DoTest(){
             setTime(`${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`);
             // Nếu thời gian kết thúc, hiển thị chuỗi thông báo
             if (distance < 0) {
-                setTime("Thời gian đã kết thúc!");
+                setTime("Thời gian đã kết thúc");
+                setDisableButton(true);
                 return clearInterval(dateTimeChange);
             }
             }, 1000);
         }
         getGiaiDau();
     },[])
-
 
     useEffect(() => {
         const getBaiKiemTra = async ()=>{
@@ -107,10 +109,9 @@ function DoTest(){
         
     }, [idDeMatch]);
     
-    const sendMessage = async (message) => {
+    const sendMessage = async (message, sttCau) => {
         try {
-            await connection.invoke("SendMessage", message);
-            console.log("thanh cong SendMessage: ", message);
+            await connection.invoke("SendMessage", message, sttCau);
         } catch (e) {
             console.log(e);
         }
@@ -128,6 +129,8 @@ function DoTest(){
         setResultView(true);
         let totalScore = answers.reduce((sum, answer) => sum+answer.diemDatDuoc, 0);
         totalScore = Math.round(totalScore*10)/10;
+        setCollapse(true);
+        localStorage.removeItem('match');
         setTongDiem(totalScore);
               const saveBaiLamKiemTra = async()=>{
                 try {
@@ -165,6 +168,21 @@ function DoTest(){
         return sum;
     }
 
+    const danhDauCauDaLam = (index) => {
+        var sl = sttCau.length;
+        var dem = 0;
+        for (let i = 0; i < sl; i++) {
+            if(uId === sttCau[i].uId)
+            {
+                if(index+1 === Number(sttCau[i].sttCau))
+                {
+                    dem = 1;
+                }
+            }    
+        }
+        return dem;
+    }
+
     return (
         <div className={styles.test} >
             <div className={collapse === true ? styles.left_frame_collapse : styles.left_frame} >
@@ -184,13 +202,8 @@ function DoTest(){
                         <div className={styles.left_line} ></div>
                     </div>}
                         { questions.map((data, index) => (
-                            <div className={collapse === true ? styles.question_item_collapse :styles.question_item} key={index} onClick={() => handleSelect(index)}  >
-                                
-                                <p>{collapse === true ? 'C'+(data.stt) : `Câu hỏi ${data.stt}`}</p>
-                                <div className={collapse === true ? styles.none : styles.question_discription} >
-                                    Câu hỏi {data.loaiCauHoi === 0 ? 'trắc nghiệm' :'code' }, {data.diem} điểm
-                                </div>
-                                <div className={styles.left_line} ></div>
+                            <div className={collapse === true ? styles.question_item_collapse : styles.question_item} key={index} onClick={() => handleSelect(index)} style={{background: danhDauCauDaLam(index)===1 ? "#66D551" : "#81949F"}}>
+                                <p>{collapse === true ? 'C'+(data.stt) : (data.stt)}</p>
                             </div>
                         ))}
                     </div>
@@ -207,7 +220,7 @@ function DoTest(){
                 <div className={styles.right_header} >
                    <div>
                         {resultView || <Button sx={{float:"right", backgroundColor: '#66d551'}} variant="contained"
-                            onClick={handleNopBai}>
+                            disabled={disableButton} onClick={handleNopBai}>
                             Nộp bài
                         </Button>}
                    </div>
@@ -236,7 +249,7 @@ function DoTest(){
                 </div>
 
                 <div className={styles.right_content} >
-                    {(!!select && !resultView) &&  (select.loaiCauHoi === 1  ? <CauCode data={select} sendMessage={sendMessage}/> : <TestMutipleQuestion data={select} /> ) }
+                    {(!!select && !resultView) &&  (select.loaiCauHoi === 1  ? <CauCode data={select} sendMessage={sendMessage} idDe={idDeMatch}/> : <TestMutipleQuestion data={select} /> ) }
                     { resultView && <ResultView totalScore = {tongDiem} answers ={answers}></ResultView> }
                 </div>
             </div>

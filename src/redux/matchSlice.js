@@ -28,7 +28,7 @@ export const formatDateTime = (dateTime) =>{
     return format;
 }
 
-const initialState = { data: [], listMatch: [], searchText: "", totalPages: 0 , member: []};
+const initialState = { data: [], listMatch: [], searchText: "", totalPages: 0 , member: [], slDS: 0, listMessage: [{uId:"", message:"", sttCau:""}]};
 const matchSlice = createSlice({
     name: 'match',
     initialState,
@@ -41,7 +41,16 @@ const matchSlice = createSlice({
         },
         setMemeber: (state, action) => {
             state.member = [...state.member, action.payload];
-        }
+        },
+        setSlDS: (state, action) => {
+            state.slDS = action.payload;
+        },
+        setListMessage: (state, action) => {
+            state.listMessage = [...state.listMessage, action.payload];
+        },
+        setFilterListMessage: (state, action) => {
+            state.listMessage = state.listMessage.filter(item => item !== state.listMessage[action.payload])
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(callApiGetListMatch.fulfilled, (state, action) => {

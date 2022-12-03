@@ -58,14 +58,14 @@ function CreateBTCodeLT() {
                 tag:tagRef.current.value,
                 testCases: testCases
             }
-    
-            console.log(ob);
             const addBTCode = async () => {
                 try {
                     const response = await BaiTapLuyenTapAPI.add(ob);
                     if(response.data)
+                    {
                         alert("Thêm bài tập luyện tập thành công!")
-                    navigate('/Admin/Quanlybaitapcode')
+                        navigate('/Admin/Quanlybaitapcode')
+                    }
                 } catch (error) {
                     console.log("Fetch data error: ", error);
                 }
@@ -143,7 +143,6 @@ function CreateBTCodeLT() {
                             </div>
 
                             <div className={styles.testcase_btn} >
-                                <FontAwesomeIcon className={styles.btn_update} icon={faPen} />
                                 <FontAwesomeIcon className={styles.btn_delete} icon={faTrashCan} onClick={() => handleRemoveInput(index)} />
                             </div>
                         </div>
