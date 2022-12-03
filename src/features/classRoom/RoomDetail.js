@@ -34,7 +34,7 @@ function RoomDetail(props) {
 
   return (
     <>
-      <div className={styles.header}>
+      {/* <div className={styles.header}>
         <div className={styles.nameRoom}>
           <FontAwesomeIcon className={styles.iconHeader} icon={faBook} />
           <h1>{roomInfo.tenPhong}</h1>
@@ -45,43 +45,14 @@ function RoomDetail(props) {
 
 
     return (
-        <>
-            <div className={styles.header}>
-                <div className={styles.nameRoom}>
-                    <FontAwesomeIcon className={styles.iconHeader} icon={faBook} />
-                    <h1>{roomInfo.tenPhong}</h1>
-                </div>
-                <h2>{roomInfo.idphong}</h2>
-            </div>
-
-            <div className={styles.container}>
-               
-                <div className={styles.content}>
-
-                    <div className={styles.roomdetail_header}>
-
-                        {tabs.map((tab) => (
-
-                            <button key={tab}
-                                onClick={() => handleTab(tab)}
-                                style={tabType === tab ? {
-                                    color: 'white',
-                                    backgroundColor: '#3e80ef'
-                                } : {
-
-                                }}
-                            >
-                                {tab}
-                            </button>
-                        ))}
-
-                    </div>
-                    {tabType === "Bài tập" && <Coursework type={tabType} />}
-                    {tabType === "Thành viên" && <Member type={tabType} />}
-                </div>
-            </div>
-        </>
-    );
+        <> */}
+      <div className={styles.header}>
+        <div className={styles.nameRoom}>
+          <FontAwesomeIcon className={styles.iconHeader} icon={faBook} />
+          <h1>{roomInfo.tenPhong}</h1>
+        </div>
+        <h2>{roomInfo.idphong}</h2>
+      </div>
 
       <div className={styles.container}>
         <div className={styles.content}>
@@ -107,9 +78,35 @@ function RoomDetail(props) {
           {tabType === "Thành viên" && <Member type={tabType} />}
         </div>
       </div>
+      {/* </>
+    ); */}
+
+      {/* <div className={styles.container}>
+        <div className={styles.content}>
+          <div className={styles.roomdetail_header}>
+            {tabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => handleTab(tab)}
+                style={
+                  tabType === tab
+                    ? {
+                        color: "white",
+                        backgroundColor: "#3e80ef",
+                      }
+                    : {}
+                }
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+          {tabType === "Bài tập" && <Coursework type={tabType} />}
+          {tabType === "Thành viên" && <Member type={tabType} />}
+        </div>
+      </div> */}
     </>
   );
-
 }
 
 export default RoomDetail;
