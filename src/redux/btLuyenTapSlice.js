@@ -14,7 +14,7 @@ const initialState = {
 
 export const responseAPI = createAsyncThunk("Call API", async () => {
   const pageNumber = 1;
-  const pageSize = 2;
+  const pageSize = 8;
   const response = await BaiTapLuyenTapAPI.getAll(pageNumber, pageSize);
 
   let arr = response.data.data;
@@ -26,7 +26,7 @@ export const responseAPI = createAsyncThunk("Call API", async () => {
     return i.thoiGian === null;
   });
 
-  console.log(layBaiTapCoThoiGian);
+  console.log(arr);
 
   return [
     response.data,

@@ -115,6 +115,10 @@ function CreateBTCode(props) {
                     <TextField inputRef={dinhDangDauRaRef} sx={{marginTop:"20px"}} fullWidth label="Nhập định dạng đầu ra" multiline />
                     <TextField inputRef={mauDauVaoRef} sx={{marginTop:"20px"}} fullWidth label="Nhập mẫu đầu vào" multiline />
                     <TextField inputRef={mauDauRaRef} sx={{marginTop:"20px"}} fullWidth label="Nhập mẫu đầu ra" multiline />
+                    <TextField 
+                    // inputRef={} 
+                    sx={{marginTop:"20px"}} fullWidth label="Thời gian" multiline />
+
                 </div>
                 
 

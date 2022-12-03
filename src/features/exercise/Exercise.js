@@ -33,6 +33,12 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import testCaseBtCode from "../../apis/testCaseBtCode";
 import { useDispatch, useSelector } from "react-redux";
 import importDataSlice from "../../redux/importDataSlice";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import BaiTapLuyenTapAPI from '../../apis/baiTapLuyenTapAPI'
+
+
 
 function Exercise(props) {
   const [input, setInput] = useState("");
@@ -45,6 +51,7 @@ function Exercise(props) {
   const [rowsTN, setRowsTN] = useState([]);
   const [testCases, setTestCases] = useState([]);
   const navigate = useNavigate();
+
   // const [importBTCode, setImportBTCode] = useState([]);
   // const [importBTTN, setImportBTTN] = useState([]);
 
@@ -58,6 +65,7 @@ function Exercise(props) {
     isBTCode: false,
     id: 1,
   });
+
 
   const importCauHoiTracNghiem = useSelector(
     (state) => state.importData.cauHoiTracNghiem
@@ -74,6 +82,9 @@ function Exercise(props) {
     mauDauVao: "",
     mauDauRa: "",
     ngonNgu: "",
+    thoiGian: "",
+    doKho: "",
+    congKhai: "",
   });
   const [btTN, setBtTN] = useState({
     id: 0,
@@ -84,6 +95,9 @@ function Exercise(props) {
     cauTraLoi4: "",
     dapAn: "",
   });
+
+  console.log("R: ", btCode.doKho)
+
 
   const uId = JSON.parse(localStorage.getItem("uId"));
 
@@ -198,11 +212,14 @@ function Exercise(props) {
           mauDauVao: data[5],
           mauDauRa: data[6],
           ngonNgu: data[7],
+          thoiGian: data[8].replaceAll(`"`, ""),
+          congKhai: data[9],
+          doKho: data[10],
           uIdNguoiTao: uId,
         };
 
         let testCase = [];
-        let i = 8;
+        let i = 11;
         while (data.length > 0) {
           if (i > data.length) {
             return;
@@ -250,6 +267,7 @@ function Exercise(props) {
       dispatch(importDataSlice.actions.setCauHoiTracNghiem([]));
     }
   };
+
 
   const handleDelete = () => {
     if (deleteAction.isBTCode) {
@@ -304,7 +322,10 @@ function Exercise(props) {
     DinhDangDauRa,
     MauDauVao,
     MauDauRa,
-    NgonNgu
+    NgonNgu,
+    thoiGian,
+    congKhai,
+    doKho,
   ) => {
     setBtCode({
       id: Id,
@@ -316,7 +337,11 @@ function Exercise(props) {
       mauDauVao: MauDauVao,
       mauDauRa: MauDauRa,
       ngonNgu: NgonNgu,
+      thoiGian: thoiGian,
+      congKhai: congKhai,
+      doKho: doKho,
     });
+    // console.log("C: ",congKhai);
     setOpenEditBtCode(true);
     setResetTC(!resetTC);
   };
@@ -326,6 +351,14 @@ function Exercise(props) {
       try {
         const response = await BaiTapCodeAPI.editBaiTapCode(btCode);
         if (response.data) {
+          if(btCode.congKhai === true){
+            const response = await BaiTapLuyenTapAPI.EditBTLT(btCode.id, btCode.doKho, btCode.tieuDe, btCode.rangBuoc,
+              btCode.dinhDangDauVao,
+              btCode.dinhDangDauRa,
+              btCode.mauDauVao,
+              btCode.mauDauRa,);
+          }
+
           alert("Sửa thành công");
           setOpenEditBtCode(false);
           setReset(!reset);
@@ -468,6 +501,28 @@ function Exercise(props) {
     }
   };
 
+  const handlePublic = async (btCode) => {
+    const object = {
+      id: btCode.id,
+      doKho: btCode.doKho,
+      tieuDe: btCode.tieuDe,
+      deBai: btCode.deBai,
+      isPublic: true,
+      uIdNguoiTao: uId,
+      rangBuoc: btCode.rangBuoc,
+      dinhDangDauVao: btCode.dinhDangDauVao,
+      dinhDangDauRa: btCode.dinhDangDauRa,
+      mauDauVao: btCode.mauDauVao,
+      mauDauRa: btCode.mauDauRa,
+      thoiGian: btCode.thoiGian,
+    }
+
+    const response = await BaiTapCodeAPI.publicCauHoiCode(object)
+    if(response.data === true){
+      alert("Công khai câu hỏi thành công");
+    }
+  }
+
   return (
     <>
       <div className={styles.container}>
@@ -505,6 +560,9 @@ function Exercise(props) {
                   <TableCell sx={{ fontWeight: "700" }} align="center">
                     Ngôn ngữ
                   </TableCell>
+                  <TableCell sx={{ fontWeight: "700" }} align="center">
+                    Thời gian
+                  </TableCell>
                   <TableCell
                     sx={{ width: 40, fontWeight: "700" }}
                     align="center"
@@ -530,6 +588,7 @@ function Exercise(props) {
                     </TableCell>
                     <TableCell align="center">{row.tieuDe}</TableCell>
                     <TableCell align="center">{row.ngonNgu}</TableCell>
+                    <TableCell align="center">{row.thoiGian !== null ? row.thoiGian: "Không có"}</TableCell>
                     <TableCell align="center">
                       <DeleteIcon
                         sx={{ cursor: "pointer", color: "#f04530" }}
@@ -549,7 +608,10 @@ function Exercise(props) {
                             row.dinhDangDauRa,
                             row.mauDauVao,
                             row.mauDauRa,
-                            row.ngonNgu
+                            row.ngonNgu,
+                            row.thoiGian,
+                            row.congKhai,
+                            row.doKho,
                           )
                         }
                       />
@@ -734,6 +796,9 @@ function Exercise(props) {
                       <TableCell sx={{ width: "10%", fontWeight: "700" }}>
                         Mẫu đầu ra
                       </TableCell>
+                      <TableCell sx={{ width: "10%", fontWeight: "700" }}>
+                        Thời gian
+                      </TableCell>
                       <TableCell
                         sx={{ width: "5%", fontWeight: "700" }}
                         align="center"
@@ -768,6 +833,7 @@ function Exercise(props) {
                       <TableCell>{row[5]}</TableCell>
 
                       <TableCell>{row[6]}</TableCell>
+                      <TableCell>{row[8].replaceAll(`"`, "")}</TableCell>
 
                       <TableCell align="center">
                         <DeleteIcon
@@ -928,6 +994,16 @@ function Exercise(props) {
               label="Nhập mẫu đầu ra"
               multiline
             />
+            <TextField
+              value={btCode.thoiGian}
+              onChange={(e) =>
+                setBtCode({ ...btCode, thoiGian: e.target.value })
+              }
+              sx={{ marginTop: "20px" }}
+              fullWidth
+              label="Thời gian"
+              multiline
+            />
           </div>
 
           <div className={styles.excercise_language}>
@@ -947,7 +1023,35 @@ function Exercise(props) {
                 <MenuItem value="java">Java</MenuItem>
               </Select>
             </FormControl>
+
           </div>
+          
+          <FormControl fullWidth >
+              <InputLabel id="level-label">Độ khó</InputLabel>
+              <Select
+                labelId="level-label"
+                value={btCode.doKho}
+                label="Đô khó"
+                onChange={(e) =>
+                  setBtCode({ ...btCode, doKho: e.target.value })
+                }
+              >
+                <MenuItem value="1">Dễ</MenuItem>
+                <MenuItem value="2">Trung Bình</MenuItem>
+                <MenuItem value="3">Khó</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormGroup>
+              <FormControlLabel control={<Checkbox checked={btCode.congKhai !== true ? false : true} />} 
+              label="Công khai câu hỏi" 
+              onChange={() => 
+                handlePublic(
+                  btCode
+                )
+              }
+              />
+            </FormGroup>
           {/* xuất các testcase của bài code có id = id */}
           <div className={styles.content_TestCase}>
             <Button
