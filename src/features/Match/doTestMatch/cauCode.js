@@ -20,15 +20,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useStateIfMounted } from "use-state-if-mounted";
 
 
-function CauCode({data, sendMessage}) {
+function CauCode({data, sendMessage, idDe}) {
 
     const dispatch = useDispatch();
     const answer = useSelector((state) => state.doTest.answer.find(element => element.id === data.id&&element.loaiCauHoi=== data.loaiCauHoi))
     const language = {'py' : 'Python','c': 'C','c++': 'C++','java': 'Java','js':'JavaScript','go':'GoLang' }
 
+    const storageMatch = JSON.parse(localStorage.getItem('match'));
     const [openTestCase, setOpenTestCase] = useState(false);
     const [baiTapCode,setBaiTapCode] = useStateIfMounted({});
     const [testCase,setTestCase] = useStateIfMounted([]);
+    const [saveMatch, setSaveMatch] = useState(storageMatch ?? []);
+    const uId = JSON.parse(localStorage.getItem('uId'));
 
     useEffect(() => {
         const getBaiTapCode = async () => {
@@ -67,8 +70,7 @@ function CauCode({data, sendMessage}) {
                         ...answer,
                         diemDatDuoc: Math.floor((heSoDiem*data.diem)*100)/100
                     }))
-
-                    sendMessage((Math.floor((heSoDiem*data.diem)*100)/100).toString());
+                    sendMessage(((Math.floor((heSoDiem*data.diem)*100)/100).toString()), data.stt.toString());
                     setTestCase(response.data);
                 }
                 
@@ -90,6 +92,47 @@ function CauCode({data, sendMessage}) {
             diemToiDa:data.diem,
             diemDatDuoc: !!answer ? answer.diemDatDuoc:0
         }))
+        setSaveMatch(prev => [...prev, {uId: uId, code: newValue, cau: data.stt.toString(), idDe: idDe.toString()}]);
+    }
+    
+    useEffect(() => {
+        if(saveMatch.length > 0)
+        {
+            for (let index = 0; index < saveMatch.length-1; index++) {
+                if(saveMatch[saveMatch.length-1].uId === saveMatch[index].uId && saveMatch[saveMatch.length-1].cau === saveMatch[index].cau && saveMatch[saveMatch.length-1].idDe === saveMatch[index].idDe)
+                {
+                    setSaveMatch(saveMatch.filter(item => item !== saveMatch[index]));
+                }  
+            }
+            const storageMatchSave = JSON.parse(localStorage.getItem('match'))
+            if(storageMatchSave !== null)
+            {
+                localStorage.removeItem('match');
+                const jsonmatch = JSON.stringify(saveMatch);
+                localStorage.setItem('match', jsonmatch);
+            }
+            else
+            {
+                const jsonmatch = JSON.stringify(saveMatch);
+                localStorage.setItem('match', jsonmatch);
+            }
+        }
+    },[saveMatch.length])
+
+    const saveCodeMatch = () => {
+        if(storageMatch !== null)
+        {
+            for (let index = 0; index < storageMatch.length; index++) {
+                if(storageMatch[index].cau === data.stt.toString() && storageMatch[index].idDe === idDe)
+                {
+                    return storageMatch[index].code;
+                }
+            }
+        }
+        else
+        {
+            return "";
+        } 
     }
 
     return (
@@ -138,7 +181,7 @@ function CauCode({data, sendMessage}) {
 
             <div className={styles.code_section} >
                 <AceEditor 
-                    value={ !!answer ? answer.dapAn : ""}
+                    value={ !!answer ? answer.dapAn : saveCodeMatch()}
                     mode="c_cpp"
                     theme='one_dark'
                     fontSize='12pt'

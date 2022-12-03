@@ -42,6 +42,7 @@ import CreateMatch from './features/Match/creatematch';
 import CreateTestMatch from './features/Match/createtestmatch/createtestmatch';
 import DetailMatch from './features/Match/detailMatch/DetailMatch';
 import DoTest from './features/Match/doTestMatch/doTest';
+import Ranking from './features/tournament/waitPage/ranking';
 
 
 function App() {
@@ -117,6 +118,12 @@ function App() {
                     <Route path='/match/detailMatch/:nameMatch/:idMatch/:idDeCauHoiGiaiDau' element={<DetailMatch />}/>
                     <Route path='/domatch/:idDeMatch' element={<DoTest />} />
 
+                    <Route path='/ranking/:idDeCauHoiGiaiDau' element={
+                        <DefaultLayout >
+                            <Ranking />
+                        </DefaultLayout>
+                    } />
+
                     <Route path='/test/:idDeKiemTra' element={<Test />} />
 
                     <Route path='/createMonHoc' element={<CreateMonHoc />} />
@@ -148,7 +155,7 @@ function App() {
                         </DefaultLayout>
                     } />
 
-                    <Route path="/waitpage/tournament" element={<WaitPage />} />
+                    <Route path="/waitpage/tournament/:idGiaiDau" element={<WaitPage />} />
 
 
                     {/* Admin */}

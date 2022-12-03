@@ -41,7 +41,7 @@ function RoomDetail(props) {
                     <FontAwesomeIcon className={styles.iconHeader} icon={faBook} />
                     <h1>{roomInfo.tenPhong}</h1>
                 </div>
-                <h2>{roomInfo.id}</h2>
+                <h2>{roomInfo.idphong}</h2>
             </div>
 
             <div className={styles.container}>

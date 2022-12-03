@@ -93,7 +93,7 @@ function TestCode({data}) {
 
     return (
         <div className={styles.code} >
-            <h2>Câu hỏi {data.stt}</h2>
+            {/* <h2>Câu hỏi {data.stt}</h2> */}
             <div className={styles.content}>
                 <h1>{baiTapCode.tieuDe}</h1>
                 <div className={styles.question}>

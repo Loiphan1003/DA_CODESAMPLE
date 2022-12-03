@@ -270,7 +270,7 @@ function Coursework(props) {
 
                 <NavLink to={`/Meeting`} className={styles.btn_}>
                     <FontAwesomeIcon icon={faVideo} fontSize="22px"/>
-                    <p>Tạo meeting</p>
+                    <p>Học trực tuyến</p>
                 </NavLink>
 
                 <div className={styles.btn_fillter}>

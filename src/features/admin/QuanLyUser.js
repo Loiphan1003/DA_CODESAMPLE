@@ -2,6 +2,7 @@ import React from 'react'
 import {useEffect, useState} from 'react'
 import NguoiDungAPI from '../../apis/nguoiDungAPI';
 import styles from './QuanLyUser.module.css'
+import taiKhoanAPI from '../../apis/taiKhoanAPI';
 
 
 function QuanLyUser() {
@@ -10,7 +11,7 @@ function QuanLyUser() {
     useEffect(() =>{
         const data = async () => {
             try {
-                const response = await NguoiDungAPI.getAll();
+                const response = await taiKhoanAPI.getAll();
                 setUser(response.data);
             } catch (error) {
                 console.log("Fetch data error: ", error);
@@ -62,7 +63,7 @@ function QuanLyUser() {
                                 {item.email}
                             </td>
                             <td>
-                                {item.namSinh}
+                                {item.ngaySinh.split("T")[0]}
                             </td>
                             <td>
                                 {item.truong}

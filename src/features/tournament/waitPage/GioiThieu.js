@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import DeCauHoiGiaiDauAPI from "../../../apis/deCauHoiGiaiDauAPI";
 import banner from "../../../images/logo_transparent.png"
 import styles from "./styles/gioithieu.module.css"
 
-function GioiThieu({ getElement }) {
-
+function GioiThieu({ getElement, slCau }) {
   return (
     <div ref={getElement} className={styles.App_gioiThieu}>
       <h2>Thông tin giải đấu</h2>
-
       <div>
         
-        <p><strong>Thể lệ</strong> cuộc thi sẽ gồm 10 câu hỏi liên quan đến các bài đã học trên trang web.</p>
+        <p><strong>Thể lệ</strong> cuộc thi sẽ gồm {slCau} câu hỏi liên quan đến các bài đã học trên trang web.</p>
 
         <div>
           <ul>

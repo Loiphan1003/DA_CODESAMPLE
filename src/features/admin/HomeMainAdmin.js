@@ -7,12 +7,15 @@ import styles from './HomeMainAdmin.module.css'
 import LyThuyetAPI from '../../apis/lyThuyetAPI';
 import BaiTapLuyenTapAPI from '../../apis/baiTapLuyenTapAPI';
 import NguoiDungAPI from '../../apis/nguoiDungAPI';
+import taiKhoanAPI from '../../apis/taiKhoanAPI';
+import GiaiDauAPI from '../../apis/giaiDauAPI';
 
 function HomeMainAdmin() {
 
   const [countLyThuyet, setCountLyThuyet] = useState(0);
   const [countBaiLuyenTap, setCountBaiLuyenTap] = useState(0);
   const [countUser, setCountUser] = useState(0);
+  const [match, setMatch] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,10 +25,12 @@ function HomeMainAdmin() {
         try {
           const responseLythuyet = await LyThuyetAPI.countAll();
           setCountLyThuyet(responseLythuyet.data);
-          const responseNguoiDung = await NguoiDungAPI.getSoLuongUser();
+          const responseNguoiDung = await taiKhoanAPI.countAll();
           setCountUser(responseNguoiDung.data);
-          const responseBaiLuyenTap = await BaiTapLuyenTapAPI.count()
+          const responseBaiLuyenTap = await BaiTapLuyenTapAPI.count();
           setCountBaiLuyenTap(responseBaiLuyenTap.data);
+          const responseMatch = await GiaiDauAPI.count();
+          setMatch(responseMatch.data);
         } catch (error) {
           console.log("Fetch data error: ", error);
         }
@@ -60,7 +65,7 @@ function HomeMainAdmin() {
     {
       icon: faPen,
       name: "Số bài trắc nghiệm",
-      solieu: countLyThuyet,
+      solieu: match,
       bg: "#FF1818"
     },
   ]

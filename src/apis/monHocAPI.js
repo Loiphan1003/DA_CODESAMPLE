@@ -16,6 +16,10 @@ const MonHocAPI = {
     DeleteMonHoc: (id) => {
         const url = `MonHoc/DeleteMonHoc?id=${id}`
         return axiosClient.delete(url, {id});
+    },
+    getAllMH: () => {
+        const url = `MonHoc/getAllMH`;
+        return axiosClient.get(url);
     }
 }
 

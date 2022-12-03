@@ -5,6 +5,7 @@ import LyThuyetAPI from '../../apis/lyThuyetAPI';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import { display } from '@mui/system';
 
 function CouresDetail(props) {
 
@@ -69,10 +70,13 @@ function CouresDetail(props) {
                     </div>
                     <ul className={styles.couresDetailList}>
                         {coures.map(coure => (
-                            <NavLink  to={`/couredetail/section/${coure.id}`} key={coure.id} className={styles.coure} >
-                                <LibraryBooksIcon/>
-                                {coure.tieuDe}
-                            </NavLink>
+                            <div style={{width:"100%", display:'flex'}}>
+                                 <NavLink  to={`/couredetail/section/${coure.id}`} key={coure.id} className={styles.coure} >
+                                    <LibraryBooksIcon/>
+                                    {coure.tieuDe}
+                                </NavLink>
+                                <div className={styles.videos}>phuc</div>
+                            </div>
                         ))}
                     </ul>
                 </div>

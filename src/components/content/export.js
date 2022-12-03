@@ -14,7 +14,11 @@ import imgmeet from '../../images/meet1.png';
 import imgmeet2 from '../../images/meet3.png';
 import home from '../../images/homepng.png';
 import createDeThi from '../../images/createDeThi.png';
-import imgRanMatch1 from '../../images/imgRanMatch1.png'
-import imgRanMatch2 from '../../images/imgRanMatch2.png'
+import imgRanMatch1 from '../../images/imgRanMatch1.png';
+import imgRanMatch2 from '../../images/imgRanMatch2.png';
+import imgRanMatch3 from '../../images/imgRanMatch3.png';
+import imgRanMatch4 from '../../images/imgRanMatch4.jpg';
+import imgRanMatch5 from '../../images/imgRanMatch5.jpg';
+import imgRanMatch6 from '../../images/imgRanMatch6.jpg';
 
-export  {home, image_1, image_2, image_3, image_4, image_5, image_6, image_7, image_8, image_9, image_10, image_11, imghead, imgmeet, imgmeet2, createDeThi, imgRanMatch1, imgRanMatch2};
+export  {home, image_1, image_2, image_3, image_4, image_5, image_6, image_7, image_8, image_9, image_10, image_11, imghead, imgmeet, imgmeet2, createDeThi, imgRanMatch1, imgRanMatch2, imgRanMatch3, imgRanMatch4, imgRanMatch5, imgRanMatch6 };

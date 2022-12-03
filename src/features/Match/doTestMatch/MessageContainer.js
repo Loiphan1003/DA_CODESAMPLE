@@ -7,12 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import matchSlice from "../../../redux/matchSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const MessageContainer = ({ users, messages }) => {
+const MessageContainer = ({ users, messages}) => {
   const messageRef = useRef();
-  const uId = JSON.parse(localStorage.getItem("uId"));
+  // const uId = JSON.parse(localStorage.getItem("uId"));
   const dispatch = useDispatch();
   const refb = React.useRef();
   let UserRedux = useSelector((state) => state.match.member);
+  let MessagesRedux = useSelector((state) => state.match.listMessage);
 
   useEffect(() => {
     if (messageRef && messageRef.current) {
@@ -23,43 +24,59 @@ const MessageContainer = ({ users, messages }) => {
         behavior: "smooth",
       });
     }
-  }, [messages]);
+
+    if(messages.length > 0)
+    {
+      let uId = messages[messages.length-1].uId;
+      let message = messages[messages.length-1].message;
+      let sttCau = messages[messages.length-1].sttCau;
+      if(uId !== undefined && message !== undefined && sttCau !== undefined)
+      {
+        let obj = {uId, message, sttCau};
+        dispatch(matchSlice.actions.setListMessage(obj));
+      }
+    }
+  }, [messages])
+
+  useEffect(() => {
+    for (let index = 0; index < MessagesRedux.length-1; index++) {
+      if(MessagesRedux[Number(MessagesRedux.length)-1].uId === MessagesRedux[index].uId && MessagesRedux[Number(MessagesRedux.length)-1].sttCau === MessagesRedux[index].sttCau)
+      {
+        dispatch(matchSlice.actions.setFilterListMessage(index));
+      }
+    }
+  },[MessagesRedux.length]);
 
   const Diem = (u) => {
     var sum = 0;
-    for (let index = 0; index < messages.length; index++) {
-      if (messages[index].uId === u) {
-        sum += Number(messages[index].message);
+    for (let index = 0; index < MessagesRedux.length; index++) {
+      if (MessagesRedux[index].uId === u) {
+        sum += Number(MessagesRedux[index].message);
       }
     }
     return sum;
   };
 
   useEffect(() => {
-
     users.map(i => {
-
-        const data = async () => {
-            const res = await taiKhoanAPI.getNameTK(i);
-            let obj  = {
-                name: res.data.tenHienThi,
-                uId: res.data.uidTaiKhoan,
-              };
-
-            if(UserRedux.length !== 0){
-
-                UserRedux.map(d => {
-                    if(d.uId !== obj.uId){
-                        return dispatch(matchSlice.actions.setMemeber(obj));
-                    }
-                })
-            }else{
-                dispatch(matchSlice.actions.setMemeber(obj));
+      const data = async () => {
+        const res = await taiKhoanAPI.getNameTK(i);
+        let obj  = {
+          name: res.data.tenHienThi,
+          uId: res.data.uidTaiKhoan,
+        };
+        if(UserRedux.length !== 0){
+          UserRedux.map(d => {
+            if(d.uId !== obj.uId){
+              return dispatch(matchSlice.actions.setMemeber(obj));
             }
+          })
+        }else{
+          dispatch(matchSlice.actions.setMemeber(obj));
         }
-        data()
+      }
+      data()
     })
-
   },[users])
 
   const handleDisplayName = (u) =>{

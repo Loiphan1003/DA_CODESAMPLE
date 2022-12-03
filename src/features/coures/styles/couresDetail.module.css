@@ -68,3 +68,13 @@
 .coure:hover{
     background-color: aliceblue;
 }
+
+.videos{
+    width: 10%;
+    margin: 20px 5px 0px;
+    background-color: #f05325;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
