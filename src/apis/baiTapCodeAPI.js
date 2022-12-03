@@ -32,6 +32,10 @@ const BaiTapCodeAPI = {
     editBaiTapCode: (baiTapCode_Custom) => {
         const url = `BaiTapCode/editBaiTapCode`;
         return axiosClient.put(url, baiTapCode_Custom);
+    },
+    publicCauHoiCode: (baiTapCode_Custom) => {
+        const url = `BaiTapCode/publicauHoi`;
+        return axiosClient.post(url, baiTapCode_Custom);
     }
 
     
