@@ -9,14 +9,14 @@ import { faFileCsv } from '@fortawesome/free-solid-svg-icons';
 
 
 
-function UIAddMember(props) {
+function UIAddMember({onOpen}) {
 
     const [AddMember, setAddMember] = useState(true);
     let params = useParams();
 
     // const [listMembers, setListMembers] = useState([]);
-
-    console.log(params.roomId);
+    const [email, setEmail] = useState("");
+    // console.log(params.roomId);
 
 
     const handleFile = async (e) => {
@@ -36,14 +36,31 @@ function UIAddMember(props) {
         arr.forEach(e => list.push(e.toString()) )
 
         const response = await phongHocApi.addListMembers(list, params.roomId);
-        // if(response.data === true){
-        //     alert("Thêm thành viên thành công")
+        if(response.data === true){
+            alert("Thêm thành viên thành công")
             window.location.reload(true);
-        // }
+        }
         // if(response.data)
     }
 
-    // console.log(listMembers)
+    console.log(email)
+
+
+
+    const handleAddOneMember = async () => {
+        console.log(email)
+        try {
+            
+            const response = await phongHocApi.addOneMember(email,params.roomId);
+            console.log(response.data)
+            if(response.data === true){
+                alert("Thêm thành viên thành công")
+                window.location.reload(true);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }   
 
     return (
 
@@ -52,7 +69,11 @@ function UIAddMember(props) {
             <h1>Thêm thành viên</h1>
             {AddMember ? <>
                 <p>Để thêm thành viên bạn hãy nhập tài khoản gmail</p>
-                <input placeholder='Nhập email tài khoản' type={'email'} />
+                <input 
+                placeholder='Nhập email tài khoản' 
+                type={'email'} 
+                onChange={(e) => setEmail(e.target.value)}
+                />
             </> : <>
                 <p>Để thêm nhiều thành viên bạn hãy tải file mẫu sau đó nhấn nút thêm để tải file lên hệ thống</p>
                 <div className={styles.fileSample} >
@@ -65,13 +86,17 @@ function UIAddMember(props) {
 
             <p>Nếu bạn muốn thêm {AddMember ? 'nhiều thành viên' : 'thành viên'} cùng một lúc hãy nhấn vào <span onClick={() => setAddMember(!AddMember)}>đây</span></p>
             <div>
-                {AddMember ? <button>Thêm</button> :
+                {AddMember ? <button
+                    onClick={() => handleAddOneMember()}
+                >Thêm</button> :
                     <label className={styles.custom_file_upload}>
                         <input type="file" onChange={(e) => handleFile(e)} />
                         Thêm
                     </label>
                 }
-                <button>Hủy</button>
+                <button
+                    onClick={() => onOpen(false)}
+                >Hủy</button>
             </div>
         </div>
     );

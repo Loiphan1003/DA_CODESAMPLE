@@ -15,6 +15,10 @@ const taiKhoanAPI = {
         const url =`TaiKhoan/updateInfo`;
         return axiosClient.post(url, info);
     },
+    taoTaiKhoan: (info) => {
+        const url =`TaiKhoan/TaoTaiKhoan`;
+        return axiosClient.post(url, info);
+    },
 
     getNameTK: (uId) => {
         const url = `TaiKhoan/getNameTK?uid=${uId}`;

@@ -32,6 +32,10 @@ const PhongHocAPI = {
     addListMembers: (members, roomId) => {
         const url = `PhongHoc/addListMembers?roomId=${roomId}`;
         return axiosClient.post(url , members, {roomId})
+    },
+    addOneMember: (email, idRoom) => {
+        const url = `PhongHoc/addUserByEmail?email=${email}&id=${idRoom}`;
+        return axiosClient.post(url);
     }
 }
 
