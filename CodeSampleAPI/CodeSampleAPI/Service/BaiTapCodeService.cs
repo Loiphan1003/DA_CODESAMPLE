@@ -23,6 +23,7 @@ namespace CodeSampleAPI.Service
         bool editBaiTapCode(BaiTapCode_Custom baiTapCode_Custom);
 
         List<BaiTapCode> getListByuID(string uID);
+        bool publicCauHoi(BaiTapCode_Custom btLuyenTap_Cus);
 
     }
 
@@ -55,7 +56,10 @@ namespace CodeSampleAPI.Service
                 DinhDangDauVao = btCode_Custom.DinhDangDauVao, 
                 MauDauRa = btCode_Custom.MauDauRa,
                 MauDauVao = btCode_Custom.MauDauVao, 
-                NgonNgu = btCode_Custom.NgonNgu
+                NgonNgu = btCode_Custom.NgonNgu,
+                ThoiGian = btCode_Custom.ThoiGian,
+                CongKhai = btCode_Custom.CongKhai,
+                DoKho = btCode_Custom.DoKho,
             };
 
             List<TestCase_Custom> testCases = btCode_Custom.testCases;
@@ -201,6 +205,9 @@ namespace CodeSampleAPI.Service
                 btCode.MauDauVao = baiTapCode_Custom.MauDauVao;
                 btCode.MauDauRa = baiTapCode_Custom.MauDauRa;
                 btCode.NgonNgu = baiTapCode_Custom.NgonNgu;
+                btCode.ThoiGian = baiTapCode_Custom.ThoiGian;
+                btCode.CongKhai = baiTapCode_Custom.CongKhai;
+                btCode.DoKho = baiTapCode_Custom.DoKho;
                 _codeSampleContext.SaveChanges();
                 return true;
             }
@@ -208,6 +215,56 @@ namespace CodeSampleAPI.Service
             {
                 return false;
             }
+        }
+
+        public bool publicCauHoi(BaiTapCode_Custom btLuyenTap_Cus)
+        {
+            BtLuyenTap baiLuyenTap = new BtLuyenTap()
+            {
+                DeBai = btLuyenTap_Cus.DeBai,
+                TieuDe = btLuyenTap_Cus.TieuDe,
+                UIdNguoiTao = btLuyenTap_Cus.UIdNguoiTao,
+                RangBuoc = btLuyenTap_Cus.RangBuoc,
+                DinhDangDauRa = btLuyenTap_Cus.DinhDangDauRa,
+                DinhDangDauVao = btLuyenTap_Cus.DinhDangDauVao,
+                MauDauRa = btLuyenTap_Cus.MauDauRa,
+                MauDauVao = btLuyenTap_Cus.MauDauVao,
+                ThoiGian = btLuyenTap_Cus.ThoiGian,
+                //Tag = btLuyenTap_Cus.Tag,
+                DoKho = btLuyenTap_Cus.DoKho,
+                SoNguoiLam = 0,
+                SoNguoiThanhCong = 0
+            };
+            _codeSampleContext.BtLuyenTaps.Add(baiLuyenTap);
+            _codeSampleContext.SaveChanges();
+            List<TestCase_Custom> testCases = (from t in _codeSampleContext.TestCaseBtcodes
+                                               where t.IdBaiTap == btLuyenTap_Cus.Id
+                                               select new TestCase_Custom()
+                                               {
+                                                   Input = t.Input,
+                                                   Output = t.Output,
+
+                                               }).ToList();
+            try
+            {
+                foreach (var testCase in testCases)
+                {
+                    TestCaseLuyenTap t = new TestCaseLuyenTap() { IdBtluyenTap = baiLuyenTap.Id, Input = testCase.Input, Output = testCase.Output };
+                    _codeSampleContext.TestCaseLuyenTaps.Add(t);
+                }
+                _codeSampleContext.SaveChanges();
+            }
+
+
+            catch (System.Exception)
+            {
+                return false;
+            }
+
+            BaiTapCode baiTap = _codeSampleContext.BaiTapCodes.FirstOrDefault(i => i.Id == btLuyenTap_Cus.Id);
+            baiTap.CongKhai = true;
+            _codeSampleContext.SaveChanges();
+            return true;
         }
     }
 }

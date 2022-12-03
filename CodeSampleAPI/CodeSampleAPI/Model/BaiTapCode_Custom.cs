@@ -17,6 +17,9 @@ namespace CodeSampleAPI.Model
         public string DinhDangDauRa { get; set; }
         public string MauDauVao { get; set; }
         public string MauDauRa { get; set; }
+        public TimeSpan? ThoiGian { get; set; }
+        public bool? CongKhai { get; set; }
+        public int DoKho { get; set; }
         public List<TestCase_Custom> testCases { get; set; }
     }
 }
