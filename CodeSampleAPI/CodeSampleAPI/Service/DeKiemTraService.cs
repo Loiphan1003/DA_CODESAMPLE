@@ -14,6 +14,7 @@ namespace CodeSampleAPI.Service
         DeKiemTra_Custom getDeKiemTraByID(int id);
         bool publicDeKiemTra(int id);
         List<CauHoi_Custom> getListCauHoi(string uID);
+        bool updateDeKiemTra(int id, string name, DateTime NgayHetHan);
     }
 
     public class DeKiemTraService : IDeKiemTraService
@@ -169,6 +170,19 @@ namespace CodeSampleAPI.Service
             cauHois.OrderBy(q => q.Id);
 
             return cauHois;
+        }
+
+        public bool updateDeKiemTra(int id, string name, DateTime NgayHetHan)
+        {
+            DeKiemTra deKiem = _codeSampleContext.DeKiemTras.FirstOrDefault(d => d.IddeKiemTra == id);
+            if (deKiem == null)
+            {
+                return false;
+            }
+            deKiem.MoTa = name;
+            deKiem.NgayHetHan = NgayHetHan;
+            _codeSampleContext.SaveChanges();
+            return true;
         }
     }
 }
