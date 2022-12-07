@@ -47,5 +47,10 @@ namespace CodeSampleAPI.Controllers
         {
             return Ok(_deKiemTraService.getListCauHoi(uID));
         }
+        [HttpPost("updateDeInfo")]
+        public IActionResult updateDeInfo(int id, string name, DateTime NgayHetHan)
+        {
+            return Ok(_deKiemTraService.updateDeKiemTra(id, name, NgayHetHan));
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace CodeSampleAPI.Service
         public List<GiaiDau> getAll(Filter.PaginationFilter validFilter)
         {
             DateTime date = DateTime.Today;
-            return _codeSampleContext.GiaiDaus.Where(g => g.ThoiGianBatDau != date).Skip((validFilter.PageNumber - 1) * validFilter.PageSize).Take(validFilter.PageSize).ToList();
+            return _codeSampleContext.GiaiDaus.OrderByDescending(i => i.ThoiGianBatDau).Skip((validFilter.PageNumber - 1) * validFilter.PageSize).Take(validFilter.PageSize).ToList();
         }
 
         public List<GiaiDau> getListToDay()
