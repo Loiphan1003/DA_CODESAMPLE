@@ -21,6 +21,10 @@ const DeKiemTraAPI = {
     getListCauHoi: (uID) => {
         const url = `DeKiemTra/getListCauHoi?uID=${uID}`;
         return axiosClient.get(url, {uID});
+    },
+    updateDeInfo: (id, name, ngayHetHan) => {
+        const url =`DeKiemTra/updateDeInfo?id=${id}&name=${name}&NgayHetHan=${ngayHetHan}`;
+        return axiosClient.post(url);
     }
 }
 

@@ -1,22 +1,28 @@
 import React ,{memo, useEffect} from 'react'
 import styles from './ItemQuestion.module.css';
 import classNames from 'classnames/bind'
-import {  useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import createTestSlice from '../../../redux/createTestSlice';
 import BaiTapCodeAPI from '../../../apis/baiTapCodeAPI';
 import BaiTapTN from '../../../apis/baiTapTN_API';
 import { useStateIfMounted } from "use-state-if-mounted";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 const cx = classNames.bind(styles);
 
 
-function ItemQuestion({data,index}) {
+function ItemQuestion({data,index,edit,onChangeScore}) {
 
     const dispatch = useDispatch();
     const [question,setQuestion] = useStateIfMounted({});
+    const [score, setScore] = React.useState(data.diem);
     const handleDeleteQuestion = (data) => {
         dispatch(createTestSlice.actions.deleteQuestion(data))
     }
+
+    const ref = React.useRef();
+
+    // const questions = useSelector((state) => state.createTest.questions)
 
     useEffect(() => {
         console.log("call API con ", data.loaiCauHoi)
@@ -45,16 +51,33 @@ function ItemQuestion({data,index}) {
             getOneCode();
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data]);
+    }, []);
 
+    const handleChangeScore = (value, id) => {
+        setScore(value);
+        onChangeScore(value,id);
+    }
 
     return (
     <div className={cx('question')} >
         <div className={cx('header-ques')}>
             <div className={cx('header-ques-left')}>
                 <h4 className={cx('number-ques')}>Câu {index+1}</h4>
-                <span className={cx('scores')}>{data.diem} điểm</span>
+                {edit === true ? 
+                <input
+                    ref={ref}
+                    
+                    style={{
+                        marginLeft: "12px",
+                        width: "70px"
+                    }} 
+                    onChange={(e) => handleChangeScore(e.target.value, data.id)}
+                    value={score}
+                /> :
+                <span className={cx('scores')}>{data.diem} điểm</span>}
                 <span className={cx('type-ques')}>{data.loaiCauHoi === 0 ? 'TRẮC NGHIỆM':'CODE'}</span>
+                <span className={cx('type-ques')}>{data.doKho === "Dễ" ? 'Dễ':(data.doKho === "Trung bình" ? "Trung Bình": "Khó")}</span>
+
             </div>
             <div onClick={() => handleDeleteQuestion(data)}><DeleteForeverIcon fontSize='small' className={cx('icon-delete')} /></div>
         </div>

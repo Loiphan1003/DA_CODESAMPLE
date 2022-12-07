@@ -17,6 +17,7 @@ import ChartOverview from './ChartOverview';
 import phongHocApi from '../../../apis/phongHocApi';
 import roomSlice from '../../../redux/roomSlice';
 import ListNoSubmitOverview from './ListNoSubmitOverview';
+import TestInfo from './TestInfo';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -32,8 +33,10 @@ function TestOverview(props) {
         setTabType(value)
         console.log(tabType);
     }
-
-    const tabs = ["Thống kê","Lịch sử làm bài","Danh sách học viên chưa làm bài",]
+    const [info,setInfo] = useState({
+        trangThai: ''
+    });
+    const tabs = ["Thông tin","Thống kê","Lịch sử làm bài","Danh sách học viên chưa làm bài",]
     const params = useParams();
     const [open, setOpen] = useState(false);
     const [rows,setRows] = useState([]);
@@ -100,12 +103,20 @@ function TestOverview(props) {
                                 tempArr.push(i)
                                 // arr.push(tempArr)
 
-                                arr = tempArr;
+                                return arr = tempArr;
                             }
                         })
                     }
                 })
 
+                const responseInfoTest = await DeKiemTraAPI.getByIDPhonng(params.idPhong);
+                responseInfoTest.data.map(i => {
+                    if(i.iddeKiemTra === +params.idTest)
+                
+                    return setInfo(i);
+                
+                });
+                // setInfo(trangThai);
                 setRows(arr);
                 dispatch(
                     testOverviewSlice.actions.setData(arr)
@@ -132,8 +143,6 @@ function TestOverview(props) {
         return () => mounted = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params]);
-
-    
 
     const getDiem = () =>{
 
@@ -188,12 +197,39 @@ function TestOverview(props) {
         return arr;
     }
 
+    const handleAccept = () => {
+        // console.log(info.iddeKiemTra);
+        const publicBaiKiemTra = async () => {
+            try {
+                const response = await DeKiemTraAPI.publicDeKiemTra(params.idTest);
+                if(response.data)
+                {
+                    alert("Đã mở bài tập")
+                    // getListDeKiemTra();
+                    // setOpenDialogPublic(false);
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        publicBaiKiemTra();
+    }
+    
+    // console.log(info.trangThai)
 
-      
     return (
         <div className={cx('container')}>
             <div className={cx('header')}>
                 <h1>Tổng quan {testName}</h1>
+
+                
+                    { info.trangThai === 0 && 
+                        <Button variant="contained" 
+                            onClick={() => handleAccept()}
+                        >
+                            Mở đề kiểm tra
+                        </Button>
+                    }
             </div>
             <div className={styles.container}>
                
@@ -207,9 +243,10 @@ function TestOverview(props) {
                                onClick={() => setTabType(tab)}
                                style={tabType === tab ? {
                                    color: 'white',
-                                   backgroundColor: '#3e80ef'
+                                   backgroundColor: '#3e80ef',
+                                   width: "fit-content"
                                } : {
-
+                                    width: "fit-content"
                                }}
                            >
                                {tab}
@@ -220,6 +257,7 @@ function TestOverview(props) {
            </div>
            <div className={cx('content')}>
 
+                {tabType === "Thông tin" && <TestInfo data={info} />}
 
                 {tabType === "Lịch sử làm bài" &&
                 <div className={cx('content-table')}>

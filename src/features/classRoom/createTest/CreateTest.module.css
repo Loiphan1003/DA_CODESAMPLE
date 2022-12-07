@@ -154,6 +154,22 @@
     justify-content: space-around;
 }
 
+.btn-add-questionOutSite{
+    height: 36px;
+    width: fit-content;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #5e9ff5;
+    border: 1px solid #d0d8dc;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 0 12px;
+    cursor: pointer;
+    box-shadow: 0 0 2px 0 rgb(40 50 56 / 24%), 0 2px 4px 0 rgb(40 50 56 / 24%);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
 /* tìm kiếm bài tập theo id hoặc tên để thêm vào bài kiểm tra */
 
 .backdrop-add-ques{

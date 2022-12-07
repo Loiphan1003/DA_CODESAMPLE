@@ -45,9 +45,11 @@ function Coursework(props) {
     const getListDeKiemTra = async ()=>{
         try {
             const response = await DeKiemTraAPI.getByIDPhonng(idPhong);
+            const date = new Date();
+            console.log(date)
             setTest({
                 testDraft:response.data.filter(item => item.trangThai ===0),
-                testOpen:response.data.filter(item => item.trangThai ===1),
+                testOpen:response.data.filter(item => date < (new Date(item.ngayHetHan)) && item.trangThai ===1),
                 testClose:response.data.filter(item => item.trangThai ===2)
             });
         } catch (error) {
@@ -212,7 +214,8 @@ function Coursework(props) {
                                     <div className={styles.coursework_content_item} key={index}>
                                         <div className={styles.item_info}>
                                             <FontAwesomeIcon icon={faTableList} />
-                                            <div className={styles.item_name} onClick={() => handleClickOpen(test)}>{test.moTa}</div>
+                                            <NavLink className={styles.item_name} to={isTeacher ? `/test-overview/${idPhong}/${test.iddeKiemTra}`:`/test/${test.iddeKiemTra}`} >{test.moTa}</NavLink>
+                                            {/* <div className={styles.item_name} onClick={() => handleClickOpen(test)}>{test.moTa}</div> */}
                                         </div>
                                         <p className={styles.item_draft}>Nháp</p>
                                     </div>
