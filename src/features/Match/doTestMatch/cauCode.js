@@ -211,7 +211,7 @@ function CauCode({data, sendMessage, idDe}) {
                         </div>
                         <div className={styles.twoButon}>
                             
-                            <button onClick={() => handleRunCode()} >Nộp bài</button>
+                            <button onClick={() => handleRunCode()} >Kiểm tra</button>
                         </div>
                         
                     </div>

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles/Tournament.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { responseAPI, responseAPITrounamentSoonStart } from '../../../redux/giaiDauSlice';
 import GiaiDauAPI from '../../../apis/giaiDauAPI';
 import Stack from '@mui/material/Stack';
@@ -13,7 +11,6 @@ import 'react-multi-carousel/lib/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import giaiDauSilce from '../../../redux/giaiDauSlice';
 import { useNavigate } from 'react-router-dom';
-import { color, width } from '@mui/system';
 
 const responsive = {
     desktop: {
@@ -81,6 +78,8 @@ function Tournaments(props) {
         }
     }
 
+    console.log("giai dau",listTournament);
+
     return (
         <div className={styles.container} >
             <img src={Tournamnet} alt="banner" />
@@ -140,7 +139,7 @@ function Tournaments(props) {
                                     <div>
                                         <p style={{fontSize: "20px", fontWeight: "600"}}>{item.tenGiaiDau}</p>
                                         <p style={{fontWeight: "350"}}>
-                                            Thời gian kết thúc: <span>{formatTime(item.thoiGianBatDau)}</span>
+                                            Thời gian kết thúc: <span>{formatTime(item.thoiGianKetThuc)}</span>
                                         </p>
                                         {/* <FontAwesomeIcon icon={faUserGroup} /> */}
                                     </div>
@@ -149,7 +148,6 @@ function Tournaments(props) {
                                     <p style={{color: handleTypeTournament(item.thoiGianKetThuc) === "Mở" ? "green" : "red"}}>{handleTypeTournament(item.thoiGianKetThuc)}</p>
                                 </div>
                             </div>
-
                         ))}
 
                     </div>

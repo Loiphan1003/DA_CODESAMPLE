@@ -111,7 +111,7 @@ function Ranking(){
                     <div className="ranking-table-header-row">
                         <div className="ranking-table-header-data h6">Hạng</div>
                         <div className="ranking-table-header-data h6">Tên</div>
-                        <div className="ranking-table-header-data h6">Điểm</div>
+                        <div className="ranking-table-header-data h6">Thời gian</div>
                     </div>
                     {bailam.map((i, index) => (
                         <div>
@@ -121,7 +121,7 @@ function Ranking(){
                                         <div className={index + 1 === 1 && "medal-gold" || index + 1 === 2 && "medal-silver" || index + 1 === 3 && "medal-bronze"} />
                                     </div>
                                     <div className={index + 1 <= 3 && "ranking-table-data"}>{handleDisplayName(i.uIdnguoiDung)}</div>
-                                    <div className={index + 1 <= 3 && "ranking-table-data"}><div className={index + 1 <= 3 && "complete"} />
+                                    <div className={index + 1 <= 3 && "ranking-table-data"} style={{display: "flex"}}>{i.ngayLam.split("T")[1]}<div className={index + 1 <= 3 && "complete"} />
                                 </div>
                                 </div>
                             }

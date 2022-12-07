@@ -67,12 +67,13 @@ function Header({ isClick, getHeader, idDe, giaiDau }) {
       >
         <p>Xem chi tiết</p>
       </div>
+      {time !== "Thời gian đếm ngược đã kết thúc!" &&
       <div
         onClick={() => navigate(`/domatch/${idDe}`)}
         className={styles.button}
       >
         <p>Tham gia</p>
-      </div>
+      </div>}
       <div
         onClick={() => navigate(`/ranking/${idDe}`)}
         className={styles.button}

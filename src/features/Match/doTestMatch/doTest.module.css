@@ -286,7 +286,10 @@
     margin-top: 2px;
     color: #81D671;
 }
-
+.status_icon_close{
+    margin-top: 2px;
+    color: red;
+}
 .right_content {
     margin-top: 20px;
     margin-bottom: 50px;
