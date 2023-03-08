@@ -6,14 +6,14 @@ Lấy ý tưởng từ việc luyện tập viết code qua các bài tập và 
 ### Các chức năng đã làm
 Lý thuyết: Người dùng có thể xem các bài lý thuyết
 Bài tập luyện tập: Hiện thị danh sách các bài luyện tập các bài tập có chia theo cấp độ, người dùng chọn một bài và sau đó viết code, các bài tập sẽ testcase để tính điểm
-Phòng học: Người dùng có thể tạo phòng học và giao bài tập cho các thành viên trong nhóm các bài ở đây sẽ theo dạng câu hỏi code, các thành viên sẽ tiến hành làm bài và nộp bài
+Phòng học: Người dùng có thể tạo phòng học và giao bài tập cho các thành viên trong nhóm các bài ở đây sẽ theo dạng câu hỏi code, các thành viên sẽ tiến hành làm bài và nộp bài <br/>
 
 
-Danh các câu hỏi luyện tập
-![Alt text](src/readmeImage/Capture4.PNG)
-Làm câu hỏi
-![Alt text](src/readmeImage/Capture.PNG)
-Làm bài tập trong phòng học
-![Alt text](src/readmeImage/Capture2.PNG)
-Danh sách thành viên trong phòng học
-![Alt text](src/readmeImage/Capture3.PNG)
+Danh các câu hỏi luyện tập <br/>
+![Alt text](src/readmeImage/Capture4.PNG) <br/>
+Làm câu hỏi <br/>
+![Alt text](src/readmeImage/Capture.PNG) <br/>
+Làm bài tập trong phòng học <br/>
+![Alt text](src/readmeImage/Capture2.PNG) <br/>
+Danh sách thành viên trong phòng học <br/>
+![Alt text](src/readmeImage/Capture3.PNG) <br/>
